@@ -1,0 +1,37 @@
+.button {
+    margin: 0 5px;
+    box-shadow: inset 6px 6px 8px rgb(210, 37, 85, 0.2);
+}
+
+.button.is-primary {
+    box-shadow: inset 6px 6px 8px rgb(210, 37, 85, 1);
+}
+
+.button.is-light {
+    color: #000033;
+}
+
+/* Size */
+.button.is-large {
+    font-size: 18px;
+    height: 57px;
+    padding: 0 50px;
+}
+
+.button.is-medium {
+    font-size: 18px;
+    height: 44px;
+    padding: 0 30px;
+}
+
+.button.is-small {
+    font-size: 14px;
+    height: 30px;
+    padding: 0 15px;
+}
+
+.button.is-extra-small {
+    font-size: 14px;
+    height: 23px;
+    padding: 0 7px;
+}

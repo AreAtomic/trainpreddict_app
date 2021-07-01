@@ -1,0 +1,134 @@
+// Font-family
+@import url('https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&display=swap')
+
+// Brand colors
+$deep-blue: #000033
+$blue-ncs: #1d84b5
+$oxford-blue: #001f4e
+$light-blue: #334F76
+$irresistible: #a64667
+$ua-red: #d22555
+$ua-pink: #e01A4f
+$pink: #fbbdce
+$purple-pantone: #eddfef
+$orange: #ff9743
+$green: #14f5aa
+
+// Override Bulma variables
+$primary: $ua-pink
+$text: $purple-pantone
+$light: $pink
+$info: $blue-ncs
+$success: $green
+$warning: $orange
+$danger: $irresistible
+$dark: $oxford-blue
+$link: $ua-pink
+$body-background-color: $deep-blue
+
+// Import bulma
+@import "../../node_modules//bulma/bulma.sass"
+
+// Bases elements
+*
+    margin-block-start: 0
+    margin-block-end: 0
+body
+    font-family: 'Nunito', sans-serif
+    font-size: 16px
+    overflow-x: hidden
+
+h1, h2, h3, h4, h5, h6, .navbar
+    font-family: 'Open Sans', sans-serif
+    color: $pink
+
+.is-dark
+    color: $dark !important
+
+.navbar-burger span
+    border-radius: 2px
+    height: 2px
+    background: $pink
+    left: calc( 50% - 20px )
+
+a.navbar-item:focus,
+a.navbar-item:focus-within,
+a.navbar-item:hover,
+a.navbar-item.is-active,
+.navbar-link:focus,
+.navbar-link:focus-within,
+.navbar-link:hover,
+.navbar-link.is-active
+    background: $deep-blue
+    color: $ua-red
+    border-bottom: 1px solid $ua-red
+
+.main
+    margin-bottom: 200px
+
+.columns
+    padding: 0 20px
+
+.column
+    padding: 0.25rem
+
+// Input styles
+.error
+    border: 1px solid $red
+    box-shadow: 0 0 0 0.075em #F4152C4b
+
+.valid
+    border: 1px solid $green
+    box-shadow: 0 0 0 0.075em #1CD1A14b
+
+.input:focus, .textarea:focus, .select:focus, .select:focus-visible
+    border: 1px solid $info
+    box-shadow: 0 0 0 0.125em #2eb5de4b
+
+.label
+    color: $light
+    font-weight: normal
+
+.form
+    margin: 10px auto
+
+.select select, .textarea, .input
+    color: $text
+    background: $oxford-blue
+
+// Heading
+.title
+    color: $primary
+
+.title.is-light
+    color: $pink
+
+// Dropdown
+.dropdown-menu
+    min-width: 100%
+
+.dropdown-content
+    color: $text
+    background: $oxford-blue
+    width: 100%
+
+.dropdown-item
+    background: $oxford-blue
+    border: none
+    width: 100%
+    text-align: left
+
+.dropdown-item:hover
+    background: $info
+
+// Message container
+.message-container
+    position: fixed
+    bottom: 10px
+    right: 10px
+    width: 300px
+    z-index: 99
+
+// Card
+.card
+    background: $light-blue

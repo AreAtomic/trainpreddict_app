@@ -1,0 +1,52 @@
+/* Content */
+.slider-item{
+    transition: 0.5s;
+    display: none;
+}
+.slider-item.is-active{
+    animation: fade-in 0.5s linear;
+    transition: 0.5s;
+    display: block;
+}
+
+/* Arow */
+.slider-left{
+    transform: rotate(90deg);
+}
+
+.slider-right{
+    transform: rotate(-90deg);
+}
+
+/* Counter */
+.slider-counter{
+    display: flex;
+    justify-content: center;
+}
+
+.slider-counter-item{
+    transition: 0.2s;
+    background: #fbbdce80;
+    color: #fbbdce80;
+    width: 10px;
+    height: 10px;
+    line-height: 10px;
+    border-radius: 10px;
+    margin: 0 3px;
+}
+
+.slider-counter-item.is-active{
+    transition: 0.2s;
+    background: #fbbdce;
+    color: #fbbdce;
+}
+
+/* Animation */
+@keyframes fade-in{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}

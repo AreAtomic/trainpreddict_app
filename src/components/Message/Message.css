@@ -1,0 +1,15 @@
+.notification{
+    padding: 0.5rem 1rem;
+    display: none;
+}
+
+.notification p{
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+}
+
+.notification h4 {
+    margin-bottom: 10px;
+}

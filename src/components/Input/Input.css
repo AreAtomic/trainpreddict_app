@@ -1,0 +1,39 @@
+.icon.is-small.is-right.has-text-right {
+    z-index: 1;
+}
+
+.select {
+    width: 100%;
+    background: #001f4e;
+    color: #fbbdce;
+    /* Appearance: none will hide the default arrow */
+    appearance: none;
+    /* Best to include the browser prefix for cross-browser compatibility */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.basic-select {
+    position: relative;
+}
+
+/* This will add our own cutom arrow or icon */
+/* Check out https://www.toptal.com/designers/htmlarrows/ for more HTML symbols */
+.basic-select::after {
+    content: url("../../assets/arrow.png");
+    position: absolute;
+    top: 3px;
+    right: 15px;
+}
+
+.multiselect {
+    background: #001f4e;
+}
+
+.select:not(.is-multiple):not(.is-loading)::after{
+    border-color: #fbbdce !important;
+}
+
+:focus-visible{
+    background: #334F76;
+}
