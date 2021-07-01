@@ -1,0 +1,49 @@
+.clearfix {
+    clear: both;
+}
+
+.accordion {
+    display: grid;
+    position: relative;
+}
+
+.accordion-title {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #fbbdce;
+    z-index: 10;
+    background: #000033;
+}
+
+.accordion-title .title {
+    margin: 10px 10px 10px 30px;
+}
+
+.accordion-title .icon {
+    height: none;
+}
+
+.accordion-content {
+    z-index: 0;
+    padding: 20px 30px;
+    animation: fade-in-top 0.1s linear;
+}
+
+img {
+    transition: 0.5s;
+}
+
+.reverse {
+    transition: 0.5s;
+    transform: rotate(180deg);
+}
+
+@keyframes fade-in-top{
+    0%{
+        position: absolute;
+        top: 0;
+    }
+    100%{
+        position: relative;
+    }
+}

@@ -1,0 +1,75 @@
+.table-zone {
+    display: grid;
+    padding: 0 10px;
+    max-width: 95vw;
+}
+
+.table-zone-header,
+.table-zone-row {
+    display: flex;
+    min-height: 50px;
+    text-align: center;
+    margin: 0 auto;
+    width: 90vw;
+}
+
+.table-zone-item {
+    width: 12.3%;
+    padding: 5px;
+    background: #eddfef;
+    color: #000033;
+    align-items: center;
+    display: grid;
+    border: 1px solid #000033;
+}
+
+.table-zone-item.one {
+    background: var(--zone-1);
+}
+
+.table-zone-item.two {
+    background: var(--zone-2);
+}
+
+.table-zone-item.three {
+    background: var(--zone-3);
+}
+
+.table-zone-item.four {
+    background: var(--zone-4);
+    color: #FDEDF1;
+}
+
+.table-zone-item.five {
+    background: var(--zone-5);
+    color: #FDEDF1;
+}
+
+.table-zone-item.six {
+    background: var(--zone-6);
+    color: #FDEDF1;
+}
+
+.table-zone-item.seven {
+    background: var(--zone-7);
+    color: #FDEDF1;
+}
+
+@media screen and (max-width: 770px) {
+    .table-zone {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin: 0 5px;
+    }
+
+    .table-zone-header,
+    .table-zone-row {
+        flex-direction: column;
+        width: 31vw;
+    }
+
+    .table-zone-item {
+        width: 100%;
+        height: 80px;
+    }
+}

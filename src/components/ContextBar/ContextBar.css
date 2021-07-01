@@ -1,0 +1,53 @@
+.tabs {
+    height: 99px;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.tabs a {
+    height: 99px;
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+    text-align: center;
+    position: relative;
+}
+
+.tabs a img {
+    margin: 0 auto;
+}
+
+.tabs .seance {
+    padding: 0.25em 1em;
+}
+
+
+.tabs.is-toggle a {
+    background-color: #001F4E;
+    border: none;
+    border-right: 2px solid #334F76;
+    color: #FBBDCE;
+}
+
+.tabs a.courbe {
+    padding: 0.33em 1em;
+    border: none;
+}
+
+.tabs.is-toggle a:hover,
+.tabs.is-toggle li.is-active a {
+    background-color: #334F76;
+    color: #FBBDCE;
+    border-right: 2px solid #334F76;
+}
+
+.tabs.is-fullwidth li{
+    flex-grow: unset;
+    flex-shrink: unset;
+}
+
+.tabs li{
+    width: 25.1vw;
+}

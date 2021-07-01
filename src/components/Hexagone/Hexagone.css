@@ -1,0 +1,61 @@
+/* Default */
+.hexagone {
+    width: 225px;
+    height: 150px;
+    margin: 100px auto;
+    background: #e01a4f;
+    position: relative;
+    text-align: center;
+    align-items: center;
+    color: #003 !important;
+}
+
+.hexagone::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 112.5px solid transparent;
+    border-right: 112.5px solid transparent;
+    top: -50px;
+    border-bottom: 50px solid #e01a4f;
+}
+
+.hexagone::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 112.5px solid transparent;
+    border-right: 112.5px solid transparent;
+    bottom: -50px;
+    border-top: 50px solid #e01a4f;
+}
+
+/* Ligth */
+.hexagone.is-light {
+    background: #fbbdce;
+}
+
+.hexagone.is-light::after {
+    border-bottom-color: #fbbdce;
+}
+
+.hexagone.is-light::before {
+    border-top-color: #fbbdce;
+}
+
+/* Info */
+.hexagone.is-info {
+    background: #1d84b5;
+}
+
+.hexagone.is-info::after {
+    border-bottom-color: #1d84b5;
+}
+
+.hexagone.is-info::before {
+    border-top-color: #1d84b5;
+}

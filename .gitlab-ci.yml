@@ -1,3 +1,18 @@
-# This file is a template, and might need editing before it works on your project.
-include:
-  template: Jobs/Code-Quality.gitlab-ci.yml
+# Docker image
+image: node:latest
+
+# Cached
+cache:
+  paths:
+    - node_modules/
+
+
+# Define the stages
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - npm install
+    - npm run build

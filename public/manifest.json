@@ -1,0 +1,20 @@
+{
+    "short_name": "TrainPreddict",
+    "name": "TrainPreddict - Application pour cyclistes",
+    "icons": [
+        {
+            "src": "logo192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "logo512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "./connexion",
+    "display": "fullscreen",
+    "theme_color": "#FBBDCE",
+    "background_color": "#000033"
+}
