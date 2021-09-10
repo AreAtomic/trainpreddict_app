@@ -5,26 +5,26 @@ import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 
 /**
- * 
+ *
  * @param {
  *  labels* - array,
  *  id* - string,
  *  dataPrev* - array,
- *  dataRea* - array, 
+ *  dataRea* - array,
  *  nomLabel* - string,
  *  nomDataPrev* - string,
  *  nomDataRea* - string,
  *  nom* - string,
  *  color* - json{stroke : {rea, prev:(hexa)}, fill: {rea, prev:(hexa)}}
- * } props 
- * @returns 
+ * } props
+ * @returns
  */
 
 const AreaChartAnalyse = (props) => {
     const chart = useRef(null)
 
     useLayoutEffect(() => {
-        am4core.addLicense("ch-custom-attribution")
+        am4core.addLicense('ch-custom-attribution')
         let areachart = am4core.create(`courbe_${props.id}`, am4charts.XYChart)
 
         areachart.paddingRight = 20
@@ -38,6 +38,7 @@ const AreaChartAnalyse = (props) => {
                 [props.nomDataRea]: props.dataRea[i],
             })
         }
+        console.log(data)
         areachart.data = data
 
         // Create axis unit
@@ -48,14 +49,20 @@ const AreaChartAnalyse = (props) => {
             timeUnit: 'day',
             count: 1,
         }
+        dateAxis.title.text = 'Date'
+        dateAxis.title.fontWeight = "bold";
 
-        let valueY = areachart.yAxes.push(new am4charts.ValueAxis())
+        let valueY = areachart.yAxes.push(
+            new am4charts.ValueAxis('Point de forme')
+        )
+        valueY.title.text = `Point de ${props.id}`
+        valueY.title.fontWeight = "bold";
 
         // Create value point
         let serie = areachart.series.push(new am4charts.LineSeries())
         serie.dataFields.valueY = `${props.nomDataPrev}`
         serie.dataFields.dateX = `${props.nomLabel}`
-        serie.name = "Prévisionnelle"
+        serie.name = 'Prévisionnelle'
         serie.tooltipText = '[b]{valueY} point[/]'
         serie.strokeWidth = 1
         serie.tensionX = 0.8
@@ -66,7 +73,7 @@ const AreaChartAnalyse = (props) => {
         let serie2 = areachart.series.push(new am4charts.LineSeries())
         serie2.dataFields.valueY = `${props.nomDataRea}`
         serie2.dataFields.dateX = `${props.nomLabel}`
-        serie2.name = "Réalisée"
+        serie2.name = 'Réalisée'
         serie2.tooltipText = '[b]{valueY} point[/]'
         serie2.strokeWidth = 1
         serie2.tensionX = 0.8
@@ -86,11 +93,19 @@ const AreaChartAnalyse = (props) => {
         return () => {
             areachart.dispose()
         }
-    }, [])
-    return <div
-        id={`courbe_${props.id}`}
-        className="chart-area"
-    ></div>
+    }, [
+        props.color.fill,
+        props.color.stroke,
+        props.dataPrev,
+        props.dataRea,
+        props.id,
+        props.nomDataPrev,
+        props.nomDataRea,
+        props.nomLabel,
+        props.nom,
+        props.labels,
+    ])
+    return <div id={`courbe_${props.id}`} className="chart-area"></div>
 }
 
 export default AreaChartAnalyse

@@ -1,0 +1,155 @@
+.onboarding .title {
+    margin-bottom: 0;
+}
+
+.contaner-indicator {
+    background: #00003380;
+    height: 45px;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+}
+
+.indicator {
+    background: #334F76;
+    width: 100vw;
+    position: fixed;
+    left: 0;
+    bottom: 15px;
+    display: flex;
+    justify-content: space-evenly;
+    height: 15px;
+    text-align: center;
+}
+
+.indicator .circle {
+    background: #334F76;
+    color: #334F76;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    margin-top: -7px;
+    z-index: 1;
+}
+
+.indicator .circle.active {
+    background: #A64667;
+    color: #000033;
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+    margin-top: -20px;
+    line-height: 48px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.indicator .circle.passed {
+    background: #A64667;
+    color: transparent;
+    font-size: 18px;
+    font-weight: 600;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    margin-top: -7px;
+    background-size: 150%;
+}
+
+.circle.passed.one-six {
+    background: #d52254;
+}
+
+.circle.passed.two-six {
+    background: #c92b58;
+}
+
+.circle.passed.three-six {
+    background: #be345d;
+}
+
+.circle.passed.four-six {
+    background: #b63a61;
+}
+
+.circle.passed.five-six {
+    background: #ae4064;
+}
+
+.indicator .avancement {
+    position: absolute;
+    background: linear-gradient(90deg, #E01A4F 0%, #C1325C 44.06%, #A64667 98.44%);
+    z-index: 0;
+    height: 15px;
+    left: 0;
+}
+
+.indicator .velo {
+    position: absolute;
+    top: -60px;
+}
+
+.indicator .finish {
+    position: absolute;
+    top: -90px;
+    left: 84% !important;
+}
+
+hr {
+    background: var(--pink);
+    opacity: 0.5;
+    height: 1px;
+    border: none;
+    margin: 15px 0 10px;
+    width: 110%;
+    margin-left: -5%;
+}
+
+.objectif .title {
+    text-align: left !important;
+    margin-bottom: 20px;
+}
+
+.form .sprinter {
+    margin: 0 auto;
+    width: 50vw;
+    transition: 0s;
+}
+.form .sprinter.left {
+    transition: 0s;
+    transform: rotateY(-180deg);
+}
+
+/* Animation */
+.fade-in-top {
+    transition: 0.5s;
+    animation: fade-in 0.5s ease-in;
+}
+
+.fade-in-left {
+    transition: 0.5s;
+    animation: fade-in 0.5s ease-in;
+}
+
+@keyframes fade-in-top {
+    0% {
+        transform: translate(0px, -30px);
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in-left {
+    0% {
+        transform: translate(-100px, 0px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(0px, 0px);
+        opacity: 1;
+    }
+}

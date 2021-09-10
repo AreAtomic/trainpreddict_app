@@ -1,4 +1,4 @@
 import './Doghnuts.css'
-import DoghnutsAnalyse from "./Doghnuts.Analyse"
+import DoghnutsAnalyse from './Doghnuts.Analyse'
 
 export { DoghnutsAnalyse }

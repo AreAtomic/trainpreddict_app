@@ -2,12 +2,17 @@
 .hexagone {
     width: 225px;
     height: 150px;
-    margin: 100px auto;
-    background: #e01a4f;
+    margin: 50px auto 100px;
+    background: var(--ua-pink);
     position: relative;
     text-align: center;
     align-items: center;
-    color: #003 !important;
+    font-size: 40px;
+    color: var(--deep-blue);
+}
+
+.hexagone .title {
+    color: var(--deep-blue);
 }
 
 .hexagone::after {
@@ -19,7 +24,7 @@
     border-left: 112.5px solid transparent;
     border-right: 112.5px solid transparent;
     top: -50px;
-    border-bottom: 50px solid #e01a4f;
+    border-bottom: 50px solid var(--ua-pink);
 }
 
 .hexagone::before {
@@ -31,31 +36,33 @@
     border-left: 112.5px solid transparent;
     border-right: 112.5px solid transparent;
     bottom: -50px;
-    border-top: 50px solid #e01a4f;
+    border-top: 50px solid var(--ua-pink);
 }
 
 /* Ligth */
 .hexagone.is-light {
-    background: #fbbdce;
+    background: var(--pink);
+    color: var(--deep-blue);
+    margin: 50px auto 100px;
 }
 
 .hexagone.is-light::after {
-    border-bottom-color: #fbbdce;
+    border-bottom-color: var(--pink);
 }
 
 .hexagone.is-light::before {
-    border-top-color: #fbbdce;
+    border-top-color: var(--pink);
 }
 
 /* Info */
 .hexagone.is-info {
-    background: #1d84b5;
+    background: var(--blue-ncs);
 }
 
 .hexagone.is-info::after {
-    border-bottom-color: #1d84b5;
+    border-bottom-color: var(--blue-ncs);
 }
 
 .hexagone.is-info::before {
-    border-top-color: #1d84b5;
+    border-top-color: var(--blue-ncs);
 }

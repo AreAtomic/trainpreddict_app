@@ -1,8 +1,8 @@
-import { NavbarLogged } from "./Navbar"
-import { NavbarUnlogged } from "./Navbar"
-import { LogoRond } from "./Logo"
-import { ContextBar } from "./ContextBar"
-import { LogoContextBar } from "./Logo"
+import { NavbarLogged } from './Navbar'
+import { NavbarUnlogged } from './Navbar'
+import { LogoRond } from './Logo'
+import { ContextBar } from './ContextBar'
+import { LogoContextBar } from './Logo'
 import {
     TitleOne,
     TitleTwo,
@@ -10,7 +10,7 @@ import {
     TitleFour,
     TitleFive,
     TitleSix,
-} from "./Title"
+} from './Title'
 import {
     ButtonPrimaryLarge,
     ButtonSecondaryLarge,
@@ -20,28 +20,29 @@ import {
     ButtonSecondarySmall,
     ButtonPrimaryExtraSmall,
     ButtonSecondaryExtraSmall,
-} from "./Button"
-import {
-    Input,
-    InputUnit,
-    Select,
-    SelectMultiple,
-    Textarea,
-} from './Input'
+} from './Button'
+import { Input, InputUnit, Select, SelectMultiple, Textarea } from './Input'
 import {
     MessageInfo,
     MessageSuccess,
     MessageAlerte,
     MessageDanger,
-} from "./Message"
-import { AreaChartAnalyse, AreaChartSuivi } from "./Charts"
-import { Accordion } from "./Accordion"
-import { Card } from './Card'
-import { DoghnutsAnalyse } from "./Doghnuts"
+} from './Message'
+import {
+    AreaChartAnalyse,
+    AreaChartSuivi,
+    BarChart,
+    ChartAnalyseFCW,
+    StatistiquesChart,
+} from './Charts'
+import { Accordion } from './Accordion'
+import { Card, CardTraining } from './Card'
+import { DoghnutsAnalyse } from './Doghnuts'
 import { Slider } from './Slider'
 import { Hexagone } from './Hexagone'
-import { TableZone } from "./Table"
-import { zone_1, zone_2, zone_3, zone_4, zone_5, zone_6, zone_7 } from "./Zone"
+import { Upload } from './Upload'
+import { TableZone, TableTraining } from './Table'
+import { MenuAbsolute } from './MenuAbsolute'
 
 export {
     NavbarLogged,
@@ -74,11 +75,17 @@ export {
     MessageDanger,
     AreaChartAnalyse,
     AreaChartSuivi,
+    BarChart,
+    ChartAnalyseFCW,
     Accordion,
     Card,
+    CardTraining,
     DoghnutsAnalyse,
     Slider,
     Hexagone,
-    TableZone, 
-    zone_1, zone_2, zone_3, zone_4, zone_5, zone_6, zone_7
+    TableZone,
+    Upload,
+    TableTraining,
+    StatistiquesChart,
+    MenuAbsolute,
 }

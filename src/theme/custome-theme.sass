@@ -36,14 +36,40 @@ $body-background-color: $deep-blue
 body
     font-family: 'Nunito', sans-serif
     font-size: 16px
-    overflow-x: hidden
+    overflow: hidden
 
 h1, h2, h3, h4, h5, h6, .navbar
     font-family: 'Open Sans', sans-serif
     color: $pink
 
+.title.is-1
+    font-size: 35px
+.title.is-2
+    font-size: 32px
+.title.is-3
+    font-size: 27px
+.title.is-4
+    font-size: 25px
+.title.is-5
+    font-size: 22px
+.title.is-6
+    font-size: 20px
+
 .is-dark
     color: $dark !important
+
+.is-white
+    color: $white !important
+    cursor: pointer
+
+.reload
+    width: 40px
+    position: absolute
+    right: 3%
+    cursor: pointer
+
+.btn
+    cursor: pointer
 
 .navbar-burger span
     border-radius: 2px
@@ -64,7 +90,10 @@ a.navbar-item.is-active,
     border-bottom: 1px solid $ua-red
 
 .main
-    margin-bottom: 200px
+    margin-bottom: 140px
+
+.container
+    max-width: 100vw !important
 
 .columns
     padding: 0 20px
@@ -132,3 +161,7 @@ a.navbar-item.is-active,
 // Card
 .card
     background: $light-blue
+
+// Coloring
+span .is-primary
+    color: $primary

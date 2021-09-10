@@ -16,10 +16,12 @@ const Input = (props) => {
                     <Fragment>
                         <ReactToolTip />
                         <img
-                            className="ml-3"
+                            className="ml-3 tooltip"
                             src={question}
                             width={17}
                             data-tip={props.tooltip}
+                            data-background-color="#000000"
+                            data-multiline={true}
                             alt="Icone informatio"
                         />
                     </Fragment>

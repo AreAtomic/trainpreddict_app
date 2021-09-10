@@ -1,6 +1,6 @@
 .navbar {
-    background: #001F4E;
-    color: #FBBDCE;
+    background: var(--oxford-blue);
+    color: var(--pink);
     padding: 3px 0;
 }
 
@@ -18,7 +18,7 @@
 .navbar-menu-logged {
     display: grid;
     grid-template-columns: 15fr 1fr;
-    background: #001F4E;
+    background: var(--oxford-blue);
     width: 94%;
 }
 
@@ -67,7 +67,7 @@
     }
 
     .navbar-menu {
-        background-color: #001F4E;
+        background-color: var(--oxford-blue);
     }
 
     .buttons {

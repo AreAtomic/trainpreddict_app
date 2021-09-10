@@ -1,0 +1,80 @@
+.background {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 58px);
+    background: linear-gradient(180deg, #863954 10%, #000033 85.93%);
+}
+
+.background .montagne {
+    height: 275px;
+    width: 100vw;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+}
+
+.container.is-light-blue {
+    padding: 0;
+    background: var(--oxford-blue);
+    padding-bottom: 15px;
+}
+
+.landing {
+    margin-bottom: -200px;
+}
+
+.landing .column {
+    padding: 0.5rem 0;
+}
+
+.landing .footer {
+    background: var(--deep-blue);
+    padding: 0.25rem;
+    font-size: 11px;
+    display: grid;
+}
+
+.landing .footer span {
+    width: 350px;
+    max-width: 100vw;
+    margin: 0 auto;
+}
+
+.landing p {
+    padding: 0 2rem;
+}
+
+.is-primary {
+    color: var(--ua-red);
+}
+
+.landing .logo {
+    margin: 0 auto;
+    width: 271px;
+    margin-top: 100px;
+}
+
+.background .grid-button {
+    display: flex;
+    justify-content: center;
+    margin: 50px auto;
+}
+
+.background .grid-button a {
+    margin: 10px auto;
+}
+
+@media screen and (max-width: 900px) {
+    .background .grid-button {
+        margin: 15px auto;
+        flex-direction: column;
+    }
+
+    .background .grid-button a {
+        margin-top: 10px;
+    }
+    .background .montagne {
+        max-height: 21vh;
+    }
+}

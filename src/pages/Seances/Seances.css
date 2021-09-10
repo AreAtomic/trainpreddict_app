@@ -1,0 +1,125 @@
+/* Main */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 295px;
+    margin: 0 auto;
+}
+
+.grid .column {
+    display: grid;
+    padding: 20px 0;
+}
+
+.grid img {
+    margin: 30px auto;
+}
+
+.upload-images {
+    display: flex;
+    flex-direction: row;
+}
+
+.upload-images img {
+    width: 80px;
+}
+
+.upload-images img:nth-child(2) {
+    width: 60px;
+}
+
+/* Televersement */
+.televersement .button.is-light {
+    margin: 0 auto;
+}
+
+.televersement p {
+    max-width: 500px;
+    width: 90vw;
+    margin: 50px auto 0;
+}
+
+.televersement p ol {
+    padding-left: 20px;
+}
+
+/* Recherce */
+.recherche-seances {
+    margin-bottom: -80px;
+}
+
+@media screen and (max-width: 400px) {
+    .recherche-seances {
+        height: calc(100vh - 170px);
+        overflow-y: scroll;
+    }
+}
+
+.recherche-seances .title {
+    margin: 0 auto;
+    padding: 0 !important;
+}
+
+.recherche-seances .column>div {
+    margin: 0 auto;
+}
+
+.recherche-seances .column .button {
+    margin: 10px calc(50vw - 80px);
+}
+
+.container-seance {
+    background: var(--light-blue);
+    width: 95vw;
+    margin: 0 auto;
+    height: 50%;
+    height: 50vh;
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+    position: relative;
+    padding: 1px;
+    border-radius: 10px;
+}
+
+.container-seance .menu-seance {
+    height: 49.8vh;
+    min-width: 88px;
+    border-radius: 10px;
+    background: var(--oxford-blue);
+}
+
+.container-seance .menu-seance .item {
+    height: 16.6%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.container-seance .menu-seance .item.active {
+    background: var(--light-blue);
+    border-radius: 10px;
+    border: 1px solid var(--oxford-blue);
+}
+
+.seances {
+    height: 50vh;
+    overflow-y: scroll;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media screen and (max-width: 980px) {
+    .seances {
+        grid-template-columns: repeat(2, 1fr)
+    }
+}
+
+
+@media screen and (max-width: 650px) {
+    .seances {
+        grid-template-columns: 1fr
+    }
+}

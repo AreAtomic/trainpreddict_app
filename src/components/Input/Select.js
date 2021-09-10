@@ -12,17 +12,19 @@ const Select = (props) => {
                     <Fragment>
                         <ReactToolTip />
                         <img
-                            className="ml-3"
+                            className="ml-3 tooltip"
                             src={question}
                             alt="Question"
                             data-tip={props.tooltip}
+                            data-background-color="#000000"
+                            data-multiline={true}
                         />
                     </Fragment>
                 ) : (
                     ''
                 )}
             </label>
-            <div class="basic-select">
+            <div className="basic-select">
                 <select
                     {...props}
                     className={`select ${props.error ? 'error' : 'valid'}`}

@@ -10,9 +10,8 @@
 .accordion-title {
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid #fbbdce;
+    border-bottom: 1px solid var(--pink);
     z-index: 10;
-    background: #000033;
 }
 
 .accordion-title .title {
@@ -24,8 +23,8 @@
 }
 
 .accordion-content {
-    z-index: 0;
-    padding: 20px 30px;
+    z-index: 11;
+    padding: 20px 0;
     animation: fade-in-top 0.1s linear;
 }
 
@@ -38,12 +37,13 @@ img {
     transform: rotate(180deg);
 }
 
-@keyframes fade-in-top{
-    0%{
+@keyframes fade-in-top {
+    0% {
         position: absolute;
         top: 0;
     }
-    100%{
+
+    100% {
         position: relative;
     }
 }

@@ -1,0 +1,25 @@
+.explication {
+    min-width: 49vw;
+    padding: 10px;
+    border: 1px solid var(--pink);
+    margin: 15px;
+    border-radius: 5px;
+    position: relative;
+}
+.question-explication {
+    position: absolute;
+    top: 14px;
+}
+.explication .title {
+    text-align: left !important;
+    padding-left: 20px;
+}
+
+.explication .column .button {
+    margin: 0;
+}
+
+.column.flex {
+    display: flex;
+    align-items: center;
+}
