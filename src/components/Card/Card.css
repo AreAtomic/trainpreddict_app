@@ -1,5 +1,119 @@
-.card{
-    padding: 20px;
+.card {
+    padding: 20px 0;
     max-width: 95vw;
     margin: 10px auto;
+}
+
+.card.recherche{
+    background: var(--oxford-blue);
+    width: 250px;
+}
+
+/* Card entrainement */
+.card.training {
+    max-width: 330px;
+    height: 350px;
+    overflow-y: scroll;
+    animation: fade-in 0.5s linear forwards;
+}
+
+.card.training::-webkit-scrollbar {
+    width: 1px;
+}
+
+.card.training::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.card.training::-webkit-scrollbar-thumb {
+    background: var(--pink);
+}
+
+.card.training .title{
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+
+.card.training hr {
+    background: var(--deep-blue);
+    width: 90px;
+    height: 2px;
+    margin: 0 auto 10px;
+}
+
+.card.training .no-specific{
+    color: var(--pink);
+    height: 140px;
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: bold;
+}
+.card.training .no-specific p {
+    margin-top: 90px;
+    text-align: center;
+}
+
+.card.training.string{
+    width: 84vw;
+    max-width: 330px;
+}
+
+.graphique {
+    background: var(--gray);
+    margin: 7px auto;
+}
+
+.graphique-container {
+    margin: 7px auto;
+    background: var(--gray);
+    width: 310px;
+    border-radius: 5px;
+    margin: 0 10px;
+    padding: 2px 0px 0px 15px;
+}
+
+.sse{
+    background: var(--deep-blue);
+    width: 52px;
+    height: 52px;
+    color: var(--pink);
+    text-align: center;
+    align-items: center;
+    display: grid;
+    border-radius: 50px;
+    margin: 0 auto 5px;
+    font-weight: bold;
+}
+
+.card.training .buttons{
+    display: grid;
+    max-width: none;
+    text-align: center;
+}
+
+.card.recherche .graphique-container{
+    width: 220px;
+}
+
+/* .columns .card.training {
+    position: relative;
+    z-index: -1;
+} */
+
+.card.training .modal {
+    z-index: 50;
+}
+
+.description li{
+    list-style: none;
+}
+
+@media screen and (max-width: 1050px){
+    .card.training, .card.training.string{
+        max-width: 300px;
+    }
+    .graphique-container {
+        margin: 0 0 0 3px;
+        max-width: 290px;
+    }
 }

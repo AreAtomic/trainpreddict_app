@@ -1,0 +1,30 @@
+.background.formulaire {
+    height: auto;
+    margin-bottom: -200px;
+    padding-bottom: 20px;
+}
+
+.form .columns {
+    padding: 0;
+    margin: 0;
+}
+
+.field {
+    max-width: 300px;
+}
+
+.columns .field {
+    margin: 0;
+}
+
+.columns .field:nth-child(1) {
+    margin-right: 3px;
+}
+
+.columns .field:nth-child(2) {
+    margin-left: 3px;
+}
+
+.form .button {
+    margin-top: 10px;
+}

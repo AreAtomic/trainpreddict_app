@@ -1,7 +1,96 @@
 .chart-area {
-    width: 100%;
+    width: 97%;
     height: 300px;
-    background: #C4C4C4;
+    background: var(--gray);
     border-radius: 5px;
     padding-top: 15px;
+}
+
+/* Chart des analyse bloc par bloc*/
+.graphique {
+    position: relative;
+    color: var(--deep-blue);
+    margin: 0 auto;
+    font-size: 10px;
+}
+
+.graphique-zone {
+    position: relative;
+}
+
+.bloc {
+    position: absolute;
+    bottom: 0;
+    color: transparent;
+    z-index: 10;
+}
+
+.graduation-horizontal {
+    position: absolute;
+    top: 0;
+    height: 94%;
+    z-index: 0;
+}
+
+.graphique.analyse {
+    overflow: hidden;
+}
+
+.graduation-vertical {
+    position: absolute;
+    height: calc(100% - 25px);
+    top: 0;
+    left: -15px;
+    display: flex;
+    flex-direction: column-reverse;
+    z-index: 0;
+}
+
+.graphique.analyse .graduation-vertical {
+    left: 0;
+}
+
+.graphique.analyse .graphique-zone {
+    left: 15px;
+}
+
+.graphique-tooltip {
+    position: absolute;
+    font-size: 15px;
+    top: 20px;
+    left: 30%;
+    z-index: 20;
+    opacity: 0;
+    transition: 0.2s;
+    padding: 2px 5px;
+    border-radius: 2px;
+}
+
+.graduation-vertical .graduation {
+    border: 0.5px solid var(--oxford-blue);
+    height: calc(100% / 7);
+}
+
+
+.graduation-horizontal .graduation {
+    position: absolute;
+    bottom: 0;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.graduation-horizontal .graduation span {
+    width: 1px;
+    height: 84%;
+    top: 1px;
+    position: absolute;
+    background: var(--oxford-blue);
+}
+
+@media screen and (max-width: 550px) {
+    .chart-area {
+        height: 200px;
+        font-size: 12px;
+    }
 }

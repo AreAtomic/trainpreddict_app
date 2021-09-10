@@ -1,0 +1,66 @@
+.is-light,
+.is-light strong {
+    color: var(--pink);
+    margin: 0 10px;
+}
+
+.form .columns p {
+    padding: 0 15px;
+}
+
+.form .columns p.is-light{
+    padding: 0;
+}
+
+.form.objectif img {
+    width: 45px;
+}
+
+.form.objectif .columns {
+    align-items: center;
+}
+
+.objectif.buttons {
+    display: flex;
+    width: fit-content;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.title-objectif {
+    width: 30vh;
+    min-width: 350px;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    align-items: center;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.title-objectif .title {
+    margin-bottom: 10px;
+}
+
+.columns.img {
+    margin: 0 auto;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.columns.time .field {
+    width: 77%;
+}
+
+.form.scroll {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.form.scroll::-webkit-scrollbar{
+    display: none;
+}
+
+.zindex{
+    z-index: 90;
+}

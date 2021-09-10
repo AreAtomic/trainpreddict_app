@@ -3,8 +3,15 @@
     position: fixed;
     bottom: 0;
     width: 100vw;
-    z-index: 10;
+    z-index: 30;
     overflow: hidden;
+}
+
+.tabs.bottom {
+    margin: 0;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
 }
 
 .tabs a {
@@ -25,10 +32,10 @@
 
 
 .tabs.is-toggle a {
-    background-color: #001F4E;
+    background-color: var(--oxford-blue);
     border: none;
-    border-right: 2px solid #334F76;
-    color: #FBBDCE;
+    border-right: 2px solid var(--light-blue);
+    color: var(--pink);
 }
 
 .tabs a.courbe {
@@ -38,16 +45,16 @@
 
 .tabs.is-toggle a:hover,
 .tabs.is-toggle li.is-active a {
-    background-color: #334F76;
-    color: #FBBDCE;
-    border-right: 2px solid #334F76;
+    background-color: var(--light-blue);
+    color: var(--pink);
+    border-right: 2px solid var(--light-blue);
 }
 
-.tabs.is-fullwidth li{
+.tabs.is-fullwidth li {
     flex-grow: unset;
     flex-shrink: unset;
 }
 
-.tabs li{
-    width: 25.1vw;
+.tabs li {
+    width: 25.01vw;
 }

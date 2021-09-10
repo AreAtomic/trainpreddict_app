@@ -1,12 +1,22 @@
-import React from "react"
-import { TitleFour } from ".."
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { TitleFour } from '..'
+import middlewares from '../../middlewares'
 
 const MessageDanger = (props) => {
-    return <div className="notification is-danger">
-        <button className="delete"></button>
-        <TitleFour title="Danger" color="is-white" />
-        {props.message}
-    </div>
+    const dispatch = useDispatch()
+    return (
+        <div className="notification is-danger">
+            <button
+                className="delete"
+                onClick={() => {
+                    dispatch(middlewares.MessageAction.clearMessage())
+                }}
+            ></button>
+            <TitleFour title="Danger" color="is-white" />
+            {props.message}
+        </div>
+    )
 }
 
 export default MessageDanger

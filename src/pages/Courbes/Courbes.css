@@ -1,0 +1,11 @@
+.chart-area {
+    margin: 0 auto;
+    max-width: 90vw;
+}
+.courbes .card {
+    margin: 30px auto;
+}
+
+.courbes {
+    margin-bottom: -70px;
+}

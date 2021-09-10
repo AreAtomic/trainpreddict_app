@@ -4,13 +4,13 @@
 
 .select {
     width: 100%;
-    background: #001f4e;
-    color: #fbbdce;
-    /* Appearance: none will hide the default arrow */
+    background: var(--oxford-blue);
+    color: var(--pink);
     appearance: none;
-    /* Best to include the browser prefix for cross-browser compatibility */
     -webkit-appearance: none;
     -moz-appearance: none;
+    height: 40px !important;
+    padding: 10px;
 }
 
 .basic-select {
@@ -27,13 +27,51 @@
 }
 
 .multiselect {
-    background: #001f4e;
+    background: var(--oxford-blue);
 }
 
-.select:not(.is-multiple):not(.is-loading)::after{
-    border-color: #fbbdce !important;
+.select:not(.is-multiple):not(.is-loading)::after {
+    border-color: var(--pink) !important;
 }
 
-:focus-visible{
-    background: #334F76;
+:focus-visible {
+    background: var(--light-blue);
+}
+
+.form .field img {
+    width: auto;
+    margin: 0;
+}
+
+.control.has-icons-right .icon.is-right {
+    right: 10px;
+}
+
+.input::-webkit-input-placeholder {
+    color: var(--pink);
+    opacity: 0.3;
+}
+
+.input:-moz-placeholder {
+    /* Firefox 18- */
+    color: var(--pink);
+    opacity: 0.3;
+
+}
+
+.input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: var(--pink);
+    opacity: 0.3;
+
+}
+
+.input:-ms-input-placeholder {
+    color: var(--pink);
+    opacity: 0.3;
+
+}
+
+.tooltip {
+    z-index: 99;
 }

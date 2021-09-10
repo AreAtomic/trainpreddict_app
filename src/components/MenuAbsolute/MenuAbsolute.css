@@ -1,0 +1,92 @@
+.absolute-menu {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    transition: 0.5s;
+    z-index: 90;
+}
+
+.absolute-menu.active {
+    z-index: 90;
+    background: #0000335e;
+    transition: 0.5s;
+    height: 100vh;
+}
+
+.absolute-menu-button {
+    z-index: 90;
+    position: absolute;
+    background-color: var(--oxford-blue);
+    border: 1px solid var(--pink);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding-top: 5px;
+    transition: 0.5s;
+    right: 3%;
+    bottom: 110px;
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+}
+
+.absolute-menu-button.active {
+    transform: rotate(360deg);
+    padding-top: 8px;
+}
+
+.absolute-sous-menu {
+    transition: 0.5s;
+    position: absolute;
+    width: 170px;
+    min-height: 70px;
+    right: 3%;
+    bottom: 153px;
+    background: var(--oxford-blue);
+    color: var(--pink);
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+    display:none;
+}
+
+
+.tooltip-button {
+    background: #00000050;
+    width: 120px;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    right: calc(3% + 50px);
+    bottom: 111px;
+}
+
+.absolute-sous-menu.active {
+    display: grid;
+    transition: 0.5s;
+}
+
+.absolute-sous-menu .item {
+    padding: 10px;
+    text-decoration: none;
+    width: 100%;
+    color: var(--pink);
+}
+
+.absolute-sous-menu .item:hover {
+    background: var(--pink);
+    color: var(--deep-blue);
+    width: 100%;
+}
+
+.absolute-menu-button.active.zone, .tooltip-button.zone {
+    bottom: 55px;
+}
+
+.absolute-zone {
+    position: absolute;
+    width: 100%;
+    top: 70px;
+}

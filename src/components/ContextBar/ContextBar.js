@@ -6,7 +6,7 @@ import bicycle from '../../assets/bicycle.svg'
 import curve from '../../assets/curve.svg'
 
 const ContextBar = (props) => {
-    return <div className="tabs is-toggle is-fullwidth">
+    return <div className="tabs is-toggle is-fullwidth bottom">
         <ul>
             <li className={props.location === "objectif" ? "is-active" : ""}>
                 <a href="/objectif">

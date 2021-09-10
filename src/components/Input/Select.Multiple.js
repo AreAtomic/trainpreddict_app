@@ -24,15 +24,18 @@ const SelectMultiple = (props) => {
     }
     return (
         <div className="field">
-            <label className="label">{props.label}
+            <label className="label">
+                {props.label}
                 {props.tooltip ? (
                     <Fragment>
                         <ReactToolTip />
                         <img
-                            className="ml-3"
+                            className="ml-3 tooltip"
                             src={question}
                             alt="Question"
                             data-tip={props.tooltip}
+                            data-background-color="#000000"
+                            data-multiline={true}
                         />
                     </Fragment>
                 ) : (
@@ -51,12 +54,12 @@ const SelectMultiple = (props) => {
                         <span>
                             {props.value.length > 0
                                 ? props.value.map((filtre) => (
-                                    <input
-                                        type="button"
-                                        className="filtre"
-                                        value={filtre}
-                                    />
-                                ))
+                                      <input
+                                          type="button"
+                                          className="filtre"
+                                          value={filtre}
+                                      />
+                                  ))
                                 : ''}
                         </span>
                     </div>

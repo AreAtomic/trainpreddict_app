@@ -5,11 +5,12 @@
 }
 
 .doughnut-div text {
-    fill: #eddfef;
+    fill: var(--purple-pantone);
 }
 
 @media screen and (max-width: 770px) {
     .doughnut-div {
-        max-width: 90vw;
+        max-width: 77vw;
+        margin: 0 auto;
     }
 }

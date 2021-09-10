@@ -1,4 +1,4 @@
 import './Slider.css'
-import Slider from "./Slider"
+import Slider from './Slider'
 
 export { Slider }

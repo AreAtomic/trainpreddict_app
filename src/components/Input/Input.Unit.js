@@ -7,18 +7,21 @@ const InputUnit = (props) => {
     return (
         <div className="field">
             <label
-                className={`label is-flex-direction-row mt-1 ${props.size ? props.size : ''
-                    }`}
+                className={`label is-flex-direction-row mt-1 ${
+                    props.size ? props.size : ''
+                }`}
             >
                 <span>{props.label}</span>
                 {props.tooltip ? (
                     <Fragment>
                         <ReactToolTip />
                         <img
-                            className="ml-3"
+                            className="ml-3 tooltip"
                             src={question}
                             width={17}
                             data-tip={props.tooltip}
+                            data-background-color="#000000"
+                            data-multiline={true}
                             alt="Icone informatio"
                         />
                     </Fragment>
