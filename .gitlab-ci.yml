@@ -3,8 +3,10 @@ image: node:latest
 
 # Cached
 cache:
+  key: npm
+  policy: pull-push
   paths:
-    - node_modules/
+    - .npm/
 
 
 # Define the stages
@@ -15,7 +17,7 @@ stages:
 build:
   stage: build
   script:
-    - npm install
+    - npm ci
     - npm run build
 
 deploy:
