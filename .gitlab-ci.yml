@@ -25,6 +25,6 @@ deploy:
     - pip install awscli
     - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
     - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-    - aws S3 co build s3://elasticbeanstalk-us-east-2-671402616253/TrainPreddict-B2C-$CI_PIPELINE_ID 
+    - aws S3 cp ./ s3://elasticbeanstalk-us-east-2-671402616253/TrainPreddict-B2C-$CI_PIPELINE_ID -recursive
     - aws elasticbeanstalk create-application-version --application-name TrainPreddict-B2C --version-label TrainPreddict-B2C-$CI_PIPELINE_ID --source-budle S3Bucket=s3://elasticbeanstalk-us-east-2-671402616253,S3Key=TrainPreddict-B2C-$CI_PIPELINE_ID
     - aws elasticbeanstalk update-environment --application-name TrainPreddict-B2C --environment-name TrainPreddict-B2C-env --version-label TrainPreddict-B2C-$CI_PIPELINE_ID
