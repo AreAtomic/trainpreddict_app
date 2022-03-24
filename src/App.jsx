@@ -1,30 +1,53 @@
-import logo from './assets/logo.svg'
-// TODO: Config router
+//#region Import external modules
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+//#endregion
+//#region Import components
+import { Navbar } from './components/molecules'
+import { Dashboard, Auth, Show, Coureur, Parametres } from './pages'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+//#endregion
+toast.configure()
 
 const App = () => {
+    const user = useSelector((state) => state.user)
+    console.log(toast)
     return (
-        <div className="bg-gradient-to-b from-purple-trainpreddict-500 to-deep-blue-500 flex flex-col justify-center items-center w-screen h-screen">
-            <img
-                src={logo}
-                className="w-70 h-70 animate-[spin_10s_linear_infinite]"
-                alt="TrainPreddict Logo"
-            />
-            <h1 className="text-xl font-bold text-red-trainpreddict-500">
-                TRAINPREDDICT
-            </h1>
-            <h2 className="text-lg font-bold text-white-trainpreddict-500">
-                APPLICATION POUR CYCLISTES
-            </h2>
+        <div className="bg-component-one-500 text-low-contrast-500 overflow-hidden w-full pt-navbar min-h-screen">
+            {user.isLogged ? (
+                // Place tes pages pour quand tu es connecté ici
+                <>
+                    <Navbar />
+                    <Routes>
+                        <Route path="/show" element={<Show />}></Route>
+                        <Route
+                            path="/dashboard"
+                            element={<Dashboard toast={toast} />}
+                        ></Route>
+                        <Route
+                            path="/coureur"
+                            element={<Coureur toast={toast} />}
+                        ></Route>
 
-            <div className="flex justify-between items-center">
-                <div className="m-5 px-10 py-2 cursor-pointer bg-red-trainpreddict-500 rounded-lg hover:bg-red-trainpreddict-600 text-white transition">
-                    Connexion
-                </div>
-
-                <div className="m-5 px-10 py-2 cursor-pointer bg-white-trainpreddict-500 rounded-lg hover:bg-white-trainpreddict-600 text-deep-blue-500 transition">
-                    Inscription
-                </div>
-            </div>
+                        <Route
+                            path="/parametres"
+                            element={<Parametres />}
+                        ></Route>
+                        <Route
+                            path="/*"
+                            element={<Dashboard toast={toast} />}
+                        ></Route>
+                    </Routes>
+                </>
+            ) : (
+                <Routes>
+                    <Route path="/" element={<Auth toast={toast} />}></Route>
+                    <Route path="/show" element={<Show />}></Route>
+                    <Route path="/*" element={<Auth toast={toast} />}></Route>
+                </Routes>
+            )}
         </div>
     )
 }

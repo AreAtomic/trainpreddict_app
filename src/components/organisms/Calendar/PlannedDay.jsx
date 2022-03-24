@@ -1,0 +1,109 @@
+import { useEffect } from 'react'
+import { ListSeance } from '..'
+import { Modal, Card, HeadingFour } from '../../atoms'
+import { CardPlanned } from '../Card'
+import { Droppable } from '../Dnd'
+import { Comment } from '../../molecules'
+import * as middlewares from '../../../middlewares'
+import { useDispatch } from 'react-redux'
+
+const PlannedDay = (props) => {
+    const dispatch = useDispatch()
+    const removePlanned = (indexToRemove) => {
+        let newPlanned = props.planned
+        if (indexToRemove !== props.planned.length - 1) {
+            // Move planned seance to remove on last index
+            newPlanned = props.planned.filter(
+                (planned, index) => index !== indexToRemove
+            )
+            newPlanned.push(props.planned[indexToRemove])
+        }
+        props.setPlanned(
+            newPlanned.filter(
+                (planned, index) => index !== newPlanned.length - 1
+            )
+        )
+        props.updateDayPlanned(props.day.date, newPlanned, false)
+    }
+
+    // Update day on end drag & drop
+    useEffect(() => {
+        if (props.parent === props.id) {
+            props.setPlanned([...props.planned, props.newSeance])
+            props.updateDayPlanned(
+                props.day.date,
+                [...props.planned, props.newSeance],
+                true
+            )
+            props.setParent(null)
+            props.resetNewSeance()
+        }
+    }, [props.dragEnd])
+
+    return (
+        <Modal
+            visible={props.visible}
+            onClose={() => {
+                props.onClose()
+            }}
+        >
+            <div className="flex">
+                <HeadingFour>{props.date}</HeadingFour>
+            </div>
+            <div className="flex justify-between mt-2">
+                <Droppable
+                    id={props.id}
+                    onMouseEnter={() => {
+                        props.setParent(props.id)
+                    }}
+                    style={{ width: '80%' }}
+                >
+                    <div className="grid grid-cols-2 gap-5 justify-around w-full">
+                        {props.planned ? (
+                            props.planned.map((item, index) => {
+                                return (
+                                    <CardPlanned
+                                        index={index}
+                                        entrainement={item}
+                                        removePlanned={() => {
+                                            console.log('Remove')
+                                            removePlanned(index)
+                                        }}
+                                    />
+                                )
+                            })
+                        ) : (
+                            <div>Rien de plannifié</div>
+                        )}
+                    </div>
+                </Droppable>
+                <Card
+                    className="grid-cols-1 max-h-min overflow-y-hidden"
+                    onMouseEnter={() => {
+                        props.setParent(null)
+                    }}
+                >
+                    <HeadingFour>Liste de séances</HeadingFour>
+                    <ListSeance seances={props.seances} />
+                </Card>
+            </div>
+            <div className="grid">
+                <Comment
+                    comments={props.comments}
+                    value={props.newComment}
+                    setValue={(e) => {
+                        props.setNewComment(e)
+                    }}
+                    saveComment={() => {
+                        props.saveComment()
+                    }}
+                    onBlur={() => {
+                        dispatch(middlewares.setNewComment(props.newComment))
+                    }}
+                />
+            </div>
+        </Modal>
+    )
+}
+
+export default PlannedDay
