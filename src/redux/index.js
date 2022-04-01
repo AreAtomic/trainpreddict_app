@@ -5,7 +5,6 @@ import { store } from './store'
 //#region Actions
 import { registerUserData, unregisterUserData } from './slices/authSlice'
 import { login, logout, signup, endOnboarding } from './slices/userSlice'
-import { setListUser, addUser, resetListUser } from './slices/userListSlice'
 import {
     changeDateCalendar,
     changeViewCalendar,
@@ -18,7 +17,6 @@ import {
     setRacesPlanning,
     resetPlanning,
 } from './slices/planningSlice'
-import { setUserSelected, resetUserSelected } from './slices/userSelectedSlice'
 import {
     setObjectif,
     resetObjectif,
@@ -59,9 +57,6 @@ export {
     logout,
     signup,
     endOnboarding,
-    setListUser,
-    addUser,
-    resetListUser,
     changeDateCalendar,
     changeViewCalendar,
     changeDataCalendar,
@@ -70,8 +65,6 @@ export {
     setUsersPlanning,
     setRacesPlanning,
     resetPlanning,
-    setUserSelected,
-    resetUserSelected,
     setObjectif,
     resetObjectif,
     setNewObjectif,

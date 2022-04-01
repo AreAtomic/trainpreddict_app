@@ -47,7 +47,7 @@ const Coureur = ({ toast }) => {
     // API states
     const dispatch = useDispatch()
     const auth = useSelector((state) => state.auth)
-    const user = useSelector((state) => state.userSelected)
+    const user = useSelector((state) => state.user)
     const calendar = useSelector((state) => state.calendar)
     const seances = useSelector((state) => state.seances)
     const indicators = useSelector((state) => state.indicators)
@@ -60,8 +60,9 @@ const Coureur = ({ toast }) => {
             dispatch(middlewares.setSeances(response.data))
         })
         services
-            .getCalendrierYear(user.id, dayjs().year(), auth.token)
+            .getCalendrierYear(auth.userId, dayjs().year(), auth.token)
             .then((response) => {
+                console.log(response)
                 if (!response.data?.actualYear) {
                     setIsCalendar(false)
                 }
@@ -81,10 +82,10 @@ const Coureur = ({ toast }) => {
                     )
                 ).then(setLoadingStatistics(false))
             })
-        services.getAllObjectifs(user.id, auth.token).then((response) => {
+        services.getAllObjectifs(auth.userId, auth.token).then((response) => {
             dispatch(middlewares.setObjectifs(response.data))
         })
-        services.getUserProfil(user.id, auth.token).then((response) => {
+        services.getUserProfil(auth.userId, auth.token).then((response) => {
             dispatch(middlewares.setUserProfil(response.data)).then(
                 setLoadingCaracteristics(false)
             )

@@ -691,6 +691,15 @@ module.exports = {
             min: 'min-content',
             max: 'max-content',
             fit: 'fit-content',
+            'card-training': '415px',
+            'card-recap': '350px',
+            show: '21px',
+            showtext: '7px',
+            'planning-day': '35px',
+            sidebar: 'calc(100vh - 54px)',
+            calendar: '145px',
+            "calendar-small": '100px',
+            80: '80px',
         }),
         inset: ({ theme }) => ({
             auto: 'auto',
@@ -791,6 +800,7 @@ module.exports = {
             max: 'max-content',
             fit: 'fit-content',
             prose: '65ch',
+            card: '419px',
             ...breakpoints(theme('screens')),
         }),
         minHeight: {
@@ -800,6 +810,7 @@ module.exports = {
             min: 'min-content',
             max: 'max-content',
             fit: 'fit-content',
+            'card-training': '415px',
         },
         minWidth: {
             0: '0px',
@@ -807,6 +818,7 @@ module.exports = {
             min: 'min-content',
             max: 'max-content',
             fit: 'fit-content',
+            'card-training': '420px',
         },
         objectPosition: {
             bottom: 'bottom',
@@ -1066,6 +1078,13 @@ module.exports = {
             min: 'min-content',
             max: 'max-content',
             fit: 'fit-content',
+            'card-training': '420px',
+            'show-sm': '95px',
+            'show-md': '147px',
+            'planning-day': '40px',
+            'circle-name': '80px',
+            calendar: '164px',
+            "calendar-small": '110px',
         }),
         willChange: {
             auto: 'auto',

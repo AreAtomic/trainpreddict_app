@@ -1,4 +1,3 @@
-import TableCoureur from "./TableCoureur"
-import TableStats from './TableStats'
+import TableStats from './TableStats';
 
-export {TableCoureur, TableStats}
+export { TableStats };

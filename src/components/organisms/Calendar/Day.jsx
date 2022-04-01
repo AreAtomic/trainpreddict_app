@@ -17,7 +17,7 @@ const Day = (props) => {
     const dispatch = useDispatch()
     const auth = useSelector((state) => state.auth)
     const user = useSelector((state) => state.user)
-    const userId = useSelector((state) => state.userSelected.id)
+    const userId = auth.userId
     useEffect(() => {
         const tempPlanned = []
         props.day.planned.forEach((seance) => {

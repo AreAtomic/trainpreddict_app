@@ -1,131 +1,122 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 //#region Import components
+import { Sidebar, Calendar, ObjectifForm } from '../../components/organisms'
 import {
-    HeadingTwo,
-    TableCoureur,
+    CardSeanceList,
+    PanelCarac,
+    PanelIndic,
+    PanelObjectif,
+    PanelObjectifModal,
+} from '../../components/molecules'
+import {
     Dropdown,
+    HeadingTwo,
+    TableStats,
+    CourbesIndicateurs,
+    Modal,
+    HeadingFour,
+    Input,
+    InputUnit,
+    Select,
+    TextArea,
+    MultipleSelect,
     ButtonPrimary,
+    ButtonPrimarySmall,
 } from '../../components/atoms'
-import {
-    Planning,
-    CalendarSmall,
-    CoureurForm,
-} from '../../components/organisms'
 //#endregion
 //#region Import API
 import * as services from '../../services'
 import * as middlewares from '../../middlewares'
+import { ProfilForm } from '../../components/organisms/Form'
+import { DndContext, DragOverlay } from '@dnd-kit/core'
+import {
+    snapCenterToCursor,
+    restrictToFirstScrollableAncestor,
+} from '@dnd-kit/modifiers'
+import { Draggable, Droppable } from '../../components/organisms'
 //#endregion
 
-const Dashboard = ({ toast }) => {
+const Coureur = ({ toast }) => {
     //#region State declaration
     // API states
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const auth = useSelector((state) => state.auth)
-    const users = useSelector((state) => state.userList)
-    const planning = useSelector((state) => state.planning)
+    const user = useSelector((state) => state.user)
     const calendar = useSelector((state) => state.calendar)
-
-    // Page states
-    const [date, setDate] = useState(dayjs())
-    const [loadingUser, setLoadingUser] = useState(true)
-    const [loadingPlanning, setLoadingPlanning] = useState(true)
-    const [loadingCalendar, setLoadingCalendar] = useState(true)
-    const firstWeekToDisplay = dayjs(date).week()
-
-    //modal new coureur
-    const [openNc, setOpenNc] = useState(false)
+    const indicators = useSelector((state) => state.indicators)
+    const statistics = useSelector((state) => state.statistics)
+    const objectifs = useSelector((state) => state.objectifs)
+    const caracteristics = useSelector((state) => state.caracteristics)
+    const seances = useSelector((state) => state.seances)
 
     useEffect(() => {
-        services.getAllUsers(auth.token).then((response) => {
-            dispatch(middlewares.setUserList(response.data)).then(
-                setLoadingUser(false)
-            )
+        services.getAllSeances(auth.token).then((response) => {
+            dispatch(middlewares.setSeances(response.data))
         })
-        services.getAllCourses(auth.token).then((response) => {
-            dispatch(middlewares.addRacesToPlanning(response.data, date)).then(
-                setLoadingCalendar(false)
+        services
+            .getCalendrierYear(auth.userId, dayjs().year(), auth.token)
+            .then((response) => {
+                console.log(response)
+                if (!response.data?.actualYear) {
+                    setIsCalendar(false)
+                }
+                dispatch(
+                    middlewares.changeCalendarData(
+                        response.data.actualYear?.years[0].weeks
+                    )
+                ).then(setLoadingCalendar(false))
+                dispatch(
+                    middlewares.setDatasIndicators(
+                        response.data.actualYear.years[0].weeks
+                    )
+                ).then(setLoadingIndicators(false))
+                dispatch(
+                    middlewares.setWeeksStatistics(
+                        response.data.actualYear.years[0].weeks
+                    )
+                ).then(setLoadingStatistics(false))
+            })
+        services.getAllObjectifs(auth.userId, auth.token).then((response) => {
+            dispatch(middlewares.setObjectifs(response.data))
+        })
+        services.getUserProfil(auth.userId, auth.token).then((response) => {
+            dispatch(middlewares.setUserProfil(response.data)).then(
+                setLoadingCaracteristics(false)
             )
         })
     }, [])
+    //modal ouverture
+    const [openMO, setOpenMO] = useState(false)
+    const [openMP, setOpenMP] = useState(false)
+    const [loadingCalendar, setLoadingCalendar] = useState(true)
+    const [loadingIndicators, setLoadingIndicators] = useState(true)
+    const [loadingStatistics, setLoadingStatistics] = useState(true)
+    const [loadingObjectifs, setLoadingObjectifs] = useState(true)
+    const [loadingCaracteristics, setLoadingCaracteristics] = useState(true)
+    const [isCalendar, setIsCalendar] = useState(true)
+    const firstWeek = dayjs(calendar.dayOne).week() - 1 || dayjs().week() - 1
 
-    useEffect(() => {
-        if (users) {
-            users.forEach((user) => {
-                services
-                    .getAllCoursesUser(user._id, auth.token)
-                    .then((response) => {
-                        dispatch(
-                            middlewares.addUserToPlanning(
-                                user,
-                                response.data,
-                                date,
-                                planning
-                            )
-                        )
-                    })
-            })
-        }
-        services.getAllCourses(auth.token).then((response) => {
-            dispatch(middlewares.addRacesToCalendar(response.data, date)).then(
-                setLoadingPlanning(false)
-            )
-        })
-    }, [users, date])
-    //#endregion
-    console.log("Dashboard", toast)
+    // Dnd
+    const [draggedSeance, setDraggedSeance] = useState(null)
+    const [parent, setParent] = useState(null)
+    const [dragEnd, setDragEnd] = useState(false)
+
+    const handleDragStart = (event) => {
+        setDraggedSeance(event.active.data.current)
+    }
+    const handleDragEnd = (event) => {
+        setDragEnd(!dragEnd)
+    }
+
     return (
-        <div>
-            <div className="flex mt-5 mb-2">
-                <div className="w-2/5 ml-10">
-                    <HeadingTwo className="mb-3">Liste des coureurs</HeadingTwo>
-                    {!loadingUser ? (
-                        <TableCoureur
-                            className="animate-[fadeIn-1s-linear]"
-                            coureur={users}
-                        />
-                    ) : (
-                        <div class="max-w-sm w-full">
-                            <div class="animate-pulse flex space-x-1">
-                                <div class="flex-1 space-y-1 py-1">
-                                    <div class="h-20 bg-component-two-200"></div>
-                                    <div class="grid grid-cols-3 gap-1">
-                                        <div class="h-8 bg-component-two-200"></div>
-                                        <div class="h-8 bg-component-two-200"></div>
-                                        <div class="h-8 bg-component-two-200"></div>
-                                    </div>
-                                    <div class="grid grid-cols-3 gap-1">
-                                        <div class="h-8 bg-component-two-200"></div>
-                                        <div class="h-8 bg-component-two-200"></div>
-                                        <div class="h-8 bg-component-two-200"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                    <ButtonPrimary
-                        className="mt-5"
-                        onClick={() => {
-                            setOpenNc(true)
-                        }}
-                    >
-                        Ajouter un coureur
-                    </ButtonPrimary>
-                    <CoureurForm
-                        value={openNc}
-                        close={() => {
-                            setOpenNc(false)
-                        }}
-                        toast={toast}
-                    />
-                </div>
-                <div className="w-2/3">
+        <div className="grid">
+            <div className="z-0 mt-16">
+                <div className="ml-3 mb-5 z-0">
                     <div className="flex mb-3">
                         <HeadingTwo className="mr-12">Calendrier</HeadingTwo>
                         <Dropdown
@@ -149,51 +140,113 @@ const Dashboard = ({ toast }) => {
                                 '8 semaines',
                             ]}
                         />
-                    </div>
-                    <div className="w-max-1/2">
-                        <CalendarSmall
-                            className="w-max-1/3"
-                            weeks={calendar.data.slice(
-                                firstWeekToDisplay,
-                                firstWeekToDisplay + calendar.weeksDisplayed
-                            )}
+                        <Input
+                            value={dayjs(calendar.dayOne).format('YYYY-MM-DD')}
+                            type="date"
+                            onChange={(e) => {
+                                dispatch(
+                                    middlewares.setDayOneCalendar(
+                                        dayjs(e.target.value).toISOString()
+                                    )
+                                )
+                            }}
                         />
                     </div>
-                </div>
-            </div>
-            <div>
-                <HeadingTwo className="mt-10 mb-5 ml-10">
-                    Planning des coureurs
-                </HeadingTwo>
-                {loadingPlanning ? (
-                    <div class="animate-pulse flex space-x-1 ml-10 w-11/12">
-                        <div class="flex-1 space-y-1 py-1">
-                            <div class="h-10 bg-component-two-200"></div>
-                            <div class="grid grid-cols-12 gap-1">
-                                <div class="h-8 bg-component-two-200 col-span-1"></div>
-                                <div class="h-8 bg-component-two-200 col-span-10"></div>
-                                <div class="h-8 bg-component-two-200 col-span-1"></div>
-                            </div>
-                            <div class="grid grid-cols-12 gap-1">
-                                <div class="h-8 bg-component-two-200 col-span-1"></div>
-                                <div class="h-8 bg-component-two-200 col-span-10"></div>
-                                <div class="h-8 bg-component-two-200 col-span-1"></div>
-                            </div>
+                    {loadingCalendar ? (
+                        <div>Loading</div>
+                    ) : (
+                        <div>
+                            {isCalendar ? (
+                                <Calendar
+                                    className=""
+                                    dayOne={dayjs()}
+                                    weeks={calendar.data.slice(
+                                        calendar.firstWeekIndex + firstWeek,
+                                        calendar.firstWeekIndex +
+                                            firstWeek +
+                                            calendar.weeksDisplayed
+                                    )}
+                                    seances={seances}
+                                    parent={parent}
+                                    setParent={(id) => setParent(id)}
+                                    resetNewSeance={() =>
+                                        setDraggedSeance(null)
+                                    }
+                                    newSeance={draggedSeance}
+                                    dragEnd={dragEnd}
+                                />
+                            ) : (
+                                <ButtonPrimarySmall
+                                    onClick={() => {
+                                        services
+                                            .createCalendrier(
+                                                user.id,
+                                                auth.token
+                                            )
+                                            .then((res) => console.log(res))
+                                    }}
+                                >
+                                    Générer le calendrier
+                                </ButtonPrimarySmall>
+                            )}
                         </div>
+                    )}
+                </div>
+                <div className="ml-3 mb-3">
+                    <HeadingTwo className="mb-3 ">Statistique</HeadingTwo>
+                    {loadingStatistics ? (
+                        <div></div>
+                    ) : (
+                        <TableStats
+                            year={2022}
+                            weeks={statistics.weeks.slice(
+                                calendar.firstWeekIndex,
+                                statistics.weeks.length
+                            )}
+                            selected_week={statistics.weekSelected}
+                            onChange={(e) => {
+                                console.log(e)
+                                dispatch(middlewares.setWeekSelected(e))
+                            }}
+                        />
+                    )}
+                </div>
+                <div className="ml-3 mb-5 mt-6">
+                    <div className="flex">
+                        <HeadingTwo>Indicateurs</HeadingTwo>
+                        <Dropdown
+                            value={indicators.selected}
+                            onChange={(event) => {
+                                dispatch(
+                                    middlewares.setSelectedIndicators(
+                                        event.target.value
+                                    )
+                                )
+                            }}
+                            values={['planned', 'done']}
+                            options={['Prévisionnel', 'Réalisé']}
+                            margin="ml-7"
+                        />
                     </div>
-                ) : (
-                    <Planning
-                        day_one={planning.dayOne}
-                        setDayOne={(day) => {
-                            dispatch(middlewares.changeDatePlanning(day))
-                        }}
-                        days={planning.races}
-                        coureurs={planning.users}
-                    />
-                )}
+                    <div
+                        className="mt-2"
+                        style={{ maxWidth: '1135px', maxHeight: '350px' }}
+                    >
+                        {!loadingIndicators && (
+                            <CourbesIndicateurs
+                                dates={indicators.dates}
+                                tiredness={
+                                    indicators.tiredness[
+                                        `${indicators.selected}`
+                                    ]
+                                }
+                                form={indicators.form[`${indicators.selected}`]}
+                            />
+                        )}
+                    </div>
+                </div>
             </div>
         </div>
     )
 }
-
-export default Dashboard
+export default Coureur

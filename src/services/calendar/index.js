@@ -10,7 +10,7 @@ import { requestApi } from '../../api'
 export const getCalendrierYear = (userId, year, token) => {
     return requestApi(
         'get',
-        `assistant/calendrier/${userId}/${year}`,
+        `coureur/calendrier/${year}`,
         token,
         null
     )
@@ -19,7 +19,7 @@ export const getCalendrierYear = (userId, year, token) => {
 export const createCalendrier = (userId, token) => {
     return requestApi(
         'post',
-        `assistant/calendrier/${userId}`,
+        `coureur/calendrier`,
         token,
         {}
     )
@@ -35,7 +35,7 @@ export const createCalendrier = (userId, token) => {
 export const getDayCalendrier = (userId, date, token) => {
     return requestApi(
         'get',
-        `assistant/calendrier/${userId}/day/${date}`,
+        `coureur/calendrier/day/${date}`,
         token,
         null
     )
@@ -66,7 +66,7 @@ export const putDayCalendrierPlanned = (
 ) => {
     return requestApi(
         'put',
-        `assistant/calendrier/${userId}/planned/${date}`,
+        `coureur/calendrier/planned/${date}`,
         token,
         {
             planned: planned,
@@ -87,7 +87,7 @@ export const putDayCalendrierPlanned = (
 export const putDayCalendarComment = (userId, date, token, comment) => {
     return requestApi(
         'put',
-        `assistant/calendrier/${userId}/comment/${date}`,
+        `coureur/calendrier/comment/${date}`,
         token,
         { comment: comment }
     )
@@ -125,7 +125,7 @@ export const putDayCalendarObjectif = (
 ) => {
     return requestApi(
         'put',
-        `assistant/calendrier/${userId}/objectif/${date}`,
+        `coureur/calendrier/objectif/${date}`,
         token,
         {
             type: type,
@@ -171,7 +171,7 @@ export const putDayCalendarCourses = (
 ) => {
     return requestApi(
         'put',
-        `assistant/calendrier/${userId}/objectif/${date}`,
+        `coureur/calendrier/objectif/${date}`,
         token,
         {
             type: type,
@@ -195,7 +195,7 @@ export const putDayCalendarCourses = (
 export const getPlannedObject = (userId, seanceId, token) => {
     return requestApi(
         'get',
-        `assistant/calendrier/${userId}/planned/object/${seanceId}`,
+        `coureur/calendrier/planned/object/${seanceId}`,
         token,
         null
     )

@@ -26,8 +26,6 @@ const App = () => {
               path='/dashboard'
               element={<Dashboard toast={toast} />}
             ></Route>
-            <Route path='/coureur' element={<Coureur toast={toast} />}></Route>
-
             <Route path='/parametres' element={<Parametres />}></Route>
             <Route path='/home' element={<Home />} />
             <Route path='/*' element={<Dashboard toast={toast} />}></Route>

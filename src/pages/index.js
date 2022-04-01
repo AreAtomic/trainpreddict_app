@@ -1,5 +1,5 @@
-import { Dashboard } from './dashboard'
 import Coureur from './coureur'
+import Dashboard from './dashboard'
 import { Parametres } from './parametres'
 import { Auth } from './auth'
 import { Show } from './show'

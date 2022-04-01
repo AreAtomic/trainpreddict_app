@@ -7,7 +7,7 @@ import { requestApi } from '../../api'
  * @returns
  */
 export const getAllObjectifs = (userId, token) => {
-    return requestApi('get', `assistant/objectif/${userId}`, token)
+    return requestApi('get', `coureur/objectif`, token)
 }
 
 export const createObjectif = (
@@ -24,7 +24,7 @@ export const createObjectif = (
 ) => {
     return requestApi(
         'put',
-        `assistant/calendrier/${userId}/objectif/${date}`,
+        `coureur/calendrier/objectif/${date}`,
         token,
         {
             type: type,

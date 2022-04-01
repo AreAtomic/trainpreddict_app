@@ -20,7 +20,7 @@ import {
     TextArea,
     Dropdown,
 } from './Inputs'
-import { TableCoureur, TableStats } from './Tables'
+import { TableStats } from './Tables'
 import { CourbesIndicateurs, CourbesFC, CourbesPuissance } from './Courbes'
 import { Modal } from './Modal'
 import { Card } from './Card'
@@ -47,7 +47,6 @@ export {
     MultipleSelect,
     TextArea,
     Dropdown,
-    TableCoureur,
     TableStats,
     CourbesIndicateurs,
     CourbesFC,

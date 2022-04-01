@@ -24,15 +24,6 @@ const Sidebar = (props) => {
             <div className="h-2/3 overflow-y-scroll scrollbar overflow-x-none">
                 <ListSeance seances={props.seances} />
             </div>
-            <div className="py-6 flex justify-center border-t border-medium-contrast-100">
-                <ButtonSecondary
-                    onClick={() => {
-                        dispatch(middlewares.setUserSelected(null, null))
-                    }}
-                >
-                    Tous les coureurs
-                </ButtonSecondary>
-            </div>
         </div>
     )
 }

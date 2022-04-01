@@ -14,14 +14,12 @@ export const logout = () => (dispatch) => {
     dispatch(Actions.resetCaracteristics())
     dispatch(Actions.resetDaySelected())
     dispatch(Actions.resetIndicators())
-    dispatch(Actions.resetListUser())
     dispatch(Actions.resetNewObjectif())
     dispatch(Actions.resetNewSeance())
     dispatch(Actions.resetObjectif())
     dispatch(Actions.resetPlanning())
     dispatch(Actions.resetSeances())
     dispatch(Actions.resetStatistics())
-    dispatch(Actions.resetUserSelected())
     return Promise.resolve()
 }
 
@@ -46,104 +44,6 @@ export const login = (userId, token, email, name) => (dispatch) => {
     return Promise.resolve()
 }
 
-/**
- * @description Permet de set la liste de coureur
- * @param {array} userList
- * @returns
- */
-export const setUserList = (userList) => (dispatch) => {
-    dispatch(Actions.setListUser(userList))
-    return Promise.resolve()
-}
-
-/**
- * @description Permet d'ajouter un utilisateur au planning
- * @param {JSON} user
- * @param {array} races
- * @param {ISOString} date
- * @param {JSON} actualState
- * @returns
- */
-export const addUserToPlanning =
-    (user, races, date, actualState) => (dispatch) => {
-        let year = dayjs(date).year()
-        let newDay = dayjs(`01/01/${year}`)
-        let planning = []
-        let daysOfCourse = 0
-        while (newDay.year() === year) {
-            let isRace = false
-            let race = {}
-            races.forEach((race) => {
-                if (
-                    dayjs(race.date).format('DD/MM/YYYY') ==
-                    dayjs(newDay).format('DD/MM/YYYY')
-                ) {
-                    isRace = true
-                    daysOfCourse += 1
-                    race = { course: race.titre }
-                }
-            })
-            planning.push(isRace ? race : { course: false })
-            newDay = dayjs(newDay).add(1, 'day')
-        }
-
-        let users = [...actualState.users]
-        let needPush = true
-        users.forEach((u) => {
-            if (u._id === user._id) {
-                u = {
-                    _id: user._id,
-                    name: `${user.prenom} ${user.nom}`,
-                    days: planning,
-                    daysOfCourse: daysOfCourse,
-                }
-                needPush = false
-            }
-        })
-        if (needPush) {
-            users.push({
-                _id: user._id,
-                name: `${user.prenom} ${user.nom}`,
-                days: planning,
-                daysOfCourse: daysOfCourse,
-            })
-        }
-
-        dispatch(Actions.setUsersPlanning(users))
-        return Promise.resolve()
-    }
-
-/**
- * @description Permet d'ajouter les course de l'organisme au planning
- * @param {array} races
- * @param {ISOString} date
- * @returns
- */
-export const addRacesToPlanning = (races, date) => (dispatch) => {
-    let year = dayjs(date).year()
-    let newDay = dayjs(`01/01/${year}`)
-    let planning = []
-    let daysOfCourse = 0
-    while (newDay.year() === year) {
-        let isRace = false
-        let race = {}
-        races.forEach((race) => {
-            if (
-                dayjs(race.date).format('DD/MM/YYYY') ==
-                dayjs(newDay).format('DD/MM/YYYY')
-            ) {
-                isRace = true
-                daysOfCourse += 1
-                race = { course: race.titre }
-            }
-        })
-        planning.push(isRace ? race : { course: false })
-        newDay = dayjs(newDay).add(1, 'day')
-    }
-
-    dispatch(Actions.setRacesPlanning(planning))
-    return Promise.resolve()
-}
 /**
  * @description Permet de changer la date de début du planning
  * @param {ISOString} date
@@ -188,17 +88,6 @@ export const addRacesToCalendar = (races, date) => (dispatch) => {
  */
 export const changeViewCalendar = (view) => (dispatch) => {
     dispatch(Actions.changeViewCalendar(view))
-    return Promise.resolve()
-}
-
-/**
- * @description Set user selected
- * @param {string} name
- * @param {ObjectId} id
- * @returns
- */
-export const setUserSelected = (name, id) => (dispatch) => {
-    dispatch(Actions.setUserSelected({ name: name, id: id }))
     return Promise.resolve()
 }
 
