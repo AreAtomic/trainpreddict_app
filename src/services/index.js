@@ -4,15 +4,25 @@ import {
     createCalendrier,
     getDayCalendrier,
     putDayCalendrierPlanned,
+    putDayCalendrierDone,
     putDayCalendarComment,
     putDayCalendarObjectif,
     putDayCalendarCourses,
-    getPlannedObject
+    getPlannedObject,
 } from './calendar'
-import { getAllSeancesUser, getEntrainementAnalyse } from './entrainements'
+import {
+    getAllSeancesUser,
+    getEntrainementAnalyse,
+    postEntrainementFile,
+} from './entrainements'
 import { getAllObjectifs, createObjectif } from './objectifs'
 import { getAllCoursesUser, getAllCourses } from './courses'
-import { getAllUsers, getUserProfil, putUserProfil, createCoureur } from './affiliation'
+import {
+    getAllUsers,
+    getUserProfil,
+    putUserProfil,
+    createCoureur,
+} from './affiliation'
 import { getAllSeances } from './seances'
 
 export {
@@ -22,6 +32,7 @@ export {
     createCalendrier,
     getDayCalendrier,
     putDayCalendrierPlanned,
+    putDayCalendrierDone,
     putDayCalendarComment,
     putDayCalendarObjectif,
     putDayCalendarCourses,
@@ -36,5 +47,6 @@ export {
     getUserProfil,
     getAllSeances,
     putUserProfil,
-    createCoureur
+    createCoureur,
+    postEntrainementFile,
 }

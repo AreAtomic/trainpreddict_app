@@ -29,6 +29,9 @@ const Navbar = (props) => {
                 <a href="/" className={`text-low-contrast-500 my-2 mx-6`}>
                     Accueil
                 </a>
+                <a href="/upload" className={`text-low-contrast-500 my-2 mx-6`}>
+                    Upload
+                </a>
                 <a
                     href="/parametres"
                     className={`text-low-contrast-500 my-2 mx-6`}
@@ -69,6 +72,12 @@ const Navbar = (props) => {
                 >
                     <a href="/" className={`text-low-contrast-500 my-2 mx-6`}>
                         Accueil
+                    </a>
+                    <a
+                        href="/upload"
+                        className={`text-low-contrast-500 my-2 mx-6`}
+                    >
+                        Upload
                     </a>
                     <a
                         href="/parametres"

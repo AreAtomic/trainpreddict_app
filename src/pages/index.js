@@ -4,5 +4,6 @@ import { Parametres } from './parametres'
 import { Auth } from './auth'
 import { Show } from './show'
 import { Home } from './home'
+import { Televersement } from './televersement'
 
-export { Dashboard, Auth, Show, Coureur, Parametres, Home }
+export { Dashboard, Auth, Show, Coureur, Parametres, Home, Televersement }

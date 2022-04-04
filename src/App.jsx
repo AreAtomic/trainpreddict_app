@@ -5,7 +5,15 @@ import { useSelector } from 'react-redux'
 //#endregion
 //#region Import components
 import { Navbar } from './components/molecules'
-import { Dashboard, Auth, Show, Coureur, Parametres, Home } from './pages'
+import {
+    Dashboard,
+    Auth,
+    Show,
+    Coureur,
+    Parametres,
+    Home,
+    Televersement,
+} from './pages'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 //#endregion
@@ -48,6 +56,15 @@ const App = () => {
                                 </>
                             }
                         ></Route>
+                        <Route
+                            path="/upload"
+                            element={
+                                <>
+                                    <Navbar />
+                                    <Televersement toast={toast} />
+                                </>
+                            }
+                        />
                     </Routes>
                 </>
             ) : (

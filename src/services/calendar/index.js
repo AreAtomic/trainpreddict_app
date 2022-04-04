@@ -77,6 +77,34 @@ export const putDayCalendrierPlanned = (
 }
 
 /**
+ * @description Add new training in done array of a day
+ * @param {*} date 
+ * @param {*} token 
+ * @param {*} planned 
+ * @param {*} adding 
+ * @param {*} statistiques 
+ * @returns 
+ */
+export const putDayCalendrierDone = (
+    date,
+    token,
+    planned,
+    adding,
+    statistiques
+) => {
+    return requestApi(
+        'put',
+        `coureur/calendrier/done/${date}`,
+        token,
+        {
+            done: planned,
+            adding: adding,
+            statistiques: statistiques,
+        }
+    )
+}
+
+/**
  * @description Add a comment for a day
  * @param {ObjectId} userId
  * @param {ISOString} date
