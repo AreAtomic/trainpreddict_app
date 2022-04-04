@@ -89,13 +89,10 @@ const Upload = (props) => {
             <ButtonSecondary
                 onClick={(e) => {
                     for (let i = 0; i < file.length; i++) {
-                        console.log(file[i])
                         services
                             .postEntrainementFile(auth.token, file[i])
                             .then((res) => {
-                                console.log(res)
                                 if (res.msg) {
-                                    console.log(res.data)
                                     const date = res.data.date.split('T')[0]
                                     const statistiques = {
                                         time: res.data.duree,
@@ -107,14 +104,20 @@ const Upload = (props) => {
                                         denivele: res.data.deniv,
                                         nombreSeance: 1,
                                     }
-                                    services.putDayCalendrierDone(
-                                        dayjs(date).toISOString(),
-                                        auth.token,
-                                        res.data._id,
-                                        true,
-                                        statistiques
-                                    )
-                                    props.toast.success(res.msg)
+                                    services
+                                        .putDayCalendrierDone(
+                                            dayjs(date).toISOString(),
+                                            auth.token,
+                                            res.data._id,
+                                            true,
+                                            statistiques
+                                        )
+                                        .then((response) =>
+                                            props.toast.success(res.msg)
+                                        )
+                                        .catch((err) =>
+                                            props.toast.success(res.msg)
+                                        )
                                 } else props.toast.error(res.error)
                             })
                             .catch((err) => {
