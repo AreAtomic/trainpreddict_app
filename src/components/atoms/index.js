@@ -25,7 +25,7 @@ import { CourbesIndicateurs, CourbesFC, CourbesPuissance } from './Courbes'
 import { Modal } from './Modal'
 import { Card } from './Card'
 import { Cell } from './Cell'
-import { ShowCourse, ShowEntrainement } from './Show'
+import { ShowCourse, ShowEntrainement, ShowMobile } from './Show'
 import { TooltipWithDelay } from './Tooltips'
 import { Doghnut } from './Doghnuts'
 // TODO: Container for coureur view (with the sidebar)
@@ -58,4 +58,5 @@ export {
     ShowEntrainement,
     TooltipWithDelay,
     Doghnut,
+    ShowMobile,
 }

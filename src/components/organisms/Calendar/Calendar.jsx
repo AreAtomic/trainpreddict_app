@@ -29,7 +29,7 @@ const Calendar = (props) => {
             // Permet d'ajouter ou de supprimer dans la bdd
             nombreSeance: adding ? planned.length : planned.length - 1,
         }
-        console.log(statistiques, plannedIds)
+
         services.putDayCalendrierPlanned(
             user.id,
             date,

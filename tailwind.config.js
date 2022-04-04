@@ -4,6 +4,7 @@ module.exports = {
     darkMode: 'media', // or 'class'
     theme: {
         screens: {
+            xs: '100px',
             sm: '640px',
             md: '768px',
             ml: '900px',
@@ -698,7 +699,8 @@ module.exports = {
             'planning-day': '35px',
             sidebar: 'calc(100vh - 54px)',
             calendar: '145px',
-            "calendar-small": '100px',
+            'calendar-small': '100px',
+            'calendar-mobile': '76px',
             80: '80px',
         }),
         inset: ({ theme }) => ({
@@ -1084,7 +1086,9 @@ module.exports = {
             'planning-day': '40px',
             'circle-name': '80px',
             calendar: '164px',
-            "calendar-small": '110px',
+            'calendar-small': '110px',
+            'calendar-mobile': '50px',
+            'show-xs': '46px',
         }),
         willChange: {
             auto: 'auto',

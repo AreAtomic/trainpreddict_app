@@ -1,7 +1,6 @@
 import { ButtonPrimarySmall, TextArea } from '../../atoms'
 
 const Comment = (props) => {
-    console.log(props.comments)
     return (
         <div className="w-full rounded-lg border-2 border-low-contrast-500 mt-5 bg-component-one-500 px-3 py-3">
             <div className="grid h-10 overflow-auto text-low-contrast-500 scrollbar mb-2">

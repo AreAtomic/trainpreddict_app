@@ -118,7 +118,7 @@ const Coureur = ({ toast }) => {
             <div className="z-0 mt-16">
                 <div className="ml-3 mb-5 z-0">
                     <div className="flex mb-3">
-                        <HeadingTwo className="mr-12">Calendrier</HeadingTwo>
+                        <HeadingTwo className="mr-12 sm:mr-2 xs:mr-2">Calendrier</HeadingTwo>
                         <Dropdown
                             value={calendar.weeksDisplayed}
                             onChange={(event) => {
@@ -140,17 +140,21 @@ const Coureur = ({ toast }) => {
                                 '8 semaines',
                             ]}
                         />
-                        <Input
-                            value={dayjs(calendar.dayOne).format('YYYY-MM-DD')}
-                            type="date"
-                            onChange={(e) => {
-                                dispatch(
-                                    middlewares.setDayOneCalendar(
-                                        dayjs(e.target.value).toISOString()
+                        <div className="2xl:inline-block xl:inline-block lg:inline-block ml:inline-block md:inline-block md:hidden sm:hidden xs:hidden">
+                            <Input
+                                value={dayjs(calendar.dayOne).format(
+                                    'YYYY-MM-DD'
+                                )}
+                                type="date"
+                                onChange={(e) => {
+                                    dispatch(
+                                        middlewares.setDayOneCalendar(
+                                            dayjs(e.target.value).toISOString()
+                                        )
                                     )
-                                )
-                            }}
-                        />
+                                }}
+                            />
+                        </div>
                     </div>
                     {loadingCalendar ? (
                         <div>Loading</div>
@@ -192,7 +196,7 @@ const Coureur = ({ toast }) => {
                         </div>
                     )}
                 </div>
-                <div className="ml-3 mb-3">
+                <div className="ml-3 mb-3 w-1/12">
                     <HeadingTwo className="mb-3 ">Statistique</HeadingTwo>
                     {loadingStatistics ? (
                         <div></div>
@@ -210,40 +214,6 @@ const Coureur = ({ toast }) => {
                             }}
                         />
                     )}
-                </div>
-                <div className="ml-3 mb-5 mt-6">
-                    <div className="flex">
-                        <HeadingTwo>Indicateurs</HeadingTwo>
-                        <Dropdown
-                            value={indicators.selected}
-                            onChange={(event) => {
-                                dispatch(
-                                    middlewares.setSelectedIndicators(
-                                        event.target.value
-                                    )
-                                )
-                            }}
-                            values={['planned', 'done']}
-                            options={['Prévisionnel', 'Réalisé']}
-                            margin="ml-7"
-                        />
-                    </div>
-                    <div
-                        className="mt-2"
-                        style={{ maxWidth: '1135px', maxHeight: '350px' }}
-                    >
-                        {!loadingIndicators && (
-                            <CourbesIndicateurs
-                                dates={indicators.dates}
-                                tiredness={
-                                    indicators.tiredness[
-                                        `${indicators.selected}`
-                                    ]
-                                }
-                                form={indicators.form[`${indicators.selected}`]}
-                            />
-                        )}
-                    </div>
                 </div>
             </div>
         </div>

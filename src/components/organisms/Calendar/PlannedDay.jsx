@@ -66,7 +66,6 @@ const PlannedDay = (props) => {
                                         index={index}
                                         entrainement={item}
                                         removePlanned={() => {
-                                            console.log('Remove')
                                             removePlanned(index)
                                         }}
                                     />
@@ -77,6 +76,8 @@ const PlannedDay = (props) => {
                         )}
                     </div>
                 </Droppable>
+                {/* NOT SHOW FOR COUREUR IN STRUCTURE 
+                //TODO: Add condition for structure condition
                 <Card
                     className="grid-cols-1 max-h-min overflow-y-hidden"
                     onMouseEnter={() => {
@@ -85,7 +86,7 @@ const PlannedDay = (props) => {
                 >
                     <HeadingFour>Liste de séances</HeadingFour>
                     <ListSeance seances={props.seances} />
-                </Card>
+                </Card> */}
             </div>
             <div className="grid">
                 <Comment

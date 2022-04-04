@@ -19,22 +19,15 @@ const Navbar = (props) => {
         <div className="fixed top-0 left-0 w-full flex justify-between px-10 py-2 bg-primary-blue-500 z-50 drop-shadow-mdlight">
             {/** PC */}
             <div className="xs:hidden sm:hidden md:hidden lg:flex xl:flex 2xl:flex flex-row">
-                <img
-                    src={logo}
-                    alt="Logo TrainPreddict, application pour cyclistes"
-                    width={40}
-                />
+                <a href="/home">
+                    <img
+                        src={logo}
+                        alt="Logo TrainPreddict, application pour cyclistes"
+                        width={40}
+                    />
+                </a>
                 <a href="/" className={`text-low-contrast-500 my-2 mx-6`}>
                     Accueil
-                </a>
-                <a
-                    href="/coureur"
-                    className={`text-low-contrast-500 my-2 mx-6`}
-                >
-                    Coureurs
-                </a>
-                <a href="/" className={`text-low-contrast-500 my-2 mx-6`}>
-                    Concepteur de séance
                 </a>
                 <a
                     href="/parametres"
@@ -53,11 +46,13 @@ const Navbar = (props) => {
             </ButtonSecondarySmall>
             {/**Mobile */}
             <div className="lg:hidden xl:hidden 2xl:hidden sm:flex md: flex justify-between w-full">
-                <img
-                    src={logo}
-                    alt="Logo TrainPreddict, application pour cyclistes"
-                    width={40}
-                />
+                <a href="/home">
+                    <img
+                        src={logo}
+                        alt="Logo TrainPreddict, application pour cyclistes"
+                        width={40}
+                    />
+                </a>
                 <ButtonSecondarySmall
                     className="w-fit grid"
                     onClick={() => {
@@ -75,13 +70,10 @@ const Navbar = (props) => {
                     <a href="/" className={`text-low-contrast-500 my-2 mx-6`}>
                         Accueil
                     </a>
-                    <a href="/" className={`text-low-contrast-500 my-2 mx-6`}>
-                        Coureurs
-                    </a>
-                    <a href="/" className={`text-low-contrast-500 my-2 mx-6`}>
-                        Concepteur de séance
-                    </a>
-                    <a href="/" className={`text-low-contrast-500 my-2 mx-6`}>
+                    <a
+                        href="/parametres"
+                        className={`text-low-contrast-500 my-2 mx-6`}
+                    >
                         Paramètres
                     </a>
                 </div>

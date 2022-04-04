@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import { ShowEntrainement } from '../../atoms'
+import { ShowEntrainement, ShowCourse, ShowMobile } from '../../atoms'
 import DonedDay from './DonedDay'
 import PlannedDay from './PlannedDay'
 import { Droppable } from '../Dnd'
@@ -145,7 +145,7 @@ const Day = (props) => {
                 )}
             </div>
             <div
-                className="bg-primary-blue-500 border border-high-contrast-500 relative w-calendar h-calendar p-2 overflow-y-auto no-scrollbar"
+                className="bg-primary-blue-500 border border-high-contrast-500 relative p-1 overflow-y-auto no-scrollbar 2xl:w-calendar 2xl:h-calendar xl:w-calendar xl:h-calendar lg:w-calendar-small lg:h-calendar-small ml:h-calendar-small ml:w-calendar-small md:h-calendar-small md:w-calendar-small sm:h-calendar-mobile sm:w-calendar-mobile xs:h-calendar-mobile xs:w-calendar-mobile"
                 onClick={() => {
                     setEdit(true)
                 }}
@@ -158,24 +158,48 @@ const Day = (props) => {
                     <div className="absolute top-0 left-0 w-full h-full bg-low-contrast-500 opacity-10"></div>
                 )}
                 <div className="flex justify-between text-high-contrast-500">
-                    <div className="text-left">
+                    <div className="text-left 2xl:text-[13px] xl:text-[13px] lg:text-[13px] ml:text-[13px] md:text-[13px] md:text-[7px] sm:text-[5px] xs:text-[5px]">
                         {props.month && props.month}
                     </div>
-                    <div className="text-right">
-                        {dayjs(props.day.date).format('ddd DD')}
+                    <div className="text-right 2xl:text-[13px] xl:text-[13px] lg:text-[13px] ml:text-[13px] md:text-[13px] md:text-[10px] sm:text-[10px] xs:text-[10px]">
+                        {dayjs(props.day.date).format('DD')}
                     </div>
                 </div>
                 {!loading &&
                     planned.map((seance) => {
                         return (
-                            <ShowEntrainement>
-                                <p>{seance.titre}</p>
-                                {!seance.course && (
-                                    <p className="text-medium-contrast-500">
-                                        {seance.score_stress_entrainement} SSE
-                                    </p>
-                                )}
-                            </ShowEntrainement>
+                            <>
+                                <div className="2xl:flex xl:flex lg:flex ml:hidden md:hidden sm:hidden xs:hidden">
+                                    <ShowEntrainement>
+                                        <p className='text-[10px]'>{seance.titre}</p>
+                                        {!seance.course && (
+                                            <p className="text-medium-contrast-500 text-[10px]">
+                                                {
+                                                    seance.score_stress_entrainement
+                                                }{' '}
+                                                SSE
+                                            </p>
+                                        )}
+                                    </ShowEntrainement>
+                                </div>
+                                <div className="2xl:hidden xl:hidden lg:hidden ml:flex md:flex sm:hidden xs:hidden">
+                                    <ShowCourse>
+                                        <p className='text-[10px]'>{seance.titre}</p>
+                                        {!seance.course && (
+                                            <p className="text-medium-contrast-500 text-[10px]">
+                                                {
+                                                    seance.score_stress_entrainement
+                                                }
+                                            </p>
+                                        )}
+                                    </ShowCourse>
+                                </div>
+                                <div className="2xl:hidden xl:hidden lg:hidden ml:hidden md:hidden sm:flex xs:flex">
+                                    <ShowMobile>
+                                        <p className='text-[7px]'>{seance.titre}</p>
+                                    </ShowMobile>
+                                </div>
+                            </>
                         )
                     })}
                 {!loading &&
