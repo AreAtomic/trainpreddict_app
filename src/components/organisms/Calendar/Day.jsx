@@ -206,7 +206,7 @@ const Day = (props) => {
                     done.map((entrainement) => {
                         return (
                             <ShowEntrainement>
-                                <p>{entrainement.titre}</p>
+                                <p>{entrainement.titre || entrainement.type}</p>
                                 <p className="text-medium-contrast-500">
                                     {entrainement.score_stress_entrainement}
                                     SSE

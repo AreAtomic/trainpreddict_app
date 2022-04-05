@@ -28,6 +28,7 @@ import { Cell } from './Cell'
 import { ShowCourse, ShowEntrainement, ShowMobile } from './Show'
 import { TooltipWithDelay } from './Tooltips'
 import { Doghnut } from './Doghnuts'
+import { SpinLoader } from './Loader'
 // TODO: Container for coureur view (with the sidebar)
 
 export {
@@ -59,4 +60,5 @@ export {
     TooltipWithDelay,
     Doghnut,
     ShowMobile,
+    SpinLoader,
 }
