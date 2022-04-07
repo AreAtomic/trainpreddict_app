@@ -27,3 +27,24 @@ export const register = (email, nom, type) => {
         type: type,
     })
 }
+
+/**
+ * @description Change password user
+ * @param {string} email
+ * @param {string} nom
+ * @param {string} type
+ * @returns {JSON}
+ */
+ export const changePassword = (
+    email,
+    previousPassword,
+    newPassword,
+    newPasswordConfirm
+) => {
+    return requestApi('post', `auth/changePassword`, null, {
+        email,
+        previousPassword,
+        newPassword,
+        newPasswordConfirm,
+    })
+}

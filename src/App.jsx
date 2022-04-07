@@ -42,7 +42,7 @@ const App = () => {
                             element={
                                 <>
                                     <Navbar />
-                                    <Parametres />
+                                    <Parametres toast={toast} />
                                 </>
                             }
                         ></Route>

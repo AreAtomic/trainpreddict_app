@@ -1,4 +1,4 @@
-import { authenticate, register } from './auth'
+import { authenticate, register, changePassword } from './auth'
 import {
     getCalendrierYear,
     createCalendrier,
@@ -28,6 +28,7 @@ import { getAllSeances } from './seances'
 export {
     authenticate,
     register,
+    changePassword,
     getCalendrierYear,
     createCalendrier,
     getDayCalendrier,
