@@ -94,6 +94,7 @@ const Upload = (props) => {
                             .then((res) => {
                                 if (res.msg) {
                                     const date = res.data.date.split('T')[0]
+                                    console.log(date)
                                     const statistiques = {
                                         time: res.data.duree,
                                         distance: Math.round(
@@ -112,9 +113,10 @@ const Upload = (props) => {
                                             true,
                                             statistiques
                                         )
-                                        .then((response) =>
+                                        .then((response) => {
+                                            console.log(response)
                                             props.toast.success(res.msg)
-                                        )
+                                        })
                                         .catch((err) =>
                                             props.toast.success(res.msg)
                                         )
