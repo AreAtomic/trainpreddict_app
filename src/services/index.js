@@ -7,6 +7,7 @@ import {
     putDayCalendrierDone,
     putDayCalendarComment,
     putDayCalendarObjectif,
+    deleteDayCalendarObjectif,
     putDayCalendarCourses,
     getPlannedObject,
 } from './calendar'
@@ -36,6 +37,7 @@ export {
     putDayCalendrierDone,
     putDayCalendarComment,
     putDayCalendarObjectif,
+    deleteDayCalendarObjectif,
     putDayCalendarCourses,
     getPlannedObject,
     getAllSeancesUser,

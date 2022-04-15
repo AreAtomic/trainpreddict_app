@@ -228,3 +228,51 @@ export const getPlannedObject = (userId, seanceId, token) => {
         null
     )
 }
+
+/**
+ * @description Delete an objectif in a specific day
+ * @param {ObjectidId} userId
+ * @param {ISOString} date
+ * @param {jwt} token
+ * @param {String} type
+ * @param {String} resultat_vise
+ * @param {String} titre
+ * @param {String} description
+ * @param {Int} denivele
+ * @param {Int} distance
+ * @param {String} temps
+ * @param {Int} sse
+ * @param {boolean} realise
+ * @returns
+ */
+ export const deleteDayCalendarObjectif = (
+    userId,
+    date,
+    token,
+    type,
+    resultat_vise,
+    titre,
+    description,
+    denivele,
+    distance,
+    temps,
+    sse,
+    realise
+) => {
+    return requestApi(
+        'delete',
+        `coureur/calendrier/objectif/${date}`,
+        token,
+        {
+            type: type,
+            resultat_vise: resultat_vise,
+            titre: titre,
+            description: description,
+            denivele: denivele,
+            distance: distance,
+            temps: temps,
+            sse: sse,
+            realise: realise,
+        }
+    )
+}
