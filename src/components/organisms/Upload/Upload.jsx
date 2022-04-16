@@ -107,7 +107,7 @@ const Upload = (props) => {
                                     }
                                     services
                                         .putDayCalendrierDone(
-                                            dayjs(date).toISOString(),
+                                            date,
                                             auth.token,
                                             res.data._id,
                                             true,
