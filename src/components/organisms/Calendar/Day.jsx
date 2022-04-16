@@ -1,7 +1,12 @@
 import dayjs from 'dayjs'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import { ShowEntrainement, ShowCourse, ShowMobile } from '../../atoms'
+import {
+    ShowEntrainement,
+    ShowCourse,
+    ShowMobile,
+    ShowObjectif,
+} from '../../atoms'
 import DonedDay from './DonedDay'
 import PlannedDay from './PlannedDay'
 import { Droppable } from '../Dnd'
@@ -46,6 +51,18 @@ const Day = (props) => {
                     }
                 })
         })
+        const tempObjectif = []
+        props.objectif?.forEach((objectifId) => {
+            services
+                .getInformationsObjectif(objectifId, auth.token)
+                .then((response) => {
+                    console.log(response.objectif)
+                    if (response.objectif) {
+                        tempObjectif.push({ ...response.objectif[0] })
+                    }
+                    setObjectif(tempObjectif)
+                })
+        })
         setLoading(false)
     }, [])
     //#endregion
@@ -53,13 +70,13 @@ const Day = (props) => {
     const [loading, setLoading] = useState(true)
     const [planned, setPlanned] = useState([])
     const [done, setDone] = useState([])
+    const [objectif, setObjectif] = useState([])
     const [edit, setEdit] = useState(false)
     const [newComment, setNewComment] = useState(
         useSelector((state) => state.daySelected.newComment)
     )
     const [comments, setComments] = useState(props.day.comment)
     const saveComment = (value) => {
-        console.log(newComment)
         services
             .putDayCalendarComment(userId, props.day.date, auth.token, [
                 ...comments,
@@ -154,6 +171,9 @@ const Day = (props) => {
                     props.setParent(props.id)
                 }}
             >
+                {comments.length > 0 && (
+                    <div className="absolute right-16 w-3 h-3 bg-high-contrast-500 rounded-full"></div>
+                )}
                 {props.passed && (
                     <div className="absolute top-0 left-0 w-full h-full bg-low-contrast-500 opacity-10"></div>
                 )}
@@ -171,7 +191,9 @@ const Day = (props) => {
                             <>
                                 <div className="2xl:flex xl:flex lg:flex ml:hidden md:hidden sm:hidden xs:hidden">
                                     <ShowEntrainement>
-                                        <p className='text-[10px]'>{seance.titre}</p>
+                                        <p className="text-[10px]">
+                                            {seance.titre}
+                                        </p>
                                         {!seance.course && (
                                             <p className="text-medium-contrast-500 text-[10px]">
                                                 {
@@ -184,7 +206,9 @@ const Day = (props) => {
                                 </div>
                                 <div className="2xl:hidden xl:hidden lg:hidden ml:flex md:flex sm:hidden xs:hidden">
                                     <ShowCourse>
-                                        <p className='text-[10px]'>{seance.titre}</p>
+                                        <p className="text-[10px]">
+                                            {seance.titre}
+                                        </p>
                                         {!seance.course && (
                                             <p className="text-medium-contrast-500 text-[10px]">
                                                 {
@@ -196,7 +220,9 @@ const Day = (props) => {
                                 </div>
                                 <div className="2xl:hidden xl:hidden lg:hidden ml:hidden md:hidden sm:flex xs:flex">
                                     <ShowMobile>
-                                        <p className='text-[7px]'>{seance.titre}</p>
+                                        <p className="text-[7px]">
+                                            {seance.titre}
+                                        </p>
                                     </ShowMobile>
                                 </div>
                             </>
@@ -214,6 +240,12 @@ const Day = (props) => {
                             </ShowEntrainement>
                         )
                     })}
+                {!loading &&
+                    objectif.map((objectif) => (
+                        <ShowObjectif>
+                            <p>{objectif.titre}</p>
+                        </ShowObjectif>
+                    ))}
             </div>
         </Droppable>
     )

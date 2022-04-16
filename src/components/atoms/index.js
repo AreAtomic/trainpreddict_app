@@ -25,7 +25,7 @@ import { CourbesIndicateurs, CourbesFC, CourbesPuissance } from './Courbes'
 import { Modal } from './Modal'
 import { Card } from './Card'
 import { Cell } from './Cell'
-import { ShowCourse, ShowEntrainement, ShowMobile } from './Show'
+import { ShowCourse, ShowEntrainement, ShowMobile, ShowObjectif } from './Show'
 import { TooltipWithDelay } from './Tooltips'
 import { Doghnut } from './Doghnuts'
 import { SpinLoader } from './Loader'
@@ -61,4 +61,5 @@ export {
     Doghnut,
     ShowMobile,
     SpinLoader,
+    ShowObjectif,
 }

@@ -22,18 +22,21 @@ export const createObjectif = (
     date,
     token
 ) => {
+    return requestApi('put', `coureur/calendrier/objectif/${date}`, token, {
+        type: type,
+        resultat_vise: resultat_vise,
+        titre: titre,
+        description: description,
+        denivele: denivele,
+        distance: distance,
+        temps: temps,
+    })
+}
+
+export const getInformationsObjectif = (objectifId, token) => {
     return requestApi(
-        'put',
-        `coureur/calendrier/objectif/${date}`,
-        token,
-        {
-            type: type,
-            resultat_vise: resultat_vise,
-            titre: titre,
-            description: description,
-            denivele: denivele,
-            distance: distance,
-            temps: temps,
-        }
+        'get',
+        `assistant/objectif/informations/${objectifId}`,
+        token
     )
 }

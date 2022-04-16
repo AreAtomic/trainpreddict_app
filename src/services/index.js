@@ -16,7 +16,11 @@ import {
     getEntrainementAnalyse,
     postEntrainementFile,
 } from './entrainements'
-import { getAllObjectifs, createObjectif } from './objectifs'
+import {
+    getAllObjectifs,
+    createObjectif,
+    getInformationsObjectif,
+} from './objectifs'
 import { getAllCoursesUser, getAllCourses } from './courses'
 import {
     getAllUsers,
@@ -44,6 +48,7 @@ export {
     getEntrainementAnalyse,
     getAllObjectifs,
     createObjectif,
+    getInformationsObjectif,
     getAllCoursesUser,
     getAllCourses,
     getAllUsers,
