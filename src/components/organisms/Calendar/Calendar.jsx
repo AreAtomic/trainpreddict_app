@@ -7,7 +7,6 @@ const Calendar = (props) => {
     //#region State declaration
     // API states
     const auth = useSelector((state) => state.auth)
-    const user = useSelector((state) => state.userSelected)
 
     const updateDayPlanned = (date, planned, adding) => {
         const plannedIds = []
@@ -31,7 +30,7 @@ const Calendar = (props) => {
         }
 
         services.putDayCalendrierPlanned(
-            user.id,
+            auth.userId,
             date,
             auth.token,
             plannedIds,

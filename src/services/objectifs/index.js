@@ -36,7 +36,64 @@ export const createObjectif = (
 export const getInformationsObjectif = (objectifId, token) => {
     return requestApi(
         'get',
-        `assistant/objectif/informations/${objectifId}`,
+        `coureur/objectif/informations/${objectifId}`,
         token
+    )
+}
+
+export const editObjectif = (
+    userId,
+    type,
+    resultat_vise,
+    titre,
+    description,
+    denivele,
+    distance,
+    temps,
+    date,
+    token
+) => {
+    return requestApi(
+        'put',
+        `coureur/calendrier/objectif/${date}`,
+        token,
+        {
+            type: type,
+            resultat_vise: resultat_vise,
+            titre: titre,
+            description: description,
+            denivele: denivele,
+            distance: distance,
+            date: date,
+            temps: temps,
+        }
+    )
+}
+
+export const deleteObjectif = (
+    userId,
+    type,
+    resultat_vise,
+    titre,
+    description,
+    denivele,
+    distance,
+    temps,
+    date,
+    token
+) => {
+    return requestApi(
+        'delete',
+        `coureur/calendrier/objectif/${date}`,
+        token,
+        {
+            type: type,
+            resultat_vise: resultat_vise,
+            titre: titre,
+            description: description,
+            denivele: denivele,
+            distance: distance,
+            temps: temps,
+        }
     )
 }

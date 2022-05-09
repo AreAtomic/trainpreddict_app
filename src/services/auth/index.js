@@ -15,16 +15,24 @@ export const authenticate = (email, mot_de_passe) => {
 
 /**
  * @description Register a new user to API
- * @param {string} email 
- * @param {string} nom 
- * @param {string} type 
+ * @param {string} email
+ * @param {string} nom
+ * @param {string} type
  * @returns {JSON}
  */
-export const register = (email, nom, type) => {
-    return requestApi('post', `assistant/organisme/register`, null, {
+export const register = (
+    email,
+    firstName,
+    lastName,
+    password,
+    passwordConfirm
+) => {
+    return requestApi('post', `auth/signup`, null, {
         email: email,
-        nom: nom,
-        type: type,
+        nom: lastName,
+        prenom: firstName,
+        mot_de_passe: password,
+        mot_de_passe2: passwordConfirm,
     })
 }
 
@@ -35,7 +43,7 @@ export const register = (email, nom, type) => {
  * @param {string} type
  * @returns {JSON}
  */
- export const changePassword = (
+export const changePassword = (
     email,
     previousPassword,
     newPassword,

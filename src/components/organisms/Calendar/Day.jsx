@@ -27,7 +27,7 @@ const Day = (props) => {
         const tempPlanned = []
         props.day.planned.forEach((seance) => {
             services
-                .getPlannedObject(user.id, seance, auth.token)
+                .getPlannedObject(userId, seance, auth.token)
                 .then((response) => {
                     if (response.data) {
                         tempPlanned.push({

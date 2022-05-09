@@ -115,10 +115,102 @@ const Coureur = ({ toast }) => {
 
     return (
         <div className="grid">
+            <div className="w-full lg:flex mb-6">
+                {loadingObjectifs ? (
+                    objectifs[0]?.date &&
+                    dayjs(objectifs[0]).isAfter(dayjs()) ? (
+                        <PanelObjectif
+                            titre={objectifs[0].titre}
+                            date={dayjs(objectifs[0].date).format('DD/MM/YYYY')}
+                            duree={objectifs[0].duree}
+                            distance={objectifs[0].distance}
+                            resultat_vise={objectifs[0].resultat_vise}
+                            onClick={() => {
+                                setOpenMO(true)
+                            }}
+                            isObjectif={true}
+                        />
+                    ) : (
+                        <PanelObjectif
+                            isObjectif={false}
+                            onClick={() => {
+                                setOpenMO(true)
+                            }}
+                        />
+                    )
+                ) : (
+                    <div></div>
+                )}
+                <div className="absolute top-0 left-0">
+                    <Modal
+                        visible={openMO}
+                        onClose={() => {
+                            setOpenMO(false)
+                        }}
+                    >
+                        <HeadingTwo className="mb-4">Objectifs</HeadingTwo>
+                        <div className="flex">
+                            {objectifs.slice(0, 3).map((objectif, index) => {
+                                const titrePosition = [
+                                    'Prochain Objectif',
+                                    'Second Objectif',
+                                    'Dernier Objectif',
+                                ]
+                                return (
+                                    <PanelObjectifModal
+                                        id={objectif._id}
+                                        titre={objectif.titre}
+                                        date={dayjs(objectif.date).format(
+                                            'DD/MM/YYYY'
+                                        )}
+                                        duree={objectif.temps}
+                                        distance={objectif.distance}
+                                        resultat_vise={objectif.resultat_vise}
+                                        titrePosition={
+                                            dayjs(objectifs[0]).isAfter(dayjs())
+                                                ? 'Passé'
+                                                : titrePosition[index]
+                                        }
+                                        denivele={objectif.denivele}
+                                        description={objectif.description}
+                                        type={objectif.type}
+                                        toast={toast}
+                                    />
+                                )
+                            })}
+                        </div>
+                        <ObjectifForm toast={toast} />
+                    </Modal>
+                </div>
+                {!loadingCaracteristics ? (
+                    <PanelCarac
+                        pfs={caracteristics.pfs}
+                        fcfs={caracteristics.fcfs}
+                        poids={caracteristics.poids}
+                        onClick={() => {
+                            setOpenMP(true)
+                        }}
+                    />
+                ) : (
+                    <div></div>
+                )}
+                <div className="absolute top-0 left-0">
+                    <Modal
+                        visible={openMP}
+                        onClose={() => {
+                            setOpenMP(false)
+                        }}
+                    >
+                        <ProfilForm toast={toast} />
+                    </Modal>
+                </div>
+            </div>
             <div className="z-0 mt-16">
                 <div className="ml-3 mb-5 z-0">
                     <div className="flex mb-3">
-                        <HeadingTwo className="mr-12 sm:mr-2 xs:mr-2">Calendrier</HeadingTwo>
+                        <HeadingTwo className="mr-12 sm:mr-2 xs:mr-2">
+                            Calendrier
+                        </HeadingTwo>
                         <Dropdown
                             value={calendar.weeksDisplayed}
                             onChange={(event) => {
@@ -184,7 +276,7 @@ const Coureur = ({ toast }) => {
                                     onClick={() => {
                                         services
                                             .createCalendrier(
-                                                user.id,
+                                                auth.userId,
                                                 auth.token
                                             )
                                             .then((res) => console.log(res))

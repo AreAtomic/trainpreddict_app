@@ -17,7 +17,6 @@ import * as services from '../../../services'
 const ObjectifForm = (props) => {
     const dispatch = useDispatch()
     const auth = useSelector((state) => state.auth)
-    const user = useSelector((state) => state.userSelected)
     const newObjectif = useSelector((state) => state.newObjectif)
     //#region modal 1
     const [titre, setTitre] = useState('')
@@ -165,7 +164,7 @@ const ObjectifForm = (props) => {
                 onClick={() => {
                     services
                         .createObjectif(
-                            user.id,
+                            auth.userId,
                             type,
                             resultatVise,
                             titre,
@@ -179,7 +178,7 @@ const ObjectifForm = (props) => {
                         .then((response) => {
                             props.toast.success(response.message)
                             services
-                                .getAllObjectifs(user.id, auth.token)
+                                .getAllObjectifs(auth.userId, auth.token)
                                 .then((response) => {
                                     dispatch(
                                         middlewares.setObjectifs(response.data)

@@ -20,6 +20,8 @@ import {
     getAllObjectifs,
     createObjectif,
     getInformationsObjectif,
+    deleteObjectif,
+    editObjectif,
 } from './objectifs'
 import { getAllCoursesUser, getAllCourses } from './courses'
 import {
@@ -57,4 +59,6 @@ export {
     putUserProfil,
     createCoureur,
     postEntrainementFile,
+    deleteObjectif,
+    editObjectif,
 }

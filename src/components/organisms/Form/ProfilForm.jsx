@@ -400,7 +400,7 @@ const ProfilForm = (props) => {
                         onClick={() => {
                             services
                                 .putUserProfil(
-                                    user.id,
+                                    auth.userId,
                                     auth.token,
                                     sse,
                                     experience,

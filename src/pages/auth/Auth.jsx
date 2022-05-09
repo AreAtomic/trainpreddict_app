@@ -28,7 +28,9 @@ const Auth = ({ toast }) => {
     const [password, setPassword] = useState('')
     //Register states
     const [isregister, setRegister] = useState(false)
-    const [name, setName] = useState('')
+    const [passwordConfirm, setPasswordConfirm] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
     const [type, setType] = useState('')
     //#endregion
 
@@ -51,14 +53,16 @@ const Auth = ({ toast }) => {
         })
     }
     const inscription = () => {
-        services.register(email, name, type).then((response) => {
-            if (response.message) {
-                toast.success(response.message, { autoClose: false })
-            }
-            if (response.error) {
-                toast.warning(response.error)
-            }
-        })
+        services
+            .register(email, firstName, lastName, password, passwordConfirm)
+            .then((response) => {
+                if (response.message) {
+                    toast.success(response.message, { autoClose: false })
+                }
+                if (response.error) {
+                    toast.warning(response.error)
+                }
+            })
     }
     //#endregion
 
@@ -109,25 +113,50 @@ const Auth = ({ toast }) => {
                 ) : (
                     <>
                         <Input
-                            placeholder="TrainPreddict"
-                            label="Nom de l'organistaion"
-                            value={name}
+                            placeholder="Mot de passe de 10 caractère minimum"
+                            label="Mot de passe"
+                            value={password}
                             onChange={(e) => {
-                                setName(e.target.value)
+                                setPassword(e.target.value)
+                            }}
+                            type="password"
+                            helper="Rentrez un mot de passe de 10 caractère minimum"
+                            minlength={10}
+                        />
+                        <Input
+                            placeholder="Mot de passe de 10 caractère minimum"
+                            label="Confirmation du mot de passe"
+                            value={passwordConfirm}
+                            onChange={(e) => {
+                                setPasswordConfirm(e.target.value)
+                            }}
+                            type="password"
+                            helper="Rentrez un mot de passe de 10 caractère minimum"
+                            minlength={10}
+                        />
+                        <Input
+                            placeholder="Julian"
+                            label="Prénom"
+                            value={firstName}
+                            onChange={(e) => {
+                                setFirstName(e.target.value)
                             }}
                             type="text"
-                            helper="Rentrez le nom de l'organisme"
+                            helper="Rentrez votre prénom"
+                            required
+                        />
+                        <Input
+                            placeholder="Alaphilippe"
+                            label="Nom"
+                            value={lastName}
+                            onChange={(e) => {
+                                setLastName(e.target.value)
+                            }}
+                            type="text"
+                            helper="Rentrez votre prnoménom"
                             required
                         />
                         <div className="mt-3"></div>
-                        <Select
-                            options={['', 'Coach', 'Club']}
-                            label="Type d'organisme"
-                            value={type}
-                            onChange={(e) => {
-                                setType(e.target.value)
-                            }}
-                        />
                     </>
                 )}
                 <div className="grid grid-cols-2 gap-10 items-center mt-8">
