@@ -29,6 +29,9 @@ const Day = (props) => {
             services
                 .getPlannedObject(userId, seance, auth.token)
                 .then((response) => {
+                    if (response.status === 401) {
+                        dispatch(middlewares.logout())
+                    }
                     if (response.data) {
                         tempPlanned.push({
                             ...response.data,
@@ -43,6 +46,9 @@ const Day = (props) => {
             services
                 .getEntrainementAnalyse(seance, auth.token)
                 .then((response) => {
+                    if (response.status === 401) {
+                        dispatch(middlewares.logout())
+                    }
                     if (response.data) {
                         tempDone.push({
                             ...response.data,
@@ -56,7 +62,9 @@ const Day = (props) => {
             services
                 .getInformationsObjectif(objectifId, auth.token)
                 .then((response) => {
-                    console.log(response.objectif)
+                    if (response.status === 401) {
+                        dispatch(middlewares.logout())
+                    }
                     if (response.objectif) {
                         tempObjectif.push({ ...response.objectif[0] })
                     }

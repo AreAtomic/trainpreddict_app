@@ -23,7 +23,9 @@ export const requestApi = (method, path, token, data, contentType) => {
             return response.data
         })
         .catch((error) => {
-            console.log(error)
+            if (error.response.status === 401) {
+                return { error: 'Unauthorized', status: 401 }
+            }
             return error.response.data
         })
 }

@@ -25,7 +25,6 @@ const App = () => {
     return (
         <div className="bg-component-one-500 text-low-contrast-500 overflow-hidden w-full pt-navbar min-h-screen">
             {user.isLogged ? (
-                // Place tes pages pour quand tu es connecté ici
                 <>
                     <Routes>
                         <Route

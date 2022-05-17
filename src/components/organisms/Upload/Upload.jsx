@@ -2,12 +2,6 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import dayjs from 'dayjs'
 // TODO: replace by good one
-// import {
-//     CourbesAction,
-//     MessageAction,
-//     StatistiquesAction,
-// } from '../../middlewares/actions'
-// import { EntrainementsServices } from '../../middlewares/services'
 import { ButtonPrimary, ButtonSecondary } from '../../atoms'
 import * as services from '../../../services'
 import { useSelector } from 'react-redux'
@@ -16,7 +10,6 @@ const Upload = (props) => {
     const dispatch = useDispatch()
     const auth = useSelector((state) => state.auth)
 
-    /* Value */
     const [file, setFile] = useState([])
 
     return (

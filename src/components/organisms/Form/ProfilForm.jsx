@@ -421,10 +421,9 @@ const ProfilForm = (props) => {
                                     age
                                 )
                                 .then((response) => {
-                                    console.log(
-                                        'Enregistrmeent data: ',
-                                        response
-                                    )
+                                    if (response.status === 401) {
+                                        dispatch(middlewares.logout())
+                                    }
                                     middlewares
                                         .setUserProfil(response.data)
                                         .then(

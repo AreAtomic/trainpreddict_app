@@ -176,6 +176,9 @@ const ObjectifForm = (props) => {
                             auth.token
                         )
                         .then((response) => {
+                            if (response.status === 401) {
+                                dispatch(middlewares.logout())
+                            }
                             props.toast.success(response.message)
                             services
                                 .getAllObjectifs(auth.userId, auth.token)

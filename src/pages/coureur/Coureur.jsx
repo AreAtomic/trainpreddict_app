@@ -57,12 +57,17 @@ const Coureur = ({ toast }) => {
 
     useEffect(() => {
         services.getAllSeances(auth.token).then((response) => {
+            if (response.status === 401) {
+                dispatch(middlewares.logout())
+            }
             dispatch(middlewares.setSeances(response.data))
         })
         services
             .getCalendrierYear(auth.userId, dayjs().year(), auth.token)
             .then((response) => {
-                console.log(response)
+                if (response.status === 401) {
+                    dispatch(middlewares.logout())
+                }
                 if (!response.data?.actualYear) {
                     setIsCalendar(false)
                 }
@@ -83,9 +88,15 @@ const Coureur = ({ toast }) => {
                 ).then(setLoadingStatistics(false))
             })
         services.getAllObjectifs(auth.userId, auth.token).then((response) => {
+            if (response.status === 401) {
+                dispatch(middlewares.logout())
+            }
             dispatch(middlewares.setObjectifs(response.data))
         })
         services.getUserProfil(auth.userId, auth.token).then((response) => {
+            if (response.status === 401) {
+                dispatch(middlewares.logout())
+            }
             dispatch(middlewares.setUserProfil(response.data)).then(
                 setLoadingCaracteristics(false)
             )
@@ -345,7 +356,15 @@ const Coureur = ({ toast }) => {
                                                     auth.userId,
                                                     auth.token
                                                 )
-                                                .then((res) => console.log(res))
+                                                .then((res) => {
+                                                    if (
+                                                        res.status === 401
+                                                    ) {
+                                                        dispatch(
+                                                            middlewares.logout()
+                                                        )
+                                                    }
+                                                })
                                         }}
                                     >
                                         Générer le calendrier
