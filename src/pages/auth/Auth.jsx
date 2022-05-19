@@ -110,6 +110,9 @@ const Auth = ({ toast }) => {
                         type="password"
                         helper="Rentrez un mot de passe de 10 caractère minimum"
                         minlength={10}
+                        onKeyPress={(e) => {
+                            if (e.charCode === 13) connect()
+                        }}
                     />
                 ) : (
                     <>
