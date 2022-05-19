@@ -1,3 +1,4 @@
+import { useState } from 'react'
 //Components
 import { ButtonSecondary, HeadingFour } from '../../atoms'
 //Images
@@ -22,7 +23,13 @@ const Sidebar = (props) => {
                 </HeadingFour>
             </div>
             <div className="h-2/3 overflow-y-scroll scrollbar overflow-x-none">
-                <ListSeance seances={props.seances} />
+                <ListSeance
+                    viewSeanceItem={props.viewSeanceItem}
+                    setViewSeanceItem={(value) =>
+                        props.setViewSeanceItem(value)
+                    }
+                    seances={props.seances}
+                />
             </div>
         </div>
     )

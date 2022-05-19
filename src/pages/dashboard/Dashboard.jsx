@@ -117,6 +117,8 @@ const Coureur = ({ toast }) => {
     const [parent, setParent] = useState(null)
     const [dragEnd, setDragEnd] = useState(false)
 
+    const [viewSeanceItem, setViewSeanceItem] = useState(null)
+
     const handleDragStart = (event) => {
         setDraggedSeance(event.active.data.current)
     }
@@ -218,10 +220,8 @@ const Coureur = ({ toast }) => {
             </div>
             <div className="z-0 mt-16">
                 <div className="ml-3 mb-5 z-0">
-                    <div className="flex mb-3">
-                        <HeadingTwo className="mr-12 sm:mr-2 xs:mr-2">
-                            Calendrier
-                        </HeadingTwo>
+                    <div className="grid 2xl:grid-cols-6 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-x-2 gap-y-2 mb-3 justify-around">
+                        <HeadingTwo className="w-fit">Calendrier</HeadingTwo>
                         <Dropdown
                             value={calendar.weeksDisplayed}
                             onChange={(event) => {
@@ -243,7 +243,7 @@ const Coureur = ({ toast }) => {
                                 '8 semaines',
                             ]}
                         />
-                        <div className="2xl:inline-block xl:inline-block lg:inline-block ml:inline-block md:inline-block md:hidden sm:hidden xs:hidden">
+                        <div className="inline-block">
                             <Input
                                 value={dayjs(calendar.dayOne).format(
                                     'YYYY-MM-DD'
@@ -281,6 +281,10 @@ const Coureur = ({ toast }) => {
                                     }
                                     newSeance={draggedSeance}
                                     dragEnd={dragEnd}
+                                    viewSeanceItem={viewSeanceItem}
+                                    setViewSeanceItem={(value) =>
+                                        setViewSeanceItem(value)
+                                    }
                                 />
                             ) : (
                                 <ButtonPrimarySmall

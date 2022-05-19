@@ -43,7 +43,8 @@ const Auth = ({ toast }) => {
                         response.data.id,
                         response.data.token,
                         email,
-                        response.data.nom
+                        response.data.nom,
+                        response.data.structure
                     )
                 ).then(navigate('/dashboard'))
             }

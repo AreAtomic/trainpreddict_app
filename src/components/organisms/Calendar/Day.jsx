@@ -150,6 +150,10 @@ const Day = (props) => {
                         }}
                         saveComment={() => saveComment()}
                         comments={comments}
+                        viewSeanceItem={props.viewSeanceItem}
+                        setViewSeanceItem={(value) =>
+                            props.setViewSeanceItem(value)
+                        }
                     />
                 ) : (
                     <DonedDay

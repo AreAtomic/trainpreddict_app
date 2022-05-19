@@ -85,6 +85,14 @@ const Navbar = (props) => {
                     >
                         Paramètres
                     </a>
+                    <ButtonSecondarySmall
+                        className="w-fit grid my-2 mx-6"
+                        onClick={() => {
+                            dispatch(middlewares.logout()).then(navigate('/'))
+                        }}
+                    >
+                        Déconnexion
+                    </ButtonSecondarySmall>
                 </div>
             </div>
         </div>

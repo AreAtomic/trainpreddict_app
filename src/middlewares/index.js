@@ -32,12 +32,13 @@ export const logout = () => (dispatch) => {
  * @param {string} name
  * @returns
  */
-export const login = (userId, token, email, name) => (dispatch) => {
+export const login = (userId, token, email, name, structure) => (dispatch) => {
     dispatch(
         Actions.registerUserData({
             userId: userId,
             token: token,
             firstLogged: false,
+            structure: structure,
         })
     )
     dispatch(Actions.login({ email: email, name: name }))

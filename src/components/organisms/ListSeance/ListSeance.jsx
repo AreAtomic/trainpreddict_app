@@ -3,12 +3,11 @@ import { useState } from 'react'
 import calendar from '../../../assets/calendar.svg'
 import flag from '../../../assets/flag.svg'
 import { CardSeanceList } from '../../molecules'
-import { Droppable, Draggable } from '../Dnd'
 
 const ListSeance = (props) => {
     const [activeView, setActiveView] = useState('training')
     const [search, setSearch] = useState('')
-    
+
     return (
         <div className="grid auto-rows-min justify-center pt-1 border-high-contrast-100 h-full">
             <div className="flex h-fit pb-6">
@@ -66,17 +65,21 @@ const ListSeance = (props) => {
                     />
                 </div>
             </div>
-            <Card width="w-72" height="" className="scrollbar z-50 overflow-x-none">
+            <Card
+                width="w-72"
+                height=""
+                className="scrollbar z-50 overflow-x-none"
+            >
                 {props.seances.map((item, index) => {
                     return (
-                        <Draggable id={item._id} data={item}>
+                        <div onClick={() => props.setViewSeanceItem(item)}>
                             <CardSeanceList
                                 titre={item.titre}
                                 type={item.type}
                                 temps={item.temps}
                                 sse={item.sse}
                             />
-                        </Draggable>
+                        </div>
                     )
                 })}
             </Card>

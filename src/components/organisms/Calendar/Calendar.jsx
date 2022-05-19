@@ -62,6 +62,10 @@ const Calendar = (props) => {
                                     id={`w${weekIndex}-d${dayIndex}`}
                                     dragEnd={props.dragEnd}
                                     updateDayPlanned={updateDayPlanned}
+                                    viewSeanceItem={props.viewSeanceItem}
+                                    setViewSeanceItem={(value) =>
+                                        props.setViewSeanceItem(value)
+                                    }
                                 />
                             )
                         })}
