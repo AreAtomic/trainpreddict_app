@@ -8,7 +8,7 @@ const Modal = (props) => {
             }`}
         >
             <div className="w-full h-full bg-primary-blue-500 opacity-40 absolute"></div>
-            <div className="w-11/12 h-5/6 bg-component-one-500 absolute overflow-y-auto py-4 px-6 top-16 left-14 xs:left-4">
+            <div className="w-11/12 h-5/6 bg-component-one-500 absolute overflow-y-auto py-4 px-6 top-16 left-14 xs:left-4 scrollbar">
                 <div className="w-fit absolute right-5 top-3">
                     <img
                         src={close}

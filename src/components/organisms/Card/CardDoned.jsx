@@ -4,7 +4,7 @@ import { BarChart } from '../../molecules'
 const CardPlanned = (props) => {
     console.log(!props.entrainement.course)
     return (
-        <Card className="max-w-card font-bold">
+        <Card className="max-w-card font-bold scrollbar">
             <>
                 {' '}
                 <HeadingFour>Entrainement #{props.index}</HeadingFour>

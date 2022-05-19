@@ -4,7 +4,7 @@ import { BarChart } from '../../molecules'
 
 const CardPlanned = (props) => {
     return (
-        <Card className="max-w-card font-bold">
+        <Card className="max-w-card font-bold scrollbar">
             {!props.entrainement.course ? (
                 <>
                     <div className="flex justify-between">

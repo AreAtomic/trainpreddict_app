@@ -80,7 +80,7 @@ export const putDayCalendrierPlanned = (
  * @description Add new training in done array of a day
  * @param {*} date 
  * @param {*} token 
- * @param {*} planned 
+ * @param {*} done 
  * @param {*} adding 
  * @param {*} statistiques 
  * @returns 
@@ -88,7 +88,7 @@ export const putDayCalendrierPlanned = (
 export const putDayCalendrierDone = (
     date,
     token,
-    planned,
+    done,
     adding,
     statistiques
 ) => {
@@ -97,7 +97,7 @@ export const putDayCalendrierDone = (
         `coureur/calendrier/done/${date}`,
         token,
         {
-            done: planned,
+            done: done,
             adding: adding,
             statistiques: statistiques,
         }

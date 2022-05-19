@@ -58,7 +58,7 @@ const PlannedDay = (props) => {
                     }}
                     style={{ width: '80%' }}
                 >
-                    <div className="grid grid-cols-2 gap-5 justify-around w-full">
+                    <div className="grid xl:grid-cols-2 lg:grid-cols-2 grid-cols-1 gap-y-2 gap-x-2 justify-around w-full">
                         {props.planned ? (
                             props.planned.map((item, index) => {
                                 return (

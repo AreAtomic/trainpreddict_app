@@ -85,9 +85,9 @@ const Upload = (props) => {
                         services
                             .postEntrainementFile(auth.token, file[i])
                             .then((res) => {
+                                console.log(res)
                                 if (res.msg) {
                                     const date = res.data.date.split('T')[0]
-                                    console.log(date)
                                     const statistiques = {
                                         time: res.data.duree,
                                         distance: Math.round(

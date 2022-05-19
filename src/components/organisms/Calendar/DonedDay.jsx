@@ -17,7 +17,7 @@ const DonedDay = (props) => {
             <div className="flex">
                 <HeadingFour>{props.date}</HeadingFour>
             </div>
-            <div className="flex justify-between mb-5 mt-2">
+            <div className="grid xl:grid-cols-2 lg:grid-cols-2 grid-cols-1 gap-y-2 gap-x-2 mb-5 mt-2">
                 {props.planned ? (
                     props.planned.map((item, index) => {
                         return <CardDoned index={index} entrainement={item} />
