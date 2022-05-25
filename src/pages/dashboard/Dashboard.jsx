@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import dayjs from 'dayjs'
 //#region Import components
+import { SpinLoader } from '../../components/atoms'
 import { Sidebar, Calendar, ObjectifForm } from '../../components/organisms'
 import {
     CardSeanceList,
@@ -53,6 +54,7 @@ const Coureur = ({ toast }) => {
     const objectifs = useSelector((state) => state.objectifs)
     const caracteristics = useSelector((state) => state.caracteristics)
     const seances = useSelector((state) => state.seances)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         services.getAllSeances(auth.token).then((response) => {
@@ -119,15 +121,20 @@ const Coureur = ({ toast }) => {
 
     const [viewSeanceItem, setViewSeanceItem] = useState(null)
 
-    const handleDragStart = (event) => {
-        setDraggedSeance(event.active.data.current)
-    }
-    const handleDragEnd = (event) => {
-        setDragEnd(!dragEnd)
+    const updateView = () => {
+        window.location.reload()
     }
 
     return (
         <div className="grid">
+            {loading && (
+                <div className="fixed top-10 w-full z-50 h-full ">
+                    <div className="absolute w-full h-full bg-primary-blue-500 opacity-40"></div>
+                    <div className="mt-32">
+                        <SpinLoader />
+                    </div>
+                </div>
+            )}
             <div className="w-full lg:flex mb-6">
                 {loadingObjectifs ? (
                     objectifs[0]?.date &&
@@ -328,6 +335,72 @@ const Coureur = ({ toast }) => {
                         />
                     )}
                 </div>
+                {!auth.structure && (
+                    <div className="ml-3 mb-5 mt-6">
+                        <div className="flex">
+                            <HeadingTwo>Indicateurs</HeadingTwo>
+                            <Dropdown
+                                value={indicators.selected}
+                                onChange={(event) => {
+                                    dispatch(
+                                        middlewares.setSelectedIndicators(
+                                            event.target.value
+                                        )
+                                    )
+                                }}
+                                values={['planned', 'done']}
+                                options={['Prévisionnel', 'Réalisé']}
+                                margin="ml-7"
+                            />
+                        </div>
+                        <div>
+                            <ButtonPrimary
+                                onClick={() => {
+                                    setLoading(true)
+                                    services
+                                        .updateCourbe(
+                                            user.id,
+                                            dayjs().toISOString(),
+                                            auth.token
+                                        )
+                                        .then((response) => {
+                                            if (response.status === 401) {
+                                                dispatch(middlewares.logout())
+                                            }
+                                            updateView()
+                                            setLoading(false)
+                                        })
+                                        .catch((err) => console.log(err))
+                                }}
+                            >
+                                Recalculer
+                            </ButtonPrimary>
+                        </div>
+                        <div
+                            className="mt-2"
+                            style={{
+                                maxWidth: '1135px',
+                                maxHeight: '350px',
+                            }}
+                        >
+                            {!loadingIndicators && (
+                                <CourbesIndicateurs
+                                    dates={indicators.dates}
+                                    tiredness={
+                                        indicators.tiredness[
+                                            `${indicators.selected}`
+                                        ]
+                                    }
+                                    form={
+                                        indicators.form[
+                                            `${indicators.selected}`
+                                        ]
+                                    }
+                                />
+                            )}
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     )

@@ -276,3 +276,12 @@ export const getPlannedObject = (userId, seanceId, token) => {
         }
     )
 }
+
+export const updateCourbe = (userId, date, token) => {
+    return requestApi(
+        'put',
+        `assistant/coureur/indicators/${date}`,
+        token,
+        {}
+    )
+}
