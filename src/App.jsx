@@ -13,6 +13,7 @@ import {
     Parametres,
     Home,
     Televersement,
+    CreateCourse,
 } from './pages'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -61,6 +62,15 @@ const App = () => {
                                 <>
                                     <Navbar />
                                     <Televersement toast={toast} />
+                                </>
+                            }
+                        />
+                        <Route
+                            path="/courses"
+                            element={
+                                <>
+                                    <Navbar />
+                                    <CreateCourse toast={toast} />
                                 </>
                             }
                         />

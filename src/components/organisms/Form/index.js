@@ -1,4 +1,5 @@
-import ObjectifForm from './ObjecitfForm';
-import ProfilForm from './ProfilForm';
+import ObjectifForm from './ObjecitfForm'
+import ProfilForm from './ProfilForm'
+import CourseForm from './CourseForm'
 
-export { ObjectifForm, ProfilForm };
+export { ObjectifForm, ProfilForm, CourseForm }

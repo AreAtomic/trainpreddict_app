@@ -19,3 +19,12 @@ export const getAllCoursesUser = (userId, token) => {
 export const getAllCourses = (token) => {
     return requestApi('get', `assistant/courses`, token)
 }
+
+export const putCourses = (model, statistiques, planned, adding, token) => {
+    return requestApi('put', `coureur/calendrier/course/${model.date}`, token, {
+        model,
+        planned,
+        statistiques,
+        adding,
+    })
+}

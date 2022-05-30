@@ -7,6 +7,7 @@ import { ObjectifForm } from './Form'
 import { Draggable, Droppable } from './Dnd'
 import { Upload } from './Upload'
 import { CardListTraining } from './Card'
+import { CourseForm } from './Form'
 
 export {
     Sidebar,
@@ -20,4 +21,5 @@ export {
     Droppable,
     Upload,
     CardListTraining,
+    CourseForm,
 }

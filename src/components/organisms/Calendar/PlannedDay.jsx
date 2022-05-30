@@ -29,6 +29,28 @@ const PlannedDay = (props) => {
         props.updateDayPlanned(props.day.date, newPlanned, false)
     }
 
+    const updateDayPlannedWithRace = (indexToRemove, courseModel) => {
+        let newPlanned = props.planned
+        if (indexToRemove !== props.planned.length - 1) {
+            // Move planned seance to remove on last index
+            newPlanned = props.planned.filter(
+                (planned, index) => index !== indexToRemove
+            )
+            newPlanned.push(props.planned[indexToRemove])
+        }
+        props.setPlanned(
+            newPlanned.filter(
+                (planned, index) => index !== newPlanned.length - 1
+            )
+        )
+        props.updateDayPlannedWithRace(
+            props.day.date,
+            newPlanned,
+            false,
+            courseModel
+        )
+    }
+
     // Update day on end drag & drop
     useEffect(() => {
         if (props.parent === props.id) {
@@ -88,6 +110,14 @@ const PlannedDay = (props) => {
                                         entrainement={item}
                                         removePlanned={() => {
                                             removePlanned(index)
+                                        }}
+                                        updateDayPlannedWithRace={(
+                                            courseModel
+                                        ) => {
+                                            updateDayPlannedWithRace(
+                                                index,
+                                                courseModel
+                                            )
                                         }}
                                     />
                                 )

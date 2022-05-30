@@ -56,7 +56,11 @@ const CardPlanned = (props) => {
                         <img
                             src={trash}
                             alt="Supression d'un entrainement cycliste sur mesure."
-                            onClick={props.removePlanned}
+                            onClick={() =>
+                                props.updateDayPlannedWithRace(
+                                    props.entrainement
+                                )
+                            }
                         />
                     </div>
                     <div className="grid">

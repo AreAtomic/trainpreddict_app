@@ -5,5 +5,15 @@ import { Auth } from './auth'
 import { Show } from './show'
 import { Home } from './home'
 import { Televersement } from './televersement'
+import CreateCourse from './courses'
 
-export { Dashboard, Auth, Show, Coureur, Parametres, Home, Televersement }
+export {
+    Dashboard,
+    Auth,
+    Show,
+    Coureur,
+    Parametres,
+    Home,
+    Televersement,
+    CreateCourse,
+}

@@ -1,12 +1,14 @@
 import dayjs from 'dayjs'
 import Day from './Day'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as services from '../../../services'
+import * as middlewares from '../../../middlewares'
 
 const Calendar = (props) => {
     //#region State declaration
     // API states
     const auth = useSelector((state) => state.auth)
+    const dispatch = useDispatch()
 
     const updateDayPlanned = (date, planned, adding) => {
         const plannedIds = []
@@ -38,6 +40,40 @@ const Calendar = (props) => {
             statistiques
         )
     }
+
+    const updateDayPlannedWithRace = (date, planned, adding, courseModel) => {
+        const plannedIds = []
+        planned.forEach((seance, index) => {
+            if (!adding) {
+                if (index !== planned.length - 1) {
+                    plannedIds.push(seance._id)
+                }
+            } else {
+                plannedIds.push(seance._id)
+            }
+        })
+        const statistiques = {
+            time: `${courseModel.temps}:00`,
+            distance: courseModel.distance,
+            sse: courseModel.sse,
+            denivele: courseModel.denivele,
+            nombreSeance: adding ? planned.length : planned.length - 1,
+        }
+
+        services
+            .putCourses(
+                courseModel,
+                statistiques,
+                plannedIds,
+                adding,
+                auth.token
+            )
+            .then((response) => {
+                if (response.status === 401) {
+                    dispatch(middlewares.logout())
+                }
+            })
+    }
     //#endregion
     return (
         <div className="grid">
@@ -62,6 +98,7 @@ const Calendar = (props) => {
                                     id={`w${weekIndex}-d${dayIndex}`}
                                     dragEnd={props.dragEnd}
                                     updateDayPlanned={updateDayPlanned}
+                                    updateDayPlannedWithRace={updateDayPlannedWithRace}
                                     viewSeanceItem={props.viewSeanceItem}
                                     setViewSeanceItem={(value) =>
                                         props.setViewSeanceItem(value)

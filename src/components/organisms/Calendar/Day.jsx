@@ -109,14 +109,26 @@ const Day = (props) => {
 
     useEffect(() => {
         if (props.parent === props.id) {
-            setPlanned([...planned, props.newSeance])
-            props.updateDayPlanned(
-                props.day.date,
-                [...planned, props.newSeance],
-                true
-            )
-            props.setParent(null)
-            props.resetNewSeance()
+            if (!props.newSeance.course) {
+                setPlanned([...planned, props.newSeance])
+                props.updateDayPlanned(
+                    props.day.date,
+                    [...planned, props.newSeance],
+                    true
+                )
+                props.setParent(null)
+                props.resetNewSeance()
+            } else {
+                setPlanned([...planned, props.newSeance])
+                props.updateDayPlannedWithRace(
+                    props.day.date,
+                    [...planned, props.newSeance],
+                    true,
+                    props.newSeance
+                )
+                props.setParent(null)
+                props.resetNewSeance()
+            }
         }
     }, [props.dragEnd])
 
@@ -143,6 +155,9 @@ const Day = (props) => {
                         resetNewSeance={props.resetNewSeance}
                         day={props.day}
                         updateDayPlanned={props.updateDayPlanned}
+                        updateDayPlannedWithRace={
+                            props.updateDayPlannedWithRace
+                        }
                         setPlanned={(value) => setPlanned(value)}
                         newComment={newComment}
                         setNewComment={(e) => {

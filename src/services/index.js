@@ -10,7 +10,7 @@ import {
     deleteDayCalendarObjectif,
     putDayCalendarCourses,
     getPlannedObject,
-    updateCourbe
+    updateCourbe,
 } from './calendar'
 import {
     getAllSeancesUser,
@@ -24,7 +24,7 @@ import {
     deleteObjectif,
     editObjectif,
 } from './objectifs'
-import { getAllCoursesUser, getAllCourses } from './courses'
+import { getAllCoursesUser, getAllCourses, putCourses } from './courses'
 import {
     getAllUsers,
     getUserProfil,
@@ -62,5 +62,6 @@ export {
     postEntrainementFile,
     deleteObjectif,
     editObjectif,
-    updateCourbe
+    updateCourbe,
+    putCourses,
 }
