@@ -21,7 +21,6 @@ const Upload = (props) => {
                     type="file"
                     className="is-white input-file"
                     onChange={(e) => {
-                        console.log(e.target.files)
                         if (e.target.files.length === undefined) {
                             setFile([...file])
                             if (file.length === 0) {
@@ -85,7 +84,6 @@ const Upload = (props) => {
                         services
                             .postEntrainementFile(auth.token, file[i])
                             .then((res) => {
-                                console.log(res)
                                 if (res.msg) {
                                     const date = res.data.date.split('T')[0]
                                     const statistiques = {
@@ -107,7 +105,6 @@ const Upload = (props) => {
                                             statistiques
                                         )
                                         .then((response) => {
-                                            console.log(response)
                                             props.toast.success(res.msg)
                                         })
                                         .catch((err) =>
@@ -116,7 +113,6 @@ const Upload = (props) => {
                                 } else props.toast.error(res.error)
                             })
                             .catch((err) => {
-                                console.log(err)
                                 props.toast.error(err)
                             })
                     }

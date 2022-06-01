@@ -1,7 +1,6 @@
 import Chart from 'react-apexcharts'
 
 const CourbesFC = (props) => {
-    console.log(props.time)
     const options = {
         chart: {
             id: 'indicateurs',

@@ -172,7 +172,6 @@ const CourseForm = (props) => {
                             if (response.status === 401) {
                                 dispatch(middlewares.logout())
                             }
-                            console.log(response)
                             props.toast.success(response.message)
                         })
                 }}

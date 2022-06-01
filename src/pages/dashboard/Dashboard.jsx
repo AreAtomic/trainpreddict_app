@@ -54,6 +54,7 @@ const Coureur = ({ toast }) => {
     const objectifs = useSelector((state) => state.objectifs)
     const caracteristics = useSelector((state) => state.caracteristics)
     const seances = useSelector((state) => state.seances)
+    const parametres = useSelector((state) => state.parametres)
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -335,7 +336,7 @@ const Coureur = ({ toast }) => {
                         />
                     )}
                 </div>
-                {!auth.structure && (
+                {!auth.structure ? (
                     <div className="ml-3 mb-5 mt-6">
                         <div className="flex">
                             <HeadingTwo>Indicateurs</HeadingTwo>
@@ -400,6 +401,75 @@ const Coureur = ({ toast }) => {
                             )}
                         </div>
                     </div>
+                ) : (
+                    parametres.coureur.courbes && (
+                        <div className="ml-3 mb-5 mt-6">
+                            <div className="flex">
+                                <HeadingTwo>Indicateurs</HeadingTwo>
+                                <Dropdown
+                                    value={indicators.selected}
+                                    onChange={(event) => {
+                                        dispatch(
+                                            middlewares.setSelectedIndicators(
+                                                event.target.value
+                                            )
+                                        )
+                                    }}
+                                    values={['planned', 'done']}
+                                    options={['Prévisionnel', 'Réalisé']}
+                                    margin="ml-7"
+                                />
+                            </div>
+                            <div>
+                                <ButtonPrimary
+                                    onClick={() => {
+                                        setLoading(true)
+                                        services
+                                            .updateCourbe(
+                                                user.id,
+                                                dayjs().toISOString(),
+                                                auth.token
+                                            )
+                                            .then((response) => {
+                                                if (response.status === 401) {
+                                                    dispatch(
+                                                        middlewares.logout()
+                                                    )
+                                                }
+                                                updateView()
+                                                setLoading(false)
+                                            })
+                                            .catch((err) => console.log(err))
+                                    }}
+                                >
+                                    Recalculer
+                                </ButtonPrimary>
+                            </div>
+                            <div
+                                className="mt-2"
+                                style={{
+                                    maxWidth: '1135px',
+                                    maxHeight: '350px',
+                                }}
+                            >
+                                {!loadingIndicators && (
+                                    <CourbesIndicateurs
+                                        dates={indicators.dates}
+                                        tiredness={
+                                            indicators.tiredness[
+                                                `${indicators.selected}`
+                                            ]
+                                        }
+                                        form={
+                                            indicators.form[
+                                                `${indicators.selected}`
+                                            ]
+                                        }
+                                    />
+                                )}
+                            </div>
+                        </div>
+                    )
                 )}
             </div>
         </div>

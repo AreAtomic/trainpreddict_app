@@ -165,9 +165,6 @@ const CreationSeance = () => {
         setintensite_travail(intensite)
         setscore_stress_entrainement((charge + intensite) / 2)
         setdistance(Math.round(vitesse_moyenne * (duree / 60)))
-
-        // Appel pour respect test unitaire
-        console.log(intensite_travail, charge_entrainement_estime)
     }
 
     if (!blocs) {

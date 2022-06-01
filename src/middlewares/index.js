@@ -110,14 +110,22 @@ export const setSeances = (seances) => (dispatch) => {
 export const changeCalendarData = (data) => (dispatch) => {
     if (data) {
         let index = null
-        data.forEach((week, weekIndex) => {
+        const restructuredCalendar = data.map((week, weekIndex) => {
+            const days = [...week.days]
             week.days.forEach((day) => {
                 if (index === null && day.date.indexOf('01-01') !== -1) {
                     index = weekIndex
                 }
             })
+            days.shift()
+            if (weekIndex < data.length - 1) {
+                days.push(data[weekIndex + 1].days[0])
+                return { ...week, days: days }
+            } else {
+                return { ...week, days: days }
+            }
         })
-        dispatch(Actions.changeDataCalendar(data))
+        dispatch(Actions.changeDataCalendar(restructuredCalendar))
         dispatch(Actions.changeFirstWeekIndexCalendar(index))
         return Promise.resolve()
     }
@@ -245,5 +253,10 @@ export const setNewComment = (data) => (dispatch) => {
 
 export const setDayOneCalendar = (data) => (dispatch) => {
     dispatch(Actions.changeDateCalendar(data))
+    return Promise.resolve()
+}
+
+export const setConfig = (data) => (dispatch) => {
+    dispatch(Actions.setParametres(data))
     return Promise.resolve()
 }

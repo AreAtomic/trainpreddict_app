@@ -32,6 +32,7 @@ import {
     createCoureur,
 } from './affiliation'
 import { getAllSeances } from './seances'
+import { getConfig } from './parametres'
 
 export {
     authenticate,
@@ -64,4 +65,5 @@ export {
     editObjectif,
     updateCourbe,
     putCourses,
+    getConfig,
 }

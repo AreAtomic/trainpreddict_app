@@ -47,6 +47,7 @@ import {
 } from './slices/daySelectedSlice'
 import { setSeances, resetSeances } from './slices/seancesSlice'
 import { setNewSeance, resetNewSeance } from './slices/newSeanceSlice'
+import { setParametres } from './slices/parametresSlice'
 //#endregion Actions
 
 export {
@@ -89,4 +90,5 @@ export {
     resetSeances,
     setNewSeance,
     resetNewSeance,
+    setParametres,
 }

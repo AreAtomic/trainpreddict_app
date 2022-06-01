@@ -28,6 +28,7 @@ import assistantSlice from './slices/assistantSlice'
 import daySelectedSlice from './slices/daySelectedSlice'
 import seancesSlice from './slices/seancesSlice'
 import newSeanceSlice from './slices/newSeanceSlice'
+import parametresSlice from './slices/parametresSlice'
 
 const persistConfig = {
     key: 'root',
@@ -49,6 +50,7 @@ const reducers = combineReducers({
     daySelected: daySelectedSlice,
     seances: seancesSlice,
     newSeance: newSeanceSlice,
+    parametres: parametresSlice,
 })
 
 const _persistReducer = persistReducer(persistConfig, reducers)

@@ -60,7 +60,6 @@ const Navbar = (props) => {
                     className="w-fit grid"
                     onClick={() => {
                         setMenu(!menu)
-                        console.log(menu)
                     }}
                 >
                     Menu

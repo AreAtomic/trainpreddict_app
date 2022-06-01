@@ -53,7 +53,6 @@ const Comment = (props) => {
             />
             <ButtonPrimarySmall
                 onClick={() => {
-                    console.log('Saving ...')
                     props.saveComment()
                 }}
             >

@@ -16,7 +16,6 @@ import { secondsToTimeWithSeconds } from '../../../utils'
 const ApercuAnalyse = (props) => {
     const dispatch = useDispatch()
     const [viewFull, setViewFull] = useState(false)
-    console.log(props.entrainement)
 
     return (
         <div className="grid bg-component-two-500 px-6 py-3">
@@ -91,10 +90,6 @@ const ApercuAnalyse = (props) => {
                                         props.saveComment()
                                     }}
                                     onBlur={() => {
-                                        console.log(
-                                            'Local save new comment : ',
-                                            props.newComment
-                                        )
                                         dispatch(
                                             middlewares.setNewComment(
                                                 props.newComment
@@ -185,10 +180,6 @@ const ApercuAnalyse = (props) => {
                                         props.saveComment()
                                     }}
                                     onBlur={() => {
-                                        console.log(
-                                            'Local save new comment : ',
-                                            props.newComment
-                                        )
                                         dispatch(
                                             middlewares.setNewComment(
                                                 props.newComment
