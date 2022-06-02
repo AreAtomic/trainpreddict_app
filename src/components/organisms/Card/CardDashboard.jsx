@@ -1,0 +1,96 @@
+import { Card, HeadingFour } from '../../atoms'
+import trash from '../../../assets/ico-trashcan.png'
+import { BarChart } from '../../molecules'
+import dayjs from 'dayjs'
+
+const CardPlanned = (props) => {
+    return (
+        <Card className="font-bold overflow-x-hidden scrollbar">
+            {dayjs(props.date).format('ddd DD MMM')}
+            {props.somethingToShow ? (
+                !props.entrainement.course ? (
+                    <>
+                        <div className="flex justify-between">
+                            <HeadingFour>
+                                Entrainement #{props.index}
+                            </HeadingFour>
+                        </div>
+                        <div className="grid">
+                            <p className="text-medium-contrast-500">
+                                {props.entrainement.titre}
+                            </p>
+                            <p className="text-low-contrast-500 mb-2">
+                                {props.entrainement.type.map((item, index) => {
+                                    if (
+                                        index !==
+                                        props.entrainement.type.length - 1
+                                    )
+                                        return (
+                                            <span>
+                                                {item},{'  '}
+                                            </span>
+                                        )
+                                    else return <span>{item}</span>
+                                })}
+                            </p>
+                            <div className="flex justify-between text-low-contrast-500 pr-10">
+                                <span>
+                                    {
+                                        props.entrainement
+                                            .score_stress_entrainement
+                                    }{' '}
+                                    SSE
+                                </span>
+                                <span>{props.entrainement.duree}</span>
+                                <span>
+                                    {props.entrainement.estimation_distance}km
+                                </span>
+                            </div>
+                            <p className="text-low-contrast-500 my-2">
+                                {props.entrainement.description}
+                            </p>
+                        </div>
+                        <BarChart
+                            entrainement={props.entrainement}
+                            width={200}
+                        />
+                    </>
+                ) : (
+                    <>
+                        <div className="flex justify-between">
+                            <HeadingFour>Course</HeadingFour>
+                            <img
+                                src={trash}
+                                alt="Supression d'un entrainement cycliste sur mesure."
+                                onClick={() =>
+                                    props.updateDayPlannedWithRace(
+                                        props.entrainement
+                                    )
+                                }
+                            />
+                        </div>
+                        <div className="grid">
+                            <p className="text-medium-contrast-500">
+                                {props.entrainement.titre}
+                            </p>
+                            <p className="text-low-contrast-500 mb-2">
+                                <span>{props.entrainement.type}</span>
+                            </p>
+                            <div className="flex justify-between text-low-contrast-500 pr-10">
+                                <span>{props.entrainement.temps}</span>
+                                <span>{props.entrainement.distance}km</span>
+                            </div>
+                            <p className="text-low-contrast-500 my-2">
+                                {props.entrainement.description}
+                            </p>
+                        </div>
+                    </>
+                )
+            ) : (
+                <HeadingFour className="w-card-week h-card-week" >Repos</HeadingFour>
+            )}
+        </Card>
+    )
+}
+
+export default CardPlanned

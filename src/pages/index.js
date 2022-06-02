@@ -1,19 +1,24 @@
-import Coureur from './coureur'
 import Dashboard from './dashboard'
 import { Parametres } from './parametres'
 import { Auth } from './auth'
 import { Show } from './show'
 import { Home } from './home'
 import { Televersement } from './televersement'
-import CreateCourse from './courses'
+import { SeancesRouter, CreateCourse } from './seances'
+import Plan from './plan'
+import Objectif from './objectifs'
+import { Courbes } from './courbes'
 
 export {
     Dashboard,
     Auth,
     Show,
-    Coureur,
     Parametres,
     Home,
     Televersement,
+    SeancesRouter,
     CreateCourse,
+    Plan,
+    Objectif,
+    Courbes,
 }

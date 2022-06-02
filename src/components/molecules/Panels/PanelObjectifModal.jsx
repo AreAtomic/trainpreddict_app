@@ -1,8 +1,4 @@
-import {
-    ButtonPrimarySmall,
-    HeadingFive,
-    HeadingFour,
-} from '../../atoms'
+import { ButtonPrimarySmall, HeadingFive, HeadingFour } from '../../atoms'
 import trophy from '../../../assets/trophy.svg'
 import dayjs from 'dayjs'
 import { useState } from 'react'
@@ -20,8 +16,8 @@ const PanelObjectifModal = (props) => {
     const [distance, setDistance] = useState(props.distance)
     const [resultat_vise, setResultatVise] = useState(props.resultat_vise)
     return (
-        <div className="rounded-sm grid h-fit bg-component-two-500 lg:w-1/3 w-full m-4">
-            <div className="flex justify-between ml-8 mt-3">
+        <div className="rounded-sm grid h-fit bg-component-two-500 lg:w1/3 w-full max-w-xs m-4">
+            <div className="flex flex-col lg:flex-row justify-between ml-8 mt-3">
                 <HeadingFour>{props.titrePosition}</HeadingFour>
                 <div className="mr-4">
                     {!edit ? (

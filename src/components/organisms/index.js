@@ -6,8 +6,9 @@ import { ListSeance } from './ListSeance'
 import { ObjectifForm } from './Form'
 import { Draggable, Droppable } from './Dnd'
 import { Upload } from './Upload'
-import { CardListTraining } from './Card'
+import { CardListTraining, CardDashboard } from './Card'
 import { CourseForm } from './Form'
+import { Week } from './Week'
 
 export {
     Sidebar,
@@ -22,4 +23,6 @@ export {
     Upload,
     CardListTraining,
     CourseForm,
+    CardDashboard,
+    Week,
 }

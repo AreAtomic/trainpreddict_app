@@ -6,6 +6,7 @@ const InputUnit = (props) => {
             </label>
             <div
                 className="flex w-96 py-3
+                max-w-xs
                 px-3
                 text-low-contrast-500
                 bg-component-one-500 

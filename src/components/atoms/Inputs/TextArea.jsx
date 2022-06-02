@@ -9,6 +9,7 @@ const TextArea = (props) => {
                     props.className
                         ? props.className
                         : `w-96
+                        max-w-xs
                 peer
                 invalid:ring
                 invalid:ring-high-contrast-500

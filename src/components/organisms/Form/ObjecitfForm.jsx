@@ -40,9 +40,9 @@ const ObjectifForm = (props) => {
     }, [newObjectif])
 
     return (
-        <div className="bg-component-two-500 m-4 pt-1">
+        <div className="bg-component-two-500 pt-1 w-11/12 mx-2">
             <HeadingFour className="m-4">Ajouter un objectif</HeadingFour>
-            <div className="flex h-fit">
+            <div className="flex h-fit flex-col lg:flex-row">
                 <Input
                     label="Titre objectif"
                     placeholder="Un objectif..."
@@ -74,6 +74,7 @@ const ObjectifForm = (props) => {
                         'Distance',
                         'Montagne',
                     ]}
+                    margin="mx-4 my-2"
                 />
                 <InputUnit
                     label="Distance"
@@ -89,7 +90,7 @@ const ObjectifForm = (props) => {
                     margin="mx-4"
                 />
             </div>
-            <div className="flex h-fit my-5">
+            <div className="flex h-fit my-5 flex-col lg:flex-row">
                 <InputUnit
                     label="Dénivelé"
                     placeholder="100"
@@ -112,7 +113,7 @@ const ObjectifForm = (props) => {
                     }}
                     type="time"
                     helper="Rentrez un email valide"
-                    margin="ml-1 mr-4"
+                    margin="mx-4 my-2"
                 />
 
                 <Select
@@ -131,9 +132,10 @@ const ObjectifForm = (props) => {
                         'Top 30',
                         'Finisseur',
                     ]}
+                    margin="mx-4 my-2"
                 />
             </div>
-            <div className="mx-4">
+            <div className="mx-4 flex-col lg:flex-row">
                 <Input
                     label="Date"
                     placeholder="DD/MM/YYYY"
@@ -159,59 +161,63 @@ const ObjectifForm = (props) => {
                     margin="4"
                 />
             </div>
-            <ButtonPrimary
-                className="m-4"
-                onClick={() => {
-                    services
-                        .createObjectif(
-                            auth.userId,
-                            type,
-                            resultatVise,
-                            titre,
-                            description,
-                            denivele,
-                            distance,
-                            duree,
-                            date,
-                            auth.token
+            <div className="flex flex-col lg:flex-row max-w-xs">
+                <ButtonPrimary
+                    className="m-4"
+                    onClick={() => {
+                        services
+                            .createObjectif(
+                                auth.userId,
+                                type,
+                                resultatVise,
+                                titre,
+                                description,
+                                denivele,
+                                distance,
+                                duree,
+                                date,
+                                auth.token
+                            )
+                            .then((response) => {
+                                if (response.status === 401) {
+                                    dispatch(middlewares.logout())
+                                }
+                                props.toast.success(response.message)
+                                services
+                                    .getAllObjectifs(auth.userId, auth.token)
+                                    .then((response) => {
+                                        dispatch(
+                                            middlewares.setObjectifs(
+                                                response.data
+                                            )
+                                        )
+                                    })
+                            })
+                    }}
+                >
+                    Ajouter l'objectif
+                </ButtonPrimary>
+                <ButtonSecondary
+                    className="m-4"
+                    onClick={() => {
+                        dispatch(
+                            middlewares.setNewObjectif({
+                                date: date,
+                                type: type,
+                                resultatVise: resultatVise,
+                                titre: titre,
+                                description: description,
+                                denivele: denivele,
+                                distance: distance,
+                                temps: duree,
+                                realise: false,
+                            })
                         )
-                        .then((response) => {
-                            if (response.status === 401) {
-                                dispatch(middlewares.logout())
-                            }
-                            props.toast.success(response.message)
-                            services
-                                .getAllObjectifs(auth.userId, auth.token)
-                                .then((response) => {
-                                    dispatch(
-                                        middlewares.setObjectifs(response.data)
-                                    )
-                                })
-                        })
-                }}
-            >
-                Ajouter l'objectif
-            </ButtonPrimary>
-            <ButtonSecondary
-                className="m-4"
-                onClick={() => {
-                    dispatch(
-                        middlewares.setNewObjectif({
-                            date: date,
-                            type: type,
-                            resultatVise: resultatVise,
-                            titre: titre,
-                            description: description,
-                            denivele: denivele,
-                            distance: distance,
-                            temps: duree,
-                            realise: false,
-                        })
-                    )
-                }}
-            >
-                Continuer plus tard
-            </ButtonSecondary>
+                    }}
+                >
+                    Continuer plus tard
+                </ButtonSecondary>
+            </div>
         </div>
     )
 }

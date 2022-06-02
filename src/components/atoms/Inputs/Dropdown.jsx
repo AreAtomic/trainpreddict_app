@@ -6,7 +6,7 @@ const Dropdown = (props) => {
             <div
                 className="
                 relative
-                w-52
+                w-48
                 peer
                 invalid:ring
                 invalid:ring-high-contrast-500
@@ -28,7 +28,7 @@ const Dropdown = (props) => {
                 "
             >
                 <select
-                    className="dropdown-select bg-component-two-500 focus:outline-none peer w-48"
+                    className="dropdown-select bg-component-two-500 focus:outline-none peer w-44"
                     {...props}
                 >
                     {props.options.map((item, index) => {

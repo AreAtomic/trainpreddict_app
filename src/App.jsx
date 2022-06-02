@@ -4,21 +4,25 @@ import { Routes, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 //#endregion
 //#region Import components
-import { Navbar } from './components/molecules'
+import { Header, Navbar, Bottom } from './components/molecules'
 import {
     Dashboard,
     Auth,
     Show,
-    Coureur,
+    Plan,
     Parametres,
     Home,
     Televersement,
     CreateCourse,
+    SeancesRouter,
+    Objectif,
+    Courbes,
 } from './pages'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import * as services from './services'
 import * as middlewares from './middlewares'
+import { LoggedLayout } from './components/layouts'
 //#endregion
 toast.configure()
 
@@ -36,56 +40,49 @@ const App = () => {
     }, [auth])
 
     return (
-        <div className="bg-component-one-500 text-low-contrast-500 overflow-hidden w-full pt-navbar min-h-screen">
+        <div className="bg-primary-blue-500 text-low-contrast-500 overflow-hidden w-full pt-navbar min-h-screen">
             {user.isLogged ? (
                 <>
                     <Routes>
-                        <Route
-                            path="/dashboard"
-                            element={
-                                <>
-                                    <Navbar />
-                                    <Dashboard toast={toast} />
-                                </>
-                            }
-                        ></Route>
-                        <Route
-                            path="/parametres"
-                            element={
-                                <>
-                                    <Navbar />
-                                    <Parametres toast={toast} />
-                                </>
-                            }
-                        ></Route>
-                        <Route path="/home" element={<Home />} />
-                        <Route
-                            path="/*"
-                            element={
-                                <>
-                                    <Navbar />
-                                    <Dashboard toast={toast} />
-                                </>
-                            }
-                        ></Route>
-                        <Route
-                            path="/upload"
-                            element={
-                                <>
-                                    <Navbar />
-                                    <Televersement toast={toast} />
-                                </>
-                            }
-                        />
-                        <Route
-                            path="/courses"
-                            element={
-                                <>
-                                    <Navbar />
-                                    <CreateCourse toast={toast} />
-                                </>
-                            }
-                        />
+                        <Route path="/" element={<LoggedLayout />}>
+                            <Route path="/home" element={<Home />} />
+                            <Route
+                                path="/dashboard"
+                                element={<Dashboard toast={toast} />}
+                            />
+                            <Route
+                                path="/objectif"
+                                element={<Objectif toast={toast} />}
+                            />
+                            <Route
+                                path="/plan"
+                                element={<Plan toast={toast} />}
+                            />
+                            <Route
+                                path="/seances"
+                                element={<SeancesRouter />}
+                            />
+                            <Route
+                                path="/upload"
+                                element={<Televersement toast={toast} />}
+                            />
+                            <Route
+                                path="/courses"
+                                element={<CreateCourse toast={toast} />}
+                            />
+                            <Route
+                                path="/courbes"
+                                element={<Courbes toast={toast} />}
+                            />
+                            <Route
+                                path="/parametres"
+                                element={<Parametres toast={toast} />}
+                            />
+                            <Route
+                                path="/*"
+                                element={<Dashboard toast={toast} />}
+                            />
+                        </Route>
                     </Routes>
                 </>
             ) : (

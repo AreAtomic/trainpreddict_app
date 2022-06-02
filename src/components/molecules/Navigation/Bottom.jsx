@@ -1,0 +1,34 @@
+import analyze from '../../../assets/analyze.svg'
+import calendar from '../../../assets/calendar.svg'
+import courbes from '../../../assets/courbes.svg'
+import trophy from '../../../assets/trophy.svg'
+import user from '../../../assets/user.svg'
+
+//TODO: Remplacer les liens avec les liens d'action rapide
+const Navbar = () => {
+    return (
+        <div
+            className="fixed bottom-0 left-0 w-full lg:hidden xl:hidden 2xl:hidden sm:flex md:flex justify-between px-4 py-4 bg-primary-blue-500 z-0"
+        >
+            <div className="flex flex-row justify-between w-full z-0">
+                <a className="w-full flex justify-around" href="/plan">
+                    <img src={calendar} width={24} />
+                </a>
+                <a className="w-full flex justify-around" href="/objectif">
+                    <img src={trophy} width={24} />
+                </a>
+                <a className="w-full flex justify-around" href="/seances">
+                    <img src={analyze} width={24} />
+                </a>
+                <a className="w-full flex justify-around" href="/courbes">
+                    <img src={courbes} width={24} />
+                </a>
+                <a className="w-full flex justify-around" href="/parametres">
+                    <img src={user} width={24} />
+                </a>
+            </div>
+        </div>
+    )
+}
+
+export default Navbar

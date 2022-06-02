@@ -1,6 +1,5 @@
 import { BarChart } from './Charts'
-// TODO: Router in Navbar
-import { Navbar } from './Navbar'
+import { Navbar, Header, Bottom } from './Navigation'
 import { CardSeanceList } from './CardsSeance'
 import { HeaderPlanning, RowPlanning } from './Planning'
 import {
@@ -22,4 +21,6 @@ export {
     PanelObjectifModal,
     PanelCarac,
     Comment,
+    Header,
+    Bottom,
 }

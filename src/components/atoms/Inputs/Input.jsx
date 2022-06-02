@@ -6,12 +6,13 @@ const Input = (props) => {
             </label>
             <input
                 className={`${props.width ? props.width : 'w-96'}
+                max-w-xs
                 peer
                 invalid:ring
                 invalid:ring-high-contrast-500
                 invalid:border-0
                 invalid:text-high-contrast-50
-                py-3
+                py-1
                 px-3
                 text-low-contrast-500
                 bg-component-one-500 

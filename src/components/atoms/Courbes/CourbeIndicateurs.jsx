@@ -34,6 +34,7 @@ const CourbesIndicateurs = (props) => {
             show: false,
         },
         theme: { mode: 'dark' },
+        dataLabels: { enabled: false }
     }
     const series = [
         {

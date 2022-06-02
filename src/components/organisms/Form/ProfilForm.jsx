@@ -138,8 +138,7 @@ const ProfilForm = (props) => {
     return (
         caracteristics && (
             <div>
-                <HeadingTwo className="mb-4">Profil</HeadingTwo>
-                <div className="flex h-fit my-5">
+                <div className="flex flex-col h-fit my-5 lg:flex-row">
                     <InputUnit
                         label="Puissance fonctionnelles au Seuil (FTP)"
                         placeholder="100"
@@ -184,7 +183,9 @@ const ProfilForm = (props) => {
                         required
                     />
                 </div>{' '}
-                <div className="flex h-fit my-5">
+                <div
+                    className="flex h-fit my-5 flex-col lg:flex-row"
+                >
                     <InputUnit
                         label="Expérience"
                         placeholder="100"
@@ -229,7 +230,7 @@ const ProfilForm = (props) => {
                         required
                     />
                 </div>{' '}
-                <div className="flex h-fit my-5">
+                <div className="flex h-fit my-5 flex-col lg:flex-row">
                     <InputUnit
                         label="Temps Entrainements Semaine"
                         placeholder="100"
@@ -273,7 +274,7 @@ const ProfilForm = (props) => {
                         required
                     />
                 </div>{' '}
-                <div className="flex h-fit my-5">
+                <div className="flex h-fit my-5 flex-col lg:flex-row">
                     <Select
                         label="Musculation"
                         placeholder="Sélectionner une valeur"
@@ -309,7 +310,7 @@ const ProfilForm = (props) => {
                         margin="mx-4"
                     />
                 </div>{' '}
-                <div className="flex h-fit my-5">
+                <div className="flex h-fit my-5 flex-col lg:flex-row">
                     <Select
                         label="Style"
                         placeholder="Sélectionner une valeur"
@@ -362,7 +363,7 @@ const ProfilForm = (props) => {
                         ]}
                     />
                 </div>
-                <div className="flex h-fit my-5">
+                <div className="flex h-fit my-5 flex-col lg:flex-row">
                     <MultipleSelect
                         label="Jour de repos"
                         placeholder="Sélectionner une valeur"
