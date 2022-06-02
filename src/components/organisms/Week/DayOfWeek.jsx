@@ -10,14 +10,12 @@ import { CardDashboard } from '../Card'
 //#endregion
 
 const Day = (props) => {
-    console.log(props)
     const dispatch = useDispatch()
     const auth = useSelector((state) => state.auth)
     const userId = auth.userId
     useEffect(() => {
         const tempPlanned = []
         props.day.planned.forEach((seance) => {
-            console.log(seance)
             services
                 .getPlannedObject(userId, seance, auth.token)
                 .then((response) => {

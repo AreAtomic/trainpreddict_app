@@ -12,6 +12,9 @@ const Navbar = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [menu, setMenu] = useState(false)
+
+    const location = window.location.pathname.split('/')[1]
+
     return (
         <div className="fixed top-0 left-0 w-full lg:hidden xl:hidden 2xl:hidden sm:flex md:flex justify-between px-10 bg-primary-blue-500 z-50 drop-shadow-mdlight h-fit">
             <div className="flex justify-between w-full h-fit my-2">
@@ -22,6 +25,7 @@ const Navbar = () => {
                         width={30}
                     />
                 </a>
+                <p className='capitalize'>{location}</p>
                 <img
                     src={menuIcon}
                     alt="Menu"
@@ -35,7 +39,10 @@ const Navbar = () => {
                         menu ? 'grid' : 'hidden'
                     }`}
                 >
-                    <a href="/dashboard" className={`text-low-contrast-500 my-2 mx-6`}>
+                    <a
+                        href="/dashboard"
+                        className={`text-low-contrast-500 my-2 mx-6`}
+                    >
                         Dashboard
                     </a>
                     <a

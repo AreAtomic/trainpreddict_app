@@ -131,7 +131,6 @@ const Coureur = ({ toast }) => {
     const updateView = () => {
         window.location.reload()
     }
-    console.log(calendar)
 
     return (
         <div className="grid">

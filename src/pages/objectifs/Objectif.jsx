@@ -34,8 +34,6 @@ const Objectif = ({ toast }) => {
     //modal ouverture
     const [openMO, setOpenMO] = useState(false)
 
-    console.log(dayjs(objectifs[0]).isAfter(dayjs()))
-
     return (
         <div className="grid max-w-screen">
             {loading && (

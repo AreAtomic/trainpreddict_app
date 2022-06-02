@@ -12,7 +12,6 @@ const Week = ({ days }) => {
             content_scoll_left = content_scroll_width
         }
         content.scrollLeft = content_scoll_left
-        console.log(content)
     }
 
     const handleScrollLeft = () => {
@@ -25,7 +24,6 @@ const Week = ({ days }) => {
             content_scoll_left = content_scroll_width
         }
         content.scrollLeft = content_scoll_left
-        console.log(content)
     }
     return (
         <div className="flex justify-between select-none">
