@@ -157,32 +157,10 @@ const Coureur = ({ toast }) => {
                                         days={
                                             calendar.data[
                                                 calendar.firstWeekIndex +
-                                                    dayjs().add(1, 'week').week()
+                                                    dayjs().week()
                                             ].days
                                         }
                                     />
-                                    {/* <Calendar
-                                        className=""
-                                        dayOne={dayjs()}
-                                        weeks={calendar.data.slice(
-                                            calendar.firstWeekIndex + firstWeek,
-                                            calendar.firstWeekIndex +
-                                                firstWeek +
-                                                calendar.weeksDisplayed
-                                        )}
-                                        seances={seances}
-                                        parent={parent}
-                                        setParent={(id) => setParent(id)}
-                                        resetNewSeance={() =>
-                                            setDraggedSeance(null)
-                                        }
-                                        newSeance={draggedSeance}
-                                        dragEnd={dragEnd}
-                                        viewSeanceItem={viewSeanceItem}
-                                        setViewSeanceItem={(value) =>
-                                            setViewSeanceItem(value)
-                                        }
-                                    /> */}
                                 </>
                             ) : (
                                 <ButtonPrimarySmall
