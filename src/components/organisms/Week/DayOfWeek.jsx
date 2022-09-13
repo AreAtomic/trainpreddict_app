@@ -19,13 +19,14 @@ const Day = (props) => {
             services
                 .getPlannedObject(userId, seance, auth.token)
                 .then((response) => {
+                    console.log("planned obejct", response)
                     if (response.status === 401) {
                         dispatch(middlewares.logout())
                     }
                     if (response.data) {
                         tempPlanned.push({
                             ...response.data,
-                            course: response.data._utilisateur ? true : false,
+                            course: response.data.course,
                         })
                         setPlanned([...planned, ...tempPlanned])
                     }

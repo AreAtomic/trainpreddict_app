@@ -83,11 +83,19 @@ const CardPlanned = (props) => {
                             <p className="text-low-contrast-500 my-2">
                                 {props.entrainement.description}
                             </p>
+                            {/* {props.entrainement && (
+                                <BarChart
+                                    entrainement={props.entrainement}
+                                    width={200}
+                                />
+                            )} */}
                         </div>
                     </>
                 )
             ) : (
-                <HeadingFour className="w-card-week h-card-week" >Repos</HeadingFour>
+                <HeadingFour className="w-card-week h-card-week">
+                    Repos
+                </HeadingFour>
             )}
         </Card>
     )

@@ -33,6 +33,7 @@ import {
 } from './affiliation'
 import { getAllSeances } from './seances'
 import { getConfig } from './parametres'
+import { createPlan } from './plan'
 
 export {
     authenticate,
@@ -66,4 +67,5 @@ export {
     updateCourbe,
     putCourses,
     getConfig,
+    createPlan
 }

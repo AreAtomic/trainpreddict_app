@@ -139,7 +139,9 @@ const Plan = ({ toast }) => {
             <div className="z-0">
                 <div className="ml-3 z-0">
                     <div className="grid 2xl:grid-cols-6 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-x-2 gap-y-2 mb-3 justify-around">
-                        <HeadingTwo className="w-fit mt-0">Calendrier</HeadingTwo>
+                        <HeadingTwo className="w-fit mt-0">
+                            Calendrier
+                        </HeadingTwo>
                         <Dropdown
                             value={calendar.weeksDisplayed}
                             onChange={(event) => {
@@ -182,28 +184,63 @@ const Plan = ({ toast }) => {
                     ) : (
                         <div>
                             {isCalendar ? (
-                                <Calendar
-                                    className=""
-                                    dayOne={dayjs()}
-                                    weeks={calendar.data.slice(
-                                        calendar.firstWeekIndex + firstWeek,
-                                        calendar.firstWeekIndex +
-                                            firstWeek +
-                                            calendar.weeksDisplayed
+                                <>
+                                    <Calendar
+                                        className=""
+                                        dayOne={dayjs()}
+                                        weeks={calendar.data.slice(
+                                            calendar.firstWeekIndex + firstWeek,
+                                            calendar.firstWeekIndex +
+                                                firstWeek +
+                                                calendar.weeksDisplayed
+                                        )}
+                                        seances={seances}
+                                        parent={parent}
+                                        setParent={(id) => setParent(id)}
+                                        resetNewSeance={() =>
+                                            setDraggedSeance(null)
+                                        }
+                                        newSeance={draggedSeance}
+                                        dragEnd={dragEnd}
+                                        viewSeanceItem={viewSeanceItem}
+                                        setViewSeanceItem={(value) =>
+                                            setViewSeanceItem(value)
+                                        }
+                                    />
+                                    {auth.structure && (
+                                        <div className="my-8">
+                                            <HeadingFour>
+                                                Soyez prudent
+                                            </HeadingFour>
+                                            <p className="mb-3">
+                                                Cette action va recalculer votre
+                                                plan pour vos futur objectif
+                                                mais elle risque de supprimer
+                                                toute votre plannification
+                                                actuelle.
+                                            </p>
+                                            <ButtonPrimary
+                                                onClick={() => {
+                                                    console.log(
+                                                        'generate plan for objectifs'
+                                                    )
+                                                    services
+                                                        .createPlan(
+                                                            auth.userId,
+                                                            auth.token
+                                                        )
+                                                        .then((response) =>
+                                                            console.log(
+                                                                response
+                                                            )
+                                                        )
+                                                }}
+                                            >
+                                                Générer votre plan
+                                            </ButtonPrimary>
+                                        </div>
                                     )}
-                                    seances={seances}
-                                    parent={parent}
-                                    setParent={(id) => setParent(id)}
-                                    resetNewSeance={() =>
-                                        setDraggedSeance(null)
-                                    }
-                                    newSeance={draggedSeance}
-                                    dragEnd={dragEnd}
-                                    viewSeanceItem={viewSeanceItem}
-                                    setViewSeanceItem={(value) =>
-                                        setViewSeanceItem(value)
-                                    }
-                                />
+                                </>
                             ) : (
                                 <ButtonPrimarySmall
                                     onClick={() => {

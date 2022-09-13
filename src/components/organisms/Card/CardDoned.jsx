@@ -12,7 +12,7 @@ const CardPlanned = (props) => {
                         {props.entrainement.titre || props.entrainement.type}
                     </p>
                     <p className="text-low-contrast-500 mb-2">
-                        {props.entrainement.type.map((item, index) => {
+                        {/* {props.entrainement.type.map((item, index) => {
                             if (index !== props.entrainement.type.length - 1)
                                 return (
                                     <span>
@@ -20,7 +20,7 @@ const CardPlanned = (props) => {
                                     </span>
                                 )
                             else return <span>{item}</span>
-                        })}
+                        })} */}
                     </p>
                     <div className="flex justify-between text-low-contrast-500 pr-10">
                         <span>
@@ -33,7 +33,9 @@ const CardPlanned = (props) => {
                         {props.entrainement.description}
                     </p>
                 </div>
-                <BarChart entrainement={props.entrainement} width={310} />
+                {props.entrainement.duree && (
+                    <BarChart entrainement={props.entrainement} width={310} />
+                )}
             </>
         </Card>
     )

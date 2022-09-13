@@ -81,6 +81,7 @@ const Calendar = (props) => {
                 return (
                     <div className="flex">
                         {week.days.map((day, dayIndex) => {
+                            console.log(day)
                             return (
                                 <Day
                                     passed={dayjs().isAfter(dayjs(day.date))}

@@ -33,9 +33,10 @@ const Day = (props) => {
                         dispatch(middlewares.logout())
                     }
                     if (response.data) {
+                        console.log(response)
                         tempPlanned.push({
                             ...response.data,
-                            course: response.data._utilisateur ? true : false,
+                            course: response.data.course,
                         })
                         setPlanned([...planned, ...tempPlanned])
                     }
