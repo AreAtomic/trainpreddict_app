@@ -9,6 +9,7 @@ import { Upload } from './Upload'
 import { CardListTraining, CardDashboard } from './Card'
 import { CourseForm } from './Form'
 import { Week } from './Week'
+import OnBoarding from './OnBoarding'
 
 export {
     Sidebar,
@@ -25,4 +26,5 @@ export {
     CourseForm,
     CardDashboard,
     Week,
+    OnBoarding
 }

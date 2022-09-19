@@ -8,6 +8,7 @@ import { store } from './redux'
 import { BrowserRouter } from 'react-router-dom'
 import { PersistGate } from 'reduxjs-toolkit-persist/integration/react'
 import { persistStore } from 'reduxjs-toolkit-persist'
+import { OnBoardingContextProvider } from './contexts/onboardingContext'
 
 let persistor = persistStore(store)
 
@@ -16,7 +17,9 @@ ReactDOM.render(
         <React.StrictMode>
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
-                    <App />
+                    <OnBoardingContextProvider>
+                        <App />
+                    </OnBoardingContextProvider>
                 </PersistGate>
             </Provider>
         </React.StrictMode>

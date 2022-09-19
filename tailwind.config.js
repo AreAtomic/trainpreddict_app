@@ -702,7 +702,7 @@ module.exports = {
             'calendar-small': '100px',
             'calendar-mobile': '76px',
             80: '80px',
-            'card-week': '324px'
+            'card-week': '324px',
         }),
         inset: ({ theme }) => ({
             auto: 'auto',
@@ -920,7 +920,7 @@ module.exports = {
             45: '45deg',
             90: '90deg',
             180: '180deg',
-            270: "-90deg"
+            270: '-90deg',
         },
         saturate: {
             0: '0',
@@ -1091,7 +1091,7 @@ module.exports = {
             'calendar-small': '110px',
             'calendar-mobile': '50px',
             'show-xs': '46px',
-            'card-week': '320px'
+            'card-week': '320px',
         }),
         willChange: {
             auto: 'auto',
@@ -1107,6 +1107,7 @@ module.exports = {
             30: '30',
             40: '40',
             50: '50',
+            onboarding: '90',
         },
     },
     variantOrder: [

@@ -19,7 +19,6 @@ const Day = (props) => {
             services
                 .getPlannedObject(userId, seance, auth.token)
                 .then((response) => {
-                    console.log("planned obejct", response)
                     if (response.status === 401) {
                         dispatch(middlewares.logout())
                     }

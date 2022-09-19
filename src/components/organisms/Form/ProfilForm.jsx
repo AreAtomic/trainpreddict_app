@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import OnBoardingContext from '../../../contexts/onboardingContext'
 import dayjs from 'dayjs'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -11,8 +11,11 @@ import {
 } from '../../atoms'
 import * as middlewares from '../../../middlewares'
 import * as services from '../../../services'
+import { useNavigate } from 'react-router-dom'
 
 const ProfilForm = (props) => {
+    const onBoardingContext = useContext(OnBoardingContext)
+    const navigate = useNavigate()
     //#region States
     //#region External states
     const dispatch = useDispatch()
@@ -183,9 +186,7 @@ const ProfilForm = (props) => {
                         required
                     />
                 </div>{' '}
-                <div
-                    className="flex h-fit my-5 flex-col lg:flex-row"
-                >
+                <div className="flex h-fit my-5 flex-col lg:flex-row">
                     <InputUnit
                         label="Expérience"
                         placeholder="100"
@@ -424,6 +425,10 @@ const ProfilForm = (props) => {
                                 .then((response) => {
                                     if (response.status === 401) {
                                         dispatch(middlewares.logout())
+                                    }
+                                    if(!onBoardingContext.complete){
+                                        onBoardingContext.handleSetStep(2)
+                                        navigate("/objectif")
                                     }
                                     middlewares
                                         .setUserProfil(response.data)

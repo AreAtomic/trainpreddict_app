@@ -1,4 +1,4 @@
-import react, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import {
@@ -12,8 +12,10 @@ import {
 import { ProfilForm } from '../../components/organisms/Form'
 import arrow from '../../assets/dropdown-arrow.svg'
 import * as services from '../../services'
+import OnBoardingContext from '../../contexts/onboardingContext'
 
 const Parametres = ({ toast }) => {
+    const onBoardingContext = useContext(OnBoardingContext)
     const nom = useSelector((state) => state.user.name)
     const prenom = useSelector((state) => state.user.name)
     const [email, setEmail] = useState(useSelector((state) => state.user.email))
@@ -23,6 +25,14 @@ const Parametres = ({ toast }) => {
     const [newMdpConfirm, setNewMdpConfirm] = useState('')
     const [disabled, setDisabled] = useState(true)
     const [step, setStep] = useState('select')
+
+    useEffect(() => {
+        if (onBoardingContext.step === 1) {
+            if (onBoardingContext.innerStep === 'form') {
+                setStep('sportif')
+            }
+        }
+    }, [onBoardingContext])
 
     return (
         <div>

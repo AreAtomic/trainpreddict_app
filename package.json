@@ -23,7 +23,7 @@
     "react-floater": "^0.8.0",
     "react-hook-form": "^7.27.1",
     "react-redux": "^7.2.6",
-    "react-router-dom": "^6.2.1",
+    "react-router-dom": "^6.4.0",
     "react-scripts": "5.0.0",
     "react-toastify": "^8.2.0",
     "reduxjs-toolkit-persist": "^7.0.7",
@@ -38,10 +38,17 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": ["react-app", "react-app/jest"]
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",

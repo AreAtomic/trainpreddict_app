@@ -1,10 +1,9 @@
 //#region Import external modules
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 //#endregion
 //#region Import components
-import { Header, Navbar, Bottom } from './components/molecules'
 import {
     Dashboard,
     Auth,
@@ -23,6 +22,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import * as services from './services'
 import * as middlewares from './middlewares'
 import { LoggedLayout } from './components/layouts'
+import OnBoardingContext from './contexts/onboardingContext'
 //#endregion
 toast.configure()
 

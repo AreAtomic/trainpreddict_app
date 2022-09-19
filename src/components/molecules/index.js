@@ -9,6 +9,7 @@ import {
     PanelObjectifModal,
 } from './Panels'
 import { Comment } from './Comment'
+import { SpecialNavigation } from './OnBoarding'
 
 export {
     BarChart,
@@ -23,4 +24,5 @@ export {
     Comment,
     Header,
     Bottom,
+    SpecialNavigation,
 }

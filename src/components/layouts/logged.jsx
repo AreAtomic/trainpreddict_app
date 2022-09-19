@@ -1,9 +1,17 @@
+import { useContext } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Navbar, Bottom, Header } from '../molecules'
+import { OnBoarding } from '../organisms'
+import OnBoardingContext from '../../contexts/onboardingContext'
 
 const LoggedLayout = () => {
+    const onBoardingContext = useContext(OnBoardingContext)
+
     return (
         <div>
+            {onBoardingContext.fetched && !onBoardingContext.complete && (
+                <OnBoarding />
+            )}
             <Navbar />
             <Header />
             <main
