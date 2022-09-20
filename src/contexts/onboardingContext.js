@@ -58,14 +58,15 @@ export const OnBoardingContextProvider = (props) => {
                         .catch((error) => alert('An error occured'))
                 },
                 handleSetComplete: (value) => {
-                    // TODO: sauvegarde dans base de données
                     setComplete(value)
-                    localStorage.setItem(
-                        JSON.stringify('onboarding', {
-                            step: 4,
-                            complete: value,
+                    requestApi('put', 'coureur/profil/onboarding', auth.token, {
+                        onboarding: { step: 4, complete: value },
+                    })
+                        .then((response) => {
+                            setStep(response.onboarding.step)
+                            setComplete(response.onboarding.complete)
                         })
-                    )
+                        .catch((error) => alert('An error occured'))
                 },
                 handleInnerStep: (innerStep) => setInnerStep(innerStep),
             }}

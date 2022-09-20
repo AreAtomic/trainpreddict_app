@@ -17,7 +17,10 @@ const Navbar = ({ onboarding, step }) => {
             <div className="flex flex-row justify-between w-full z-0">
                 <a
                     className={`w-full flex justify-around ${
-                        onboarding && (step === 3 ? 'active' : 'opacity-30')
+                        onboarding &&
+                        (step === 3
+                            ? 'border-2 border-high-contrast-500 rounded-full p-2'
+                            : 'opacity-30 pointer-events-none')
                     }`}
                     href="/plan"
                 >
@@ -25,7 +28,10 @@ const Navbar = ({ onboarding, step }) => {
                 </a>
                 <a
                     className={`w-full flex justify-around ${
-                        onboarding && (step === 2 ? 'active' : 'opacity-30')
+                        onboarding &&
+                        (step === 2
+                            ? 'border-2 border-high-contrast-500 rounded-full p-2'
+                            : 'opacity-30 pointer-events-none')
                     }`}
                     href="/objectif"
                 >
@@ -33,7 +39,10 @@ const Navbar = ({ onboarding, step }) => {
                 </a>
                 <a
                     className={`w-full flex justify-around ${
-                        onboarding && (step === 4 ? 'active' : 'opacity-30')
+                        onboarding &&
+                        (step === 4
+                            ? 'border-2 border-high-contrast-500 rounded-full p-2'
+                            : 'opacity-30 pointer-events-none')
                     }`}
                     href="/seances"
                 >
@@ -41,7 +50,10 @@ const Navbar = ({ onboarding, step }) => {
                 </a>
                 <a
                     className={`w-full flex justify-around ${
-                        onboarding && (step === 5 ? 'active' : 'opacity-30')
+                        onboarding &&
+                        (step === 5
+                            ? 'border-2 border-high-contrast-500 rounded-full p-2'
+                            : 'opacity-30 pointer-events-none')
                     }`}
                     href="/courbes"
                 >
@@ -52,7 +64,7 @@ const Navbar = ({ onboarding, step }) => {
                         onboarding &&
                         (step === 1
                             ? 'border-2 border-high-contrast-500 rounded-full p-2'
-                            : 'inactive')
+                            : 'opacity-30 pointer-events-none')
                     }`}
                     href="/parametres"
                 >

@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { useContext } from 'react'
+import OnBoardingContext from '../../../contexts/onboardingContext'
 import dayjs from 'dayjs'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -15,9 +17,11 @@ import * as middlewares from '../../../middlewares'
 import * as services from '../../../services'
 
 const ObjectifForm = (props) => {
+    const onBoardingContext = useContext(OnBoardingContext)
     const dispatch = useDispatch()
     const auth = useSelector((state) => state.auth)
     const newObjectif = useSelector((state) => state.newObjectif)
+    const objectifs = useSelector((state) => state.objectifs)
     //#region modal 1
     const [titre, setTitre] = useState('')
     const [type, setType] = useState('')
@@ -197,26 +201,38 @@ const ObjectifForm = (props) => {
                 >
                     Ajouter l'objectif
                 </ButtonPrimary>
-                <ButtonSecondary
-                    className="m-4"
-                    onClick={() => {
-                        dispatch(
-                            middlewares.setNewObjectif({
-                                date: date,
-                                type: type,
-                                resultatVise: resultatVise,
-                                titre: titre,
-                                description: description,
-                                denivele: denivele,
-                                distance: distance,
-                                temps: duree,
-                                realise: false,
-                            })
-                        )
-                    }}
-                >
-                    Continuer plus tard
-                </ButtonSecondary>
+                {onBoardingContext.complete && (
+                    <ButtonSecondary
+                        className="m-4"
+                        onClick={() => {
+                            dispatch(
+                                middlewares.setNewObjectif({
+                                    date: date,
+                                    type: type,
+                                    resultatVise: resultatVise,
+                                    titre: titre,
+                                    description: description,
+                                    denivele: denivele,
+                                    distance: distance,
+                                    temps: duree,
+                                    realise: false,
+                                })
+                            )
+                        }}
+                    >
+                        Continuer plus tard
+                    </ButtonSecondary>
+                )}
+                {objectifs.length !== 0 && (
+                    <ButtonSecondary
+                        className="m-4"
+                        onClick={() => {
+                            onBoardingContext.handleSetStep(3)
+                        }}
+                    >
+                        Etape suivante
+                    </ButtonSecondary>
+                )}
             </div>
         </div>
     )

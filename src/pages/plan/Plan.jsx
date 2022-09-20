@@ -1,11 +1,10 @@
 import React from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { createPortal } from 'react-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import dayjs from 'dayjs'
 //#region Import components
-import { SpinLoader } from '../../components/atoms'
+import { ButtonSecondary, SpinLoader } from '../../components/atoms'
 import { Sidebar, Calendar, ObjectifForm } from '../../components/organisms'
 import {
     CardSeanceList,
@@ -33,6 +32,7 @@ import {
 //#region Import API
 import * as services from '../../services'
 import * as middlewares from '../../middlewares'
+import OnBoardingContext from '../../contexts/onboardingContext'
 import { ProfilForm } from '../../components/organisms/Form'
 import { DndContext, DragOverlay } from '@dnd-kit/core'
 import {
@@ -45,6 +45,7 @@ import { Draggable, Droppable } from '../../components/organisms'
 const Plan = ({ toast }) => {
     //#region State declaration
     // API states
+    const onBoardingContext = useContext(OnBoardingContext)
     const dispatch = useDispatch()
     const auth = useSelector((state) => state.auth)
     const user = useSelector((state) => state.user)
@@ -219,25 +220,63 @@ const Plan = ({ toast }) => {
                                                 toute votre plannification
                                                 actuelle.
                                             </p>
-                                            <ButtonPrimary
-                                                onClick={() => {
-                                                    console.log(
-                                                        'generate plan for objectifs'
-                                                    )
-                                                    services
-                                                        .createPlan(
-                                                            auth.userId,
-                                                            auth.token
-                                                        )
-                                                        .then((response) =>
-                                                            console.log(
-                                                                response
+                                            {!onBoardingContext.complete ? (
+                                                <div className="grid grid-cols-2 max-w-md">
+                                                    <ButtonPrimary
+                                                        onClick={() => {
+                                                            onBoardingContext.handleInnerStep(
+                                                                'end'
                                                             )
+                                                        }}
+                                                    >
+                                                        Etape suivate
+                                                    </ButtonPrimary>
+                                                    <ButtonSecondary
+                                                        className="ml-2"
+                                                        onClick={() => {
+                                                            console.log(
+                                                                'generate plan for objectifs'
+                                                            )
+                                                            services
+                                                                .createPlan(
+                                                                    auth.userId,
+                                                                    auth.token
+                                                                )
+                                                                .then(
+                                                                    (
+                                                                        response
+                                                                    ) =>
+                                                                        onBoardingContext.handleInnerStep(
+                                                                            'end'
+                                                                        )
+                                                                )
+                                                        }}
+                                                    >
+                                                        Générer votre plan
+                                                    </ButtonSecondary>
+                                                </div>
+                                            ) : (
+                                                <ButtonPrimary
+                                                    className="ml-4"
+                                                    onClick={() => {
+                                                        console.log(
+                                                            'generate plan for objectifs'
                                                         )
-                                                }}
-                                            >
-                                                Générer votre plan
-                                            </ButtonPrimary>
+                                                        services
+                                                            .createPlan(
+                                                                auth.userId,
+                                                                auth.token
+                                                            )
+                                                            .then((response) =>
+                                                                onBoardingContext.handleInnerStep(
+                                                                    'end'
+                                                                )
+                                                            )
+                                                    }}
+                                                >
+                                                    Générer votre plan
+                                                </ButtonPrimary>
+                                            )}
                                         </div>
                                     )}
                                 </>
@@ -255,6 +294,9 @@ const Plan = ({ toast }) => {
                                                         middlewares.logout()
                                                     )
                                                 }
+                                                onBoardingContext.handleSetComplete(
+                                                    true
+                                                )
                                             })
                                     }}
                                 >
