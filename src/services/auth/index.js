@@ -1,4 +1,7 @@
 import { requestApi } from '../../api'
+import bcrypt from 'bcryptjs'
+
+const HASH = process.env.HASH
 
 /**
  * @description Authentication to API
@@ -6,10 +9,31 @@ import { requestApi } from '../../api'
  * @param {string} mot_de_passe
  * @returns {JSON}
  */
-export const authenticate = (email, mot_de_passe) => {
-    return requestApi('post', `auth/login`, null, {
+export const authenticate = async (email, mot_de_passe) => {
+    return requestApi('post', `auth`, null, {
         email: email,
-        mot_de_passe: mot_de_passe,
+    }).then(async (response) => {
+        console.log(response)
+        if (response.error) {
+            return { error: response.error }
+        }
+
+        if (response.utilisateur) {
+            const isValidPassword = await bcrypt.compare(
+                mot_de_passe,
+                response.utilisateur.mot_de_passe
+            )
+
+            if (isValidPassword) {
+                return requestApi('post', `auth/login`, null, {
+                    id: response.utilisateur._id,
+                })
+            } else {
+                return {
+                    error: 'Mot de passe invalide',
+                }
+            }
+        }
     })
 }
 
@@ -20,19 +44,15 @@ export const authenticate = (email, mot_de_passe) => {
  * @param {string} type
  * @returns {JSON}
  */
-export const register = (
-    email,
-    firstName,
-    lastName,
-    password,
-    passwordConfirm
-) => {
+export const register = async (email, firstName, lastName, password) => {
+    const salt = await bcrypt.genSalt(HASH)
+    const passwordHashed = await bcrypt.hash(password, salt)
+
     return requestApi('post', `auth/signup`, null, {
         email: email,
         nom: lastName,
         prenom: firstName,
-        mot_de_passe: password,
-        mot_de_passe2: passwordConfirm,
+        mot_de_passe: passwordHashed,
     })
 }
 

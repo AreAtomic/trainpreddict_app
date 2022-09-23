@@ -16,6 +16,7 @@ import {
     SeancesRouter,
     Objectif,
     Courbes,
+    ConfirmAccount,
 } from './pages'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -91,6 +92,10 @@ const App = () => {
                     <Route
                         path="/auth"
                         element={<Auth toast={toast} />}
+                    ></Route>
+                    <Route
+                        path="/verification/:userId"
+                        element={<ConfirmAccount toast={toast} />}
                     ></Route>
                     <Route path="/show" element={<Show />}></Route>
                     <Route path="/*" element={<Auth toast={toast} />}></Route>

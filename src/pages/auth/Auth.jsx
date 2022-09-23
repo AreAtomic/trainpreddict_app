@@ -54,21 +54,48 @@ const Auth = ({ toast }) => {
         })
     }
     const inscription = () => {
-        services
-            .register(email, firstName, lastName, password, passwordConfirm)
-            .then((response) => {
-                if (response.message) {
-                    toast.success(response.message, { autoClose: false })
-                }
-                if (response.error) {
-                    toast.warning(response.error)
-                }
-            })
+        const validForm = () => {
+            if (password.length < 10) {
+                toast.warning(
+                    'Le mot de passe doit être de 10 caractères minimum'
+                )
+                return false
+            }
+            if (password !== passwordConfirm) {
+                toast.warning('Les mot de passe ne sont pas identiques')
+                return false
+            }
+            if (!email) {
+                toast.warning("L'email est requis")
+                return false
+            }
+            if (!lastName) {
+                toast.warning('Le nom est requis')
+                return false
+            }
+            if (!firstName) {
+                toast.warning('Le prénom est requis')
+                return false
+            }
+            return true
+        }
+        if (validForm()) {
+            services
+                .register(email, firstName, lastName, password, passwordConfirm)
+                .then((response) => {
+                    if (response.message) {
+                        toast.success(response.message, { autoClose: false })
+                    }
+                    if (response.error) {
+                        toast.warning(response.error)
+                    }
+                })
+        }
     }
     //#endregion
 
     return (
-        <div className="text-center justify-center flex flex-col mb-20">
+        <div className="text-center justify-center flex flex-col mt-10 mb-20">
             <img
                 src={logo}
                 alt="TrainPreddict Logo"
@@ -127,6 +154,7 @@ const Auth = ({ toast }) => {
                             helper="Rentrez un mot de passe de 10 caractère minimum"
                             minlength={10}
                         />
+                        <div className="mt-3"></div>
                         <Input
                             placeholder="Mot de passe de 10 caractère minimum"
                             label="Confirmation du mot de passe"
@@ -138,6 +166,7 @@ const Auth = ({ toast }) => {
                             helper="Rentrez un mot de passe de 10 caractère minimum"
                             minlength={10}
                         />
+                        <div className="mt-3"></div>
                         <Input
                             placeholder="Julian"
                             label="Prénom"
@@ -149,6 +178,7 @@ const Auth = ({ toast }) => {
                             helper="Rentrez votre prénom"
                             required
                         />
+                        <div className="mt-3"></div>
                         <Input
                             placeholder="Alaphilippe"
                             label="Nom"
