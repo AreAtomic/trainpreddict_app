@@ -46,6 +46,19 @@ const ConfirmAccount = ({ toast }) => {
             }
         )
     }
+
+    const cancelAccount = () => {
+        requestApi('get', `auth/cancel/${utilisateur._id}`, null, null).then(
+            (response) => {
+                if (response.message) {
+                    toast.success(response.message)
+                    setTimeout(() => {
+                        navigate('/auth')
+                    }, 5000)
+                }
+            }
+        )
+    }
     return (
         <div className="text-center justify-center flex flex-col mt-10 mb-20 p-4">
             <img
@@ -90,7 +103,7 @@ const ConfirmAccount = ({ toast }) => {
                     <div
                         className="mx-auto"
                         onClick={() => {
-                            console.log('cancel registration')
+                            cancelAccount()
                         }}
                     >
                         Annuler
