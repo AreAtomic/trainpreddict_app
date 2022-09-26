@@ -208,18 +208,23 @@ const Plan = ({ toast }) => {
                                             setViewSeanceItem(value)
                                         }
                                     />
-                                    {auth.structure && (
+                                    {!auth.structure && (
                                         <div className="my-8">
-                                            <HeadingFour>
-                                                Soyez prudent
-                                            </HeadingFour>
-                                            <p className="mb-3">
-                                                Cette action va recalculer votre
-                                                plan pour vos futur objectif
-                                                mais elle risque de supprimer
-                                                toute votre plannification
-                                                actuelle.
-                                            </p>
+                                            {auth.structure && (
+                                                <>
+                                                    <HeadingFour>
+                                                        Soyez prudent
+                                                    </HeadingFour>
+                                                    <p className="mb-3">
+                                                        Cette action va
+                                                        recalculer votre plan
+                                                        pour vos futur objectif
+                                                        mais elle risque de
+                                                        supprimer toute votre
+                                                        plannification actuelle.
+                                                    </p>
+                                                </>
+                                            )}
                                             {!onBoardingContext.complete ? (
                                                 <div className="grid grid-cols-2 max-w-md">
                                                     <ButtonPrimary
@@ -229,7 +234,7 @@ const Plan = ({ toast }) => {
                                                             )
                                                         }}
                                                     >
-                                                        Etape suivate
+                                                        Terminer le tutoriel
                                                     </ButtonPrimary>
                                                     <ButtonSecondary
                                                         className="ml-2"
@@ -267,10 +272,15 @@ const Plan = ({ toast }) => {
                                                                 auth.userId,
                                                                 auth.token
                                                             )
-                                                            .then((response) =>
-                                                                onBoardingContext.handleInnerStep(
-                                                                    'end'
-                                                                )
+                                                            .then(
+                                                                (response) => {
+                                                                    console.log(
+                                                                        response
+                                                                    )
+                                                                    onBoardingContext.handleInnerStep(
+                                                                        'end'
+                                                                    )
+                                                                }
                                                             )
                                                     }}
                                                 >

@@ -183,10 +183,13 @@ const ObjectifForm = (props) => {
                                 auth.token
                             )
                             .then((response) => {
+                                console.log(response)
                                 if (response.status === 401) {
                                     dispatch(middlewares.logout())
                                 }
-                                props.toast.success(response.message)
+                                if (!onBoardingContext.complete) {
+                                    onBoardingContext.handleSetStep(3)
+                                }
                                 services
                                     .getAllObjectifs(auth.userId, auth.token)
                                     .then((response) => {
@@ -196,6 +199,7 @@ const ObjectifForm = (props) => {
                                             )
                                         )
                                     })
+                                props.toast.success(response.message)
                             })
                     }}
                 >

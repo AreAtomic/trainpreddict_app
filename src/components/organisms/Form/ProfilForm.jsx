@@ -426,9 +426,22 @@ const ProfilForm = (props) => {
                                     if (response.status === 401) {
                                         dispatch(middlewares.logout())
                                     }
-                                    if(!onBoardingContext.complete){
-                                        onBoardingContext.handleSetStep(2)
-                                        navigate("/objectif")
+                                    if (!onBoardingContext.complete) {
+                                        services
+                                            .createCalendrier(
+                                                auth.userId,
+                                                auth.token
+                                            )
+                                            .then((res) => {
+                                                if (res.status === 401) {
+                                                    dispatch(
+                                                        middlewares.logout()
+                                                    )
+                                                }
+                                                onBoardingContext.handleSetStep(
+                                                    2
+                                                )
+                                            })
                                     }
                                     middlewares
                                         .setUserProfil(response.data)
