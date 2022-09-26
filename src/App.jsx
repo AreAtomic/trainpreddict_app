@@ -17,6 +17,7 @@ import {
     Objectif,
     Courbes,
     ConfirmAccount,
+    PasswordLost,
 } from './pages'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -97,6 +98,10 @@ const App = () => {
                         path="/verification/:userId"
                         element={<ConfirmAccount toast={toast} />}
                     ></Route>
+                    <Route
+                        path="/password-lost"
+                        element={<PasswordLost toast={toast} />}
+                    />
                     <Route path="/show" element={<Show />}></Route>
                     <Route path="/*" element={<Auth toast={toast} />}></Route>
                 </Routes>

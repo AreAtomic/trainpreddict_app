@@ -127,20 +127,28 @@ const Auth = ({ toast }) => {
                 />
                 <div className="mt-3"></div>
                 {!isregister ? (
-                    <Input
-                        placeholder="Mot de passe de 10 caractère minimum"
-                        label="Mot de passe"
-                        value={password}
-                        onChange={(e) => {
-                            setPassword(e.target.value)
-                        }}
-                        type="password"
-                        helper="Rentrez un mot de passe de 10 caractère minimum"
-                        minlength={10}
-                        onKeyPress={(e) => {
-                            if (e.charCode === 13) connect()
-                        }}
-                    />
+                    <div className="grid">
+                        <Input
+                            placeholder="Mot de passe de 10 caractère minimum"
+                            label="Mot de passe"
+                            value={password}
+                            onChange={(e) => {
+                                setPassword(e.target.value)
+                            }}
+                            type="password"
+                            helper="Rentrez un mot de passe de 10 caractère minimum"
+                            minlength={10}
+                            onKeyPress={(e) => {
+                                if (e.charCode === 13) connect()
+                            }}
+                        />
+                        <div
+                            className="cursor-pointer"
+                            onClick={() => navigate('/password-lost')}
+                        >
+                            Mot de passe oublié ?
+                        </div>
+                    </div>
                 ) : (
                     <>
                         <Input
@@ -193,29 +201,31 @@ const Auth = ({ toast }) => {
                         <div className="mt-3"></div>
                     </>
                 )}
-                <div className="grid grid-cols-2 gap-10 items-center mt-8">
+                <div className="grid gap-1 items-center mt-8">
                     {!isregister ? (
                         <ButtonPrimary
                             onClick={() => {
                                 connect()
                             }}
+                            className="mx-auto"
                         >
                             Connexion
                         </ButtonPrimary>
                     ) : (
-                        <ButtonSecondary
+                        <ButtonPrimary
                             onClick={() => {
                                 inscription()
                             }}
+                            className="mx-auto"
                         >
                             Inscription
-                        </ButtonSecondary>
+                        </ButtonPrimary>
                     )}
                     <div
-                        className="text-high-contrast-500 underline"
+                        className="text-low-contrast-500 mx-auto cursor-pointer"
                         onClick={() => setRegister(!isregister)}
                     >
-                        {!isregister ? 'Inscription' : 'Connexion'}
+                        {!isregister ? "S'inscrire" : 'Se connecter'}
                     </div>
                 </div>
             </div>

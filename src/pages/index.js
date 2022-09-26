@@ -1,6 +1,6 @@
 import Dashboard from './dashboard'
 import { Parametres } from './parametres'
-import { Auth, ConfirmAccount } from './auth'
+import { Auth, ConfirmAccount, PasswordLost } from './auth'
 import { Show } from './show'
 import { Home } from './home'
 import { Televersement } from './televersement'
@@ -22,4 +22,5 @@ export {
     Objectif,
     Courbes,
     ConfirmAccount,
+    PasswordLost,
 }
