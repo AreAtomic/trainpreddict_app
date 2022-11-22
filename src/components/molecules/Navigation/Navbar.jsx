@@ -5,6 +5,7 @@ import logo from '../../../assets/logo.svg'
 import { ButtonSecondarySmall } from '../../atoms'
 
 import * as middlewares from '../../../middlewares'
+const ARTICLES_URL = process.env.REACT_APP_ARTICLES_URL
 
 const Navbar = (props) => {
     const dispatch = useDispatch()
@@ -23,7 +24,10 @@ const Navbar = (props) => {
                 <a href="/plan" className={`text-low-contrast-500 my-2 mx-6`}>
                     Plan
                 </a>
-                <a href="/objectif" className={`text-low-contrast-500 my-2 mx-6`}>
+                <a
+                    href="/objectif"
+                    className={`text-low-contrast-500 my-2 mx-6`}
+                >
                     Objectif
                 </a>
                 <a href="/upload" className={`text-low-contrast-500 my-2 mx-6`}>
@@ -50,6 +54,7 @@ const Navbar = (props) => {
                 <a href="/home" className={`text-low-contrast-500 my-2 mx-6`}>
                     A propos
                 </a>
+                <a href={ARTICLES_URL}>Actualités</a>
             </div>
             <ButtonSecondarySmall
                 className="xs:hidden sm:hidden md:hidden lg:flex xl:flex 2xl:flex w-fit"

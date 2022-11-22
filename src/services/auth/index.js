@@ -13,7 +13,6 @@ export const authenticate = async (email, mot_de_passe) => {
     return requestApi('post', `auth`, null, {
         email: email,
     }).then(async (response) => {
-        console.log(response)
         if (response.error) {
             return { error: response.error }
         }
