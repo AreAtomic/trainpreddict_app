@@ -56,7 +56,17 @@ const Navbar = (props) => {
                 <a href="/home" className={`text-low-contrast-500 my-2 mx-6`}>
                     A propos
                 </a>
-                <a href={(auth.userId === "6001ad64dbafc4e85acdecd5" || auth.userId === "5fb64aeb462e0df71872c3e1") ? `${ARTICLES_URL}/auth/${auth.token}` : ARTICLES_URL}>Actualités</a>
+                <a
+                    href={
+                        auth.userId === '6001ad64dbafc4e85acdecd5' ||
+                        auth.userId === '5fb64aeb462e0df71872c3e1'
+                            ? `${ARTICLES_URL}/auth/${auth.token}`
+                            : ARTICLES_URL
+                    }
+                    className={`text-low-contrast-500 my-2 mx-6`}
+                >
+                    Actualités
+                </a>
             </div>
             <ButtonSecondarySmall
                 className="xs:hidden sm:hidden md:hidden lg:flex xl:flex 2xl:flex w-fit"

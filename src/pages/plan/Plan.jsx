@@ -208,34 +208,20 @@ const Plan = ({ toast }) => {
                                             setViewSeanceItem(value)
                                         }
                                     />
-                                    {!auth.structure && (
-                                        <div className="my-8">
-                                            {auth.structure && (
-                                                <>
-                                                    <HeadingFour>
-                                                        Soyez prudent
-                                                    </HeadingFour>
-                                                    <p className="mb-3">
-                                                        Cette action va
-                                                        recalculer votre plan
-                                                        pour vos futur objectif
-                                                        mais elle risque de
-                                                        supprimer toute votre
-                                                        plannification actuelle.
-                                                    </p>
-                                                </>
-                                            )}
-                                            {!onBoardingContext.complete ? (
-                                                <div className="grid grid-cols-2 max-w-md">
-                                                    <ButtonPrimary
-                                                        onClick={() => {
-                                                            onBoardingContext.handleInnerStep(
-                                                                'end'
-                                                            )
-                                                        }}
-                                                    >
-                                                        Terminer le tutoriel
-                                                    </ButtonPrimary>
+
+                                    <div className="my-8">
+                                        {!onBoardingContext.complete ? (
+                                            <div className="grid grid-cols-2 max-w-md">
+                                                <ButtonPrimary
+                                                    onClick={() => {
+                                                        onBoardingContext.handleInnerStep(
+                                                            'end'
+                                                        )
+                                                    }}
+                                                >
+                                                    Terminer le tutoriel
+                                                </ButtonPrimary>
+                                                {!auth.structure && (
                                                     <ButtonSecondary
                                                         className="ml-2"
                                                         onClick={() => {
@@ -259,8 +245,10 @@ const Plan = ({ toast }) => {
                                                     >
                                                         Générer votre plan
                                                     </ButtonSecondary>
-                                                </div>
-                                            ) : (
+                                                )}
+                                            </div>
+                                        ) : (
+                                            !auth.structure && (
                                                 <ButtonPrimary
                                                     className="ml-4"
                                                     onClick={() => {
@@ -286,9 +274,9 @@ const Plan = ({ toast }) => {
                                                 >
                                                     Générer votre plan
                                                 </ButtonPrimary>
-                                            )}
-                                        </div>
-                                    )}
+                                            )
+                                        )}
+                                    </div>
                                 </>
                             ) : (
                                 <ButtonPrimarySmall

@@ -6,9 +6,13 @@ import logo from '../../../assets/logo.svg'
 import menuIcon from '../../../assets/ico-hamburger menu.png'
 
 import * as middlewares from '../../../middlewares'
+import { useSelector } from 'react-redux'
+
+const ARTICLES_URL = process.env.REACT_APP_ARTICLES_URL
 
 //TODO: Remplacer les liens avec les liens d'action rapide
 const Navbar = () => {
+    const auth = useSelector((state) => state.auth)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [menu, setMenu] = useState(false)
@@ -25,7 +29,7 @@ const Navbar = () => {
                         width={30}
                     />
                 </a>
-                <p className='capitalize'>{location}</p>
+                <p className="capitalize">{location}</p>
                 <img
                     src={menuIcon}
                     alt="Menu"
@@ -62,6 +66,17 @@ const Navbar = () => {
                         className={`text-low-contrast-500 my-2 mx-6`}
                     >
                         A propos
+                    </a>
+                    <a
+                        href={
+                            auth.userId === '6001ad64dbafc4e85acdecd5' ||
+                            auth.userId === '5fb64aeb462e0df71872c3e1'
+                                ? `${ARTICLES_URL}/auth/${auth.token}`
+                                : ARTICLES_URL
+                        }
+                        className="w-fit grid my-2 mx-6 text-medium-contrast-500"
+                    >
+                        Actualités
                     </a>
                     <a
                         className="w-fit grid my-2 mx-6 text-medium-contrast-500"
