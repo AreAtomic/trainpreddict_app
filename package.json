@@ -6,6 +6,7 @@
   "dependencies": {
     "@dnd-kit/core": "^5.0.1",
     "@dnd-kit/modifiers": "^5.0.0",
+    "@material-tailwind/react": "^1.2.4",
     "@popperjs/core": "^2.11.2",
     "@reduxjs/toolkit": "^1.7.2",
     "@testing-library/jest-dom": "^5.16.1",

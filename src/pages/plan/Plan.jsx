@@ -66,7 +66,7 @@ const Plan = ({ toast }) => {
             dispatch(middlewares.setSeances(response.data))
         })
         services
-            .getCalendrierYear(auth.userId, dayjs().year(), auth.token)
+            .getCalendrierYear(auth.userId, dayjs(calendar.dayOne).year(), auth.token)
             .then((response) => {
                 if (response.status === 401) {
                     dispatch(middlewares.logout())
@@ -177,6 +177,7 @@ const Plan = ({ toast }) => {
                                         )
                                     )
                                 }}
+                                maxWidth='max-w-screen'
                             />
                         </div>
                     </div>

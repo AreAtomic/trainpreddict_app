@@ -212,6 +212,7 @@ export const setObjectifs = (data) => (dispatch) => {
  * @returns
  */
 export const setUserProfil = (data) => (dispatch) => {
+    console.log(data)
     dispatch(
         Actions.setCaracteristics({
             pfs: data.pfs,

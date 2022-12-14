@@ -1,10 +1,10 @@
-import { HeadingOne } from '../../components/atoms'
+import { HeadingTwo } from '../../components/atoms'
 import { CourseForm } from '../../components/organisms'
 
 const CreateCourse = (props) => {
     return (
-        <div className="grid">
-            <HeadingOne>Création d'une course</HeadingOne>
+        <div>
+            <HeadingTwo className="ml-5 mb-4">Création d'une course</HeadingTwo>
             <CourseForm toast={props.toast} />
         </div>
     )

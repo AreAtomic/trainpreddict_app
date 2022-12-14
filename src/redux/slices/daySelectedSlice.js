@@ -8,7 +8,7 @@ const daySelectedSlice = createSlice({
         planned: [],
         done: [],
         comment: [],
-        newComment: {},
+        newComment: "",
     },
     reducers: {
         setDate: (state, action) => {
@@ -34,7 +34,7 @@ const daySelectedSlice = createSlice({
                 planned: [],
                 done: [],
                 comment: [],
-                newComment: {},
+                newComment: "",
             }
         },
     },

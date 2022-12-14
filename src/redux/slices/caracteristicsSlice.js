@@ -24,6 +24,7 @@ const caracteristicsSlice = createSlice({
     },
     reducers: {
         set: (state, action) => {
+            console.log(action)
             return action.payload
         },
         reset: (state, action) => {

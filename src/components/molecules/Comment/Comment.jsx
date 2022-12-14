@@ -2,7 +2,7 @@ import { ButtonPrimarySmall, TextArea } from '../../atoms'
 
 const Comment = (props) => {
     return (
-        <div className="w-full rounded-lg border-2 border-low-contrast-500 mt-5 bg-component-one-500 px-3 py-3">
+        <div className="w-full rounded-lg border-2 border-low-contrast-500 mt-5 bg-component-one-500 px-3 py-3 max-w-[80vw]">
             <div className="grid h-10 overflow-auto text-low-contrast-500 scrollbar mb-2">
                 {props.comments?.length === 0 && (
                     <p className="text-component-two-900">Pas de commentaire</p>
@@ -26,12 +26,12 @@ const Comment = (props) => {
                     props.setValue(e.target.value)
                 }}
                 onBlur={props.onBlur}
-                width={485}
                 height={60}
                 type="text"
                 helper="Rentrez un email valide"
                 margin=""
                 className="w-94
+                max-w-screen
                 peer
                 invalid:ring
                 invalid:ring-high-contrast-500

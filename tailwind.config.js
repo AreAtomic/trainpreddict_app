@@ -804,6 +804,7 @@ module.exports = {
             fit: 'fit-content',
             prose: '65ch',
             card: '419px',
+            screen: '90vw',
             ...breakpoints(theme('screens')),
         }),
         minHeight: {
@@ -1089,7 +1090,7 @@ module.exports = {
             'circle-name': '80px',
             calendar: '164px',
             'calendar-small': '110px',
-            'calendar-mobile': '50px',
+            'calendar-mobile': '12.85vw',
             'show-xs': '46px',
             'card-week': '320px',
         }),

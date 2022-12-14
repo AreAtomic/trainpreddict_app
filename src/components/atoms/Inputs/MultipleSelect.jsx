@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { onlyUnique } from '../../../utils'
 import close from '../../../assets/ico-close.svg'
 import dropdown from '../../../assets/dropdown.svg'
+import { Tooltip } from '@material-tailwind/react'
+import help from '../../../assets/help.svg'
 
 const Select = (props) => {
     const [open, setOpen] = useState(false)
@@ -23,12 +25,26 @@ const Select = (props) => {
 
     return (
         <div className={`grid ${props.margin && props.margin}`}>
-            <label className="font-['Nunito'] font-regular text-base text-medium-contrast-500">
+            <label className="font-['Nunito'] font-regular text-base text-medium-contrast-500 flex">
                 {props.label}
+                {props.tooltip && (
+                    <Tooltip
+                        className="flex bg-primary-blue-500 text-low-contrast-500"
+                        content={props.tooltip}
+                    >
+                        <img
+                            src={help}
+                            alt="Aide pour cycliste débutant"
+                            className="ml-4"
+                            width="17px"
+                        />
+                    </Tooltip>
+                )}
             </label>
             <div
-                className="w-96
-                max-w-xs
+                className={`w-96
+                sm:max-w-xs
+                ${props.maxWidth ? props.maxWidth : 'max-w-xs'}
                 peer
                 invalid:ring
                 invalid:ring-high-contrast-500
@@ -52,7 +68,7 @@ const Select = (props) => {
                 font-['Nunito']
                 font-bold
                 text-md
-                "
+                `}
                 onClick={() => setOpen(!open)}
             >
                 <div className="w-80 py-1 overflow-x-hidden flex flex-row hover:overflow-x-auto">

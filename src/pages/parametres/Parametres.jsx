@@ -76,7 +76,7 @@ const Parametres = ({ toast }) => {
                         />
                         <HeadingSix className="ml-4">Retour</HeadingSix>
                     </div>
-                    <div className="w-fit bg-component-two-500 rounded-sm w-fit">
+                    <div className="w-fit bg-component-two-500 rounded-sm max-w-screen">
                         <div className="flex flex-col">
                             <Input
                                 label="Nom"
@@ -86,6 +86,7 @@ const Parametres = ({ toast }) => {
                                 helper="Rentrez un nom valide"
                                 margin="m-4"
                                 disabled={true}
+                                maxWidth="max-w-[80vw]"
                             />
                             <Input
                                 label="Prénom"
@@ -95,6 +96,7 @@ const Parametres = ({ toast }) => {
                                 helper="Rentrez un prénom valide"
                                 margin="m-4"
                                 disabled={true}
+                                maxWidth="max-w-[80vw]"
                             />
                         </div>
                         <div className="flex flex-col">
@@ -110,6 +112,7 @@ const Parametres = ({ toast }) => {
                                     type="mail"
                                     helper="Rentrez un email valide"
                                     margin="m-4"
+                                    maxWidth="max-w-[80vw]"
                                 />
                             </div>
                             {disabled ? (
@@ -127,6 +130,7 @@ const Parametres = ({ toast }) => {
                                         type="password"
                                         helper="Rentrez un email valide"
                                         margin="m-4"
+                                        maxWidth="max-w-[80vw]"
                                     />
                                     <Input
                                         label="Nouveau mot de passe"
@@ -139,6 +143,7 @@ const Parametres = ({ toast }) => {
                                         type="password"
                                         helper="Rentrez un email valide"
                                         margin="m-4"
+                                        maxWidth="max-w-[80vw]"
                                     />
                                     <Input
                                         label="Confirmation du nouveau mot de passe"
@@ -151,6 +156,7 @@ const Parametres = ({ toast }) => {
                                         type="password"
                                         helper="Rentrez un email valide"
                                         margin="m-4"
+                                        maxWidth="max-w-[80vw]"
                                     />
                                 </div>
                             )}
@@ -216,7 +222,7 @@ const Parametres = ({ toast }) => {
                         />
                         <HeadingSix className="ml-4">Retour</HeadingSix>
                     </div>
-                    <ProfilForm />
+                    <ProfilForm toast={toast} />
                 </div>
             )}
         </div>

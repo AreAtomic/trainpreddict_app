@@ -39,10 +39,10 @@ const ProfilForm = (props) => {
     )
     const [sse, setSse] = useState(caracteristics?.sse ? caracteristics.sse : 0)
     const [tempsEntrainement, setTempsEntrainement] = useState(
-        caracteristics?.temps ? caracteristics.fcfs : 0
+        caracteristics?.tempsEntrainement ? caracteristics.tempsEntrainement : 0
     )
     const [nombreEntrainement, setNombreEntrainement] = useState(
-        caracteristics?.fcfs ? caracteristics.fcfs : 0
+        caracteristics?.nombreEntrainement ? caracteristics.nombreEntrainement : 0
     )
     const [musculation, setMusculation] = useState(
         caracteristics?.musculation
@@ -89,13 +89,13 @@ const ProfilForm = (props) => {
         setSommeil(caracteristics.sommeil ? caracteristics.sommeil : sommeil)
         setSse(caracteristics.sse ? caracteristics.sse : sse)
         setTempsEntrainement(
-            caracteristics.nombresEntrainementSemaine
-                ? caracteristics.nombresEntrainementSemaine
+            caracteristics.tempEntrainementSemaine
+                ? caracteristics.tempEntrainementSemaine
                 : nombreEntrainement
         )
         setNombreEntrainement(
-            caracteristics.tempEntrainementSemaine
-                ? caracteristics.tempEntrainementSemaine
+            caracteristics.nombresEntrainementSemaine
+                ? caracteristics.nombresEntrainementSemaine
                 : tempsEntrainement
         )
         setMusculation(
@@ -141,7 +141,7 @@ const ProfilForm = (props) => {
     return (
         caracteristics && (
             <div>
-                <div className="flex flex-col h-fit my-5 lg:flex-row">
+                <div className="grid xl:grid-cols-3 md:grid-cols-2 h-fit justify-center">
                     <InputUnit
                         label="Puissance fonctionnelles au Seuil (FTP)"
                         placeholder="100"
@@ -153,11 +153,12 @@ const ProfilForm = (props) => {
                         min={1}
                         helper="Rentrez une puissance supérieur à 10"
                         unit="W"
-                        margin="mx-4"
+                        margin="mx-4 my-2"
                         required
+                        maxWidth="max-w-screen"
                     />
                     <InputUnit
-                        label="Fréquence Cardiaque"
+                        label="Fréquence Cardiaque Fonctionnelle au Seuil"
                         placeholder="100"
                         value={fcfs}
                         onChange={(e) => {
@@ -168,7 +169,8 @@ const ProfilForm = (props) => {
                         helper="Rentrez une fréquence cardiaque inférieur à 220"
                         unit="BPM"
                         max={220}
-                        margin="mx-4"
+                        margin="mx-4 my-2"
+                        maxWidth="max-w-screen"
                         required
                     />
                     <InputUnit
@@ -182,11 +184,10 @@ const ProfilForm = (props) => {
                         min={1}
                         helper="Rentrez un poids valide."
                         unit="kg"
-                        margin="mx-4"
+                        margin="mx-4 my-2"
+                        maxWidth="max-w-screen"
                         required
                     />
-                </div>{' '}
-                <div className="flex h-fit my-5 flex-col lg:flex-row">
                     <InputUnit
                         label="Expérience"
                         placeholder="100"
@@ -198,7 +199,8 @@ const ProfilForm = (props) => {
                         min={0}
                         helper="Rentrez une expérience valide"
                         unit="ans"
-                        margin="mx-4"
+                        margin="mx-4 my-2"
+                        maxWidth="max-w-screen"
                         required
                     />
                     <InputUnit
@@ -212,7 +214,8 @@ const ProfilForm = (props) => {
                         min={1}
                         helper="Rentrez un temps de sommeil valide"
                         unit="H"
-                        margin="mx-4"
+                        margin="mx-4 my-2"
+                        maxWidth="max-w-screen"
                         required
                         max={12}
                     />
@@ -226,15 +229,14 @@ const ProfilForm = (props) => {
                         type="number"
                         helper="Rentrez un age valide"
                         unit="ans"
-                        margin="mx-4"
+                        margin="mx-4 my-2"
                         min={14}
+                        maxWidth="max-w-screen"
                         required
                     />
-                </div>{' '}
-                <div className="flex h-fit my-5 flex-col lg:flex-row">
                     <InputUnit
-                        label="Temps Entrainements Semaine"
-                        placeholder="100"
+                        label="Temps d'entrainements max semaine"
+                        placeholder="20"
                         value={tempsEntrainement}
                         onChange={(e) => {
                             setTempsEntrainement(e.target.value)
@@ -243,12 +245,13 @@ const ProfilForm = (props) => {
                         min={1}
                         helper="Rentrez un temps d'entrainement valide"
                         unit="H"
-                        margin="mx-4"
+                        margin="mx-4 my-2"
+                        maxWidth="max-w-screen"
                         required
                     />
                     <InputUnit
-                        label="Nombres d'entraînements semaine"
-                        placeholder="100"
+                        label="Nombres d'entraînements max semaine"
+                        placeholder="7"
                         value={nombreEntrainement}
                         onChange={(e) => {
                             setNombreEntrainement(e.target.value)
@@ -257,7 +260,8 @@ const ProfilForm = (props) => {
                         min={1}
                         helper="Rentrez un nombres d'entrainements valide"
                         unit="m"
-                        margin="mx-4"
+                        margin="mx-4 my-2"
+                        maxWidth="max-w-screen"
                         required
                     />
                     <InputUnit
@@ -271,11 +275,11 @@ const ProfilForm = (props) => {
                         min={1}
                         helper="Rentrez un Score de Stress valide"
                         unit=""
-                        margin="mx-4"
+                        margin="mx-4 my-2"
+                        maxWidth="max-w-screen"
+                        tooltip="Le stress accumulé durant la semaine, plus il est élevé plus la fatigue sera grande mais avec le bon temps de repos la forme sera également plus élevée. "
                         required
                     />
-                </div>{' '}
-                <div className="flex h-fit my-5 flex-col lg:flex-row">
                     <Select
                         label="Musculation"
                         placeholder="Sélectionner une valeur"
@@ -285,7 +289,8 @@ const ProfilForm = (props) => {
                         }}
                         helper="Sélectionner une valeur"
                         options={['Oui', 'Non']}
-                        margin="mx-4"
+                        margin="mx-4 my-2"
+                        maxWidth="max-w-screen"
                         required
                     />
                     <Select
@@ -297,7 +302,8 @@ const ProfilForm = (props) => {
                         }}
                         helper="Sélectionner une valeur"
                         options={['Oui', 'Non']}
-                        margin="mx-4"
+                        maxWidth="max-w-screen"
+                        margin="mx-4 my-2"
                     />
                     <Select
                         label="Etirements"
@@ -308,10 +314,9 @@ const ProfilForm = (props) => {
                         }}
                         helper="Sélectionneé une valeur"
                         options={['Oui', 'Non']}
-                        margin="mx-4"
+                        maxWidth="max-w-screen"
+                        margin="mx-4 my-2"
                     />
-                </div>{' '}
-                <div className="flex h-fit my-5 flex-col lg:flex-row">
                     <Select
                         label="Style"
                         placeholder="Sélectionner une valeur"
@@ -328,7 +333,8 @@ const ProfilForm = (props) => {
                             'Rouleur',
                             'Complet',
                         ]}
-                        margin="mx-4"
+                        maxWidth="max-w-screen"
+                        margin="mx-4 my-2"
                     />
                     <Select
                         label="Point faible"
@@ -346,7 +352,8 @@ const ProfilForm = (props) => {
                             'Plat',
                             'Trop fort',
                         ]}
-                        margin="mx-6"
+                        maxWidth="max-w-screen"
+                        margin="mx-4 my-2"
                     />
                     <Select
                         label="Exercices durant l'hiver"
@@ -355,6 +362,7 @@ const ProfilForm = (props) => {
                         onChange={(e) => {
                             setExerciceFoncier(e.target.value)
                         }}
+                        maxWidth="max-w-screen"
                         helper="Sélectionneé une valeur"
                         options={[
                             'Force',
@@ -362,9 +370,8 @@ const ProfilForm = (props) => {
                             'Pignon fixe',
                             'Peu importe',
                         ]}
+                        margin="mx-4"
                     />
-                </div>
-                <div className="flex h-fit my-5 flex-col lg:flex-row">
                     <MultipleSelect
                         label="Jour de repos"
                         placeholder="Sélectionner une valeur"
@@ -380,7 +387,8 @@ const ProfilForm = (props) => {
                             'Samedi',
                             'Dimanche',
                         ]}
-                        margin="mx-4"
+                        maxWidth="max-w-screen"
+                        margin="mx-4 my-2"
                     />
                     <InputUnit
                         label="Temps récupération optimal"
@@ -393,7 +401,8 @@ const ProfilForm = (props) => {
                         min={1}
                         helper="Rentrez un dénivelé valide"
                         unit="H"
-                        margin="mx-5 mb-7"
+                        maxWidth="max-w-screen"
+                        margin="mx-4 my-2"
                     />
                 </div>
                 <div className="m-4">
@@ -423,6 +432,7 @@ const ProfilForm = (props) => {
                                     age
                                 )
                                 .then((response) => {
+                                    console.log(response)
                                     if (response.status === 401) {
                                         dispatch(middlewares.logout())
                                     }
@@ -443,13 +453,11 @@ const ProfilForm = (props) => {
                                                 )
                                             })
                                     }
-                                    middlewares
-                                        .setUserProfil(response.data)
-                                        .then(
-                                            props.toast.success(
-                                                'Profil enregistré'
-                                            )
-                                        )
+                                    dispatch(
+                                        middlewares.setUserProfil(response.data)
+                                    ).then(
+                                        props.toast.success('Profil enregistré')
+                                    )
                                 })
                         }}
                     >

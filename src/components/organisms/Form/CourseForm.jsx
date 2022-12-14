@@ -23,29 +23,37 @@ const CourseForm = (props) => {
     const [titre, setTitre] = useState('')
     const [type, setType] = useState('')
     const [distance, setDistance] = useState(0)
-    const [duree, setDuree] = useState('00:00')
+    const [duree, setDuree] = useState('HH:MM')
     const [denivele, setDenivele] = useState(0)
     const [description, setDescription] = useState('')
     const [date, setDate] = useState(dayjs().format('YYYY-MM-DD'))
     const [sse, setSse] = useState(200)
     //#endregion
 
+    useEffect(() => {
+        const hours = duree.split(':')[0]
+        const minutes = duree.split(':')[1]
+
+        if (hours.length === 2 && minutes.length === 2)
+            setSse(parseInt((parseInt(hours) * 60 + parseInt(minutes)) * 1.66))
+    }, [duree])
+
     return (
-        <div className="bg-component-two-500 m-4 pt-1">
-            <div className="flex h-fit">
+        <div className="bg-component-two-500 p-1 mx-1 w-min-content">
+            <div className="grid xl:grid-cols-3 md:grid-cols-2 h-fit justify-center">
                 <Input
                     label="Titre objectif"
                     placeholder="Un objectif..."
                     defaultValue=""
                     type="text"
                     helper="Rentrez un email valide"
-                    margin="mx-4"
+                    margin="mx-4 my-1"
                     value={titre}
                     onChange={(e) => {
                         setTitre(e.target.value)
                     }}
+                    maxWidth="max-w-screen"
                 />
-
                 <Select
                     label="Type"
                     placeholder="Sélectionner une valeur"
@@ -64,6 +72,8 @@ const CourseForm = (props) => {
                         'Distance',
                         'Montagne',
                     ]}
+                    maxWidth="max-w-screen"
+                    margin="mx-4 my-1"
                 />
                 <InputUnit
                     label="Distance"
@@ -76,10 +86,11 @@ const CourseForm = (props) => {
                     min={1}
                     helper="Rentrez une distance valide"
                     unit="km"
-                    margin="mx-4"
+                    maxWidth="max-w-screen"
+                    margin="mx-4 my-1"
                 />
             </div>
-            <div className="flex h-fit my-5">
+            <div className="grid xl:grid-cols-3 md:grid-cols-2 h-fit my-5 justify-center">
                 <InputUnit
                     label="Dénivelé"
                     placeholder="100"
@@ -91,21 +102,23 @@ const CourseForm = (props) => {
                     min={1}
                     helper="Rentrez un dénivelé valide"
                     unit="m"
-                    margin="mx-4"
+                    maxWidth="max-w-screen"
+                    margin="mx-4 my-1"
                 />
                 <Input
-                    label="Temps estimé"
-                    placeholder="temps .."
+                    label="Temps estimé (hh:mm)"
+                    placeholder="HH:MM"
                     value={duree}
                     onChange={(e) => {
                         setDuree(e.target.value)
                     }}
                     type="time"
                     helper="Rentrez un email valide"
-                    margin="ml-1 mr-4"
+                    maxWidth="max-w-screen"
+                    margin="mx-4 my-1"
                 />
             </div>
-            <div className="mx-4">
+            <div className="mx-4 grid xs:justify-center sm:justify-center md:justify-start">
                 <Input
                     label="Date"
                     placeholder="DD/MM/YYYY"
@@ -115,18 +128,22 @@ const CourseForm = (props) => {
                     }}
                     type="date"
                     helper="Rentrez un email valide"
-                    margin="ml-1 mr-4 mb-4"
+                    maxWidth="max-w-screen"
+                    margin="my-1"
                 />
                 <Input
                     label="Score de stress estimé"
                     placeholder="200"
-                    value={duree}
+                    value={sse}
                     onChange={(e) => {
                         setSse(e.target.value)
                     }}
-                    type="time"
+                    type="number"
                     helper="Rentrez un email valide"
-                    margin="ml-1 mr-4"
+                    margin="my-1"
+                    maxWidth="max-w-screen"
+                    disabled={true}
+                    tooltip="La fatigue engendrée par la course sur le corps (Calculé automatiquement)"
                 />
                 <TextArea
                     label="Description"
@@ -135,49 +152,49 @@ const CourseForm = (props) => {
                     onChange={(e) => {
                         setDescription(e.target.value)
                     }}
-                    width={495}
                     height={151}
                     type="text"
                     helper="Rentrez un email valide"
-                    margin="4"
+                    maxWidth="max-w-screen"
+                    margin="my-1"
                 />
+                <ButtonPrimary
+                    className="m-4"
+                    onClick={() => {
+                        services
+                            .putCourses(
+                                {
+                                    type: type,
+                                    titre: titre,
+                                    description: description,
+                                    denivele: denivele,
+                                    distance: distance,
+                                    duree: duree,
+                                    sse: sse,
+                                    date: date,
+                                },
+                                {
+                                    time: `${duree}:00`,
+                                    distance: distance,
+                                    sse: sse,
+                                    denivele: denivele,
+                                    nombreSeance: 1,
+                                },
+                                ['idquivachanger'],
+                                true,
+                                auth.token
+                            )
+                            .then((response) => {
+                                if (response.status === 401) {
+                                    dispatch(middlewares.logout())
+                                }
+                                props.toast.success(response.message)
+                            })
+                    }}
+                >
+                    Ajouter l'objectif
+                </ButtonPrimary>
             </div>
-            <ButtonPrimary
-                className="m-4"
-                onClick={() => {
-                    services
-                        .putCourses(
-                            {
-                                type: type,
-                                titre: titre,
-                                description: description,
-                                denivele: denivele,
-                                distance: distance,
-                                duree: duree,
-                                sse: sse,
-                                date: date,
-                            },
-                            {
-                                time: `${duree}:00`,
-                                distance: distance,
-                                sse: sse,
-                                denivele: denivele,
-                                nombreSeance: 1,
-                            },
-                            ['idquivachanger'],
-                            true,
-                            auth.token
-                        )
-                        .then((response) => {
-                            if (response.status === 401) {
-                                dispatch(middlewares.logout())
-                            }
-                            props.toast.success(response.message)
-                        })
-                }}
-            >
-                Ajouter l'objectif
-            </ButtonPrimary>
         </div>
     )
 }
