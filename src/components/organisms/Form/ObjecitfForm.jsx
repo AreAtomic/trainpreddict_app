@@ -44,20 +44,21 @@ const ObjectifForm = (props) => {
     }, [newObjectif])
 
     return (
-        <div className="bg-component-two-500 pt-1 w-11/12 mx-2">
+        <div className="bg-component-two-500 pt-1 w-fit mx-2 px-4">
             <HeadingFour className="m-4">Ajouter un objectif</HeadingFour>
-            <div className="flex h-fit flex-col lg:flex-row">
+            <div className="grid xl:grid-cols-3 lg:grid-cols-2 h-fit justify-center">
                 <Input
                     label="Titre objectif"
                     placeholder="Un objectif..."
                     defaultValue=""
                     type="text"
                     helper="Rentrez un email valide"
-                    margin="mx-4"
+                    margin="mx-4 my-2"
                     value={titre}
                     onChange={(e) => {
                         setTitre(e.target.value)
                     }}
+                    maxWidth="max-w-screen"
                 />
 
                 <Select
@@ -78,6 +79,7 @@ const ObjectifForm = (props) => {
                         'Distance',
                         'Montagne',
                     ]}
+                    maxWidth="max-w-screen"
                     margin="mx-4 my-2"
                 />
                 <InputUnit
@@ -91,10 +93,9 @@ const ObjectifForm = (props) => {
                     min={1}
                     helper="Rentrez une distance valide"
                     unit="km"
-                    margin="mx-4"
+                    maxWidth="max-w-screen"
+                    margin="mx-4 my-2"
                 />
-            </div>
-            <div className="flex h-fit my-5 flex-col lg:flex-row">
                 <InputUnit
                     label="Dénivelé"
                     placeholder="100"
@@ -106,7 +107,8 @@ const ObjectifForm = (props) => {
                     min={1}
                     helper="Rentrez un dénivelé valide"
                     unit="m"
-                    margin="mx-4"
+                    maxWidth="max-w-screen"
+                    margin="mx-4 my-2"
                 />
                 <Input
                     label="Temps estimé"
@@ -117,6 +119,7 @@ const ObjectifForm = (props) => {
                     }}
                     type="time"
                     helper="Rentrez un email valide"
+                    maxWidth="max-w-screen"
                     margin="mx-4 my-2"
                 />
 
@@ -136,10 +139,9 @@ const ObjectifForm = (props) => {
                         'Top 30',
                         'Finisseur',
                     ]}
+                    maxWidth="max-w-screen"
                     margin="mx-4 my-2"
                 />
-            </div>
-            <div className="mx-4 flex-col lg:flex-row">
                 <Input
                     label="Date"
                     placeholder="DD/MM/YYYY"
@@ -149,7 +151,8 @@ const ObjectifForm = (props) => {
                     }}
                     type="date"
                     helper="Rentrez un email valide"
-                    margin="ml-1 mr-4 mb-4"
+                    maxWidth="max-w-screen"
+                    margin="mx-4 my-2"
                 />
                 <TextArea
                     label="Description "
@@ -162,7 +165,8 @@ const ObjectifForm = (props) => {
                     height={151}
                     type="text"
                     helper="Rentrez un email valide"
-                    margin="4"
+                    maxWidth="max-w-screen"
+                    margin="mx-4 my-2"
                 />
             </div>
             <div className="flex flex-col lg:flex-row max-w-xs">

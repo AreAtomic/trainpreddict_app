@@ -35,7 +35,7 @@ const Objectif = ({ toast }) => {
     const [openMO, setOpenMO] = useState(false)
 
     return (
-        <div className="grid max-w-screen">
+        <div className="max-w-screen">
             {loading && (
                 <div className="fixed top-10 w-full z-50 h-full max-w-screen">
                     <div className="absolute w-full h-full bg-primary-blue-500 opacity-40"></div>
@@ -44,9 +44,9 @@ const Objectif = ({ toast }) => {
                     </div>
                 </div>
             )}
-            <div className="w-full lg:flex mb-6 max-w-screen">
+            <div className="w-full mb-6 max-w-screen">
                 <HeadingTwo className="mb-4 ml-5">Objectifs</HeadingTwo>
-                <div className="flex flex-col lg:flex-row">
+                <div className="grid xl:grid-cols-3 md:grid-cols-2">
                     {objectifs.slice(0, 3).map((objectif, index) => {
                         const titrePosition = [
                             'Prochain Objectif',
@@ -74,7 +74,9 @@ const Objectif = ({ toast }) => {
                         )
                     })}
                 </div>
-                <ObjectifForm toast={toast} />
+                <div>
+                    <ObjectifForm toast={toast} />
+                </div>
             </div>
         </div>
     )
