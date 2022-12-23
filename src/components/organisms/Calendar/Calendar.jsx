@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import dayjs from 'dayjs'
 import Day from './Day'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,6 +10,19 @@ const Calendar = (props) => {
     // API states
     const auth = useSelector((state) => state.auth)
     const dispatch = useDispatch()
+    const calendar = useSelector((state) => state.calendar)
+    const seances = useSelector((state) => state.seances)
+
+    const [calendarWeekDisplayed, setCalendarWeekDisplayed] = useState([])
+
+    useEffect(() => {
+        setCalendarWeekDisplayed(
+            calendar.data.slice(
+                calendar.firstWeekIndex,
+                calendar.firstWeekIndex + calendar.weeksDisplayed
+            )
+        )
+    }, [calendar])
 
     const updateDayPlanned = (date, planned, adding) => {
         const plannedIds = []
@@ -18,17 +32,17 @@ const Calendar = (props) => {
                     plannedIds.push(seance._id)
                 }
             } else {
-                plannedIds.push(seance._id)
+                plannedIds.push(seance?._id)
             }
         })
         const statistiques = {
             // Données à ajouter ou supprimer
-            time: planned[planned.length - 1].duree,
-            distance: planned[planned.length - 1].estimation_distance,
-            sse: planned[planned.length - 1].score_stress_entrainement,
-            denivele: planned[planned.length - 1].estimation_deniv,
+            time: planned[planned.length - 1]?.duree,
+            distance: planned[planned.length - 1]?.estimation_distance,
+            sse: planned[planned.length - 1]?.score_stress_entrainement,
+            denivele: planned[planned.length - 1]?.estimation_deniv,
             // Permet d'ajouter ou de supprimer dans la bdd
-            nombreSeance: adding ? planned.length : planned.length - 1,
+            nombreSeance: adding ? planned?.length : planned?.length - 1,
         }
 
         services.putDayCalendrierPlanned(
@@ -77,38 +91,44 @@ const Calendar = (props) => {
     //#endregion
     return (
         <div className="grid">
-            {props.weeks.map((week, weekIndex) => {
-                return (
-                    <div className="flex">
-                        {week.days.map((day, dayIndex) => {
-                            return (
-                                <Day
-                                    passed={dayjs().isAfter(dayjs(day.date))}
-                                    month={
-                                        dayjs(day.date) === 1 || dayIndex === 0
-                                            ? dayjs(day.date).format('MMM')
-                                            : false
-                                    }
-                                    day={day}
-                                    seances={props.seances}
-                                    parent={props.parent}
-                                    setParent={(id) => props.setParent(id)}
-                                    newSeance={props.newSeance}
-                                    resetNewSeance={props.resetNewSeance}
-                                    id={`w${weekIndex}-d${dayIndex}`}
-                                    dragEnd={props.dragEnd}
-                                    updateDayPlanned={updateDayPlanned}
-                                    updateDayPlannedWithRace={updateDayPlannedWithRace}
-                                    viewSeanceItem={props.viewSeanceItem}
-                                    setViewSeanceItem={(value) =>
-                                        props.setViewSeanceItem(value)
-                                    }
-                                />
-                            )
-                        })}
-                    </div>
-                )
-            })}
+            {calendarWeekDisplayed.length !== 0 &&
+                calendarWeekDisplayed.map((week, weekIndex) => {
+                    return (
+                        <div className="flex">
+                            {week.days.map((day, dayIndex) => {
+                                return (
+                                    <Day
+                                        passed={dayjs().isAfter(
+                                            dayjs(day.date)
+                                        )}
+                                        month={
+                                            dayjs(day.date) === 1 ||
+                                            dayIndex === 0
+                                                ? dayjs(day.date).format('MMM')
+                                                : false
+                                        }
+                                        day={day}
+                                        seances={seances}
+                                        parent={props.parent}
+                                        setParent={(id) => props.setParent(id)}
+                                        newSeance={props.newSeance}
+                                        resetNewSeance={props.resetNewSeance}
+                                        id={`w${weekIndex}-d${dayIndex}`}
+                                        dragEnd={props.dragEnd}
+                                        updateDayPlanned={updateDayPlanned}
+                                        updateDayPlannedWithRace={
+                                            updateDayPlannedWithRace
+                                        }
+                                        viewSeanceItem={props.viewSeanceItem}
+                                        setViewSeanceItem={(value) =>
+                                            props.setViewSeanceItem(value)
+                                        }
+                                    />
+                                )
+                            })}
+                        </div>
+                    )
+                })}
         </div>
     )
 }

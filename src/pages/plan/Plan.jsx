@@ -66,7 +66,11 @@ const Plan = ({ toast }) => {
             dispatch(middlewares.setSeances(response.data))
         })
         services
-            .getCalendrierYear(auth.userId, dayjs(calendar.dayOne).year(), auth.token)
+            .getCalendrierYear(
+                auth.userId,
+                dayjs(calendar.dayOne).year(),
+                auth.token
+            )
             .then((response) => {
                 if (response.status === 401) {
                     dispatch(middlewares.logout())
@@ -76,7 +80,8 @@ const Plan = ({ toast }) => {
                 }
                 dispatch(
                     middlewares.changeCalendarData(
-                        response.data.actualYear?.years[0].weeks
+                        response.data.actualYear?.years[0].weeks,
+                        calendar.dayOne
                     )
                 ).then(setLoadingCalendar(false))
                 dispatch(
@@ -118,113 +123,155 @@ const Plan = ({ toast }) => {
 
     // Dnd
     const [draggedSeance, setDraggedSeance] = useState(null)
+    const [draggedCourse, setDraggedCourse] = useState(null)
     const [parent, setParent] = useState(null)
     const [dragEnd, setDragEnd] = useState(false)
-
     const [viewSeanceItem, setViewSeanceItem] = useState(null)
+
+    const handleDragStart = (event) => {
+        setDraggedSeance(event.active.data.current)
+    }
+    const handleDragEnd = (event) => {
+        setDragEnd(!dragEnd)
+    }
 
     const updateView = () => {
         window.location.reload()
     }
 
+
     return (
-        <div className="grid">
-            {loading && (
-                <div className="fixed top-10 w-full z-50 h-full ">
-                    <div className="absolute w-full h-full bg-primary-blue-500 opacity-40"></div>
-                    <div className="mt-32">
-                        <SpinLoader />
+        <DndContext
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+            autoScroll={false}
+        >
+            <div className="grid">
+                {loading && (
+                    <div className="fixed top-10 w-full z-50 h-full ">
+                        <div className="absolute w-full h-full bg-primary-blue-500 opacity-40"></div>
+                        <div className="mt-32">
+                            <SpinLoader />
+                        </div>
                     </div>
-                </div>
-            )}
-            <div className="z-0">
-                <div className="ml-3 z-0">
-                    <div className="grid 2xl:grid-cols-6 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-x-2 gap-y-2 mb-3 justify-around">
-                        <HeadingTwo className="w-fit mt-0">
-                            Calendrier
-                        </HeadingTwo>
-                        <Dropdown
-                            value={calendar.weeksDisplayed}
-                            onChange={(event) => {
-                                dispatch(
-                                    middlewares.changeViewCalendar(
-                                        parseInt(event.target.value)
-                                    )
-                                )
-                            }}
-                            values={[1, 2, 3, 4, 5, 6, 7, 8]}
-                            options={[
-                                '1 semaine',
-                                '2 semaines',
-                                '3 semaines',
-                                '4 semaines',
-                                '5 semaines',
-                                '6 semaines',
-                                '7 semaines',
-                                '8 semaines',
-                            ]}
-                        />
-                        <div className="inline-block">
-                            <Input
-                                value={dayjs(calendar.dayOne).format(
-                                    'YYYY-MM-DD'
-                                )}
-                                type="date"
-                                onChange={(e) => {
+                )}
+                <div className="z-0">
+                    <div className="ml-3 z-0">
+                        <div className="grid 2xl:grid-cols-6 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-x-2 gap-y-2 mb-3 justify-around">
+                            <HeadingTwo className="w-fit mt-0">
+                                Calendrier
+                            </HeadingTwo>
+                            <Dropdown
+                                value={calendar.weeksDisplayed}
+                                onChange={(event) => {
                                     dispatch(
-                                        middlewares.setDayOneCalendar(
-                                            dayjs(e.target.value).toISOString()
+                                        middlewares.changeViewCalendar(
+                                            parseInt(event.target.value)
                                         )
                                     )
                                 }}
-                                maxWidth='max-w-screen'
+                                values={[1, 2, 3, 4, 5, 6, 7, 8]}
+                                options={[
+                                    '1 semaine',
+                                    '2 semaines',
+                                    '3 semaines',
+                                    '4 semaines',
+                                    '5 semaines',
+                                    '6 semaines',
+                                    '7 semaines',
+                                    '8 semaines',
+                                ]}
                             />
+                            <div className="inline-block">
+                                <Input
+                                    value={dayjs(calendar.dayOne).format(
+                                        'YYYY-MM-DD'
+                                    )}
+                                    type="date"
+                                    onChange={(e) => {
+                                        dispatch(
+                                            middlewares.setDayOneCalendar(
+                                                e.target.value,
+                                                calendar
+                                            )
+                                        )
+                                    }}
+                                    maxWidth="max-w-screen"
+                                />
+                            </div>
                         </div>
-                    </div>
-                    {loadingCalendar ? (
-                        <div>Loading</div>
-                    ) : (
-                        <div>
-                            {isCalendar ? (
-                                <>
-                                    <Calendar
-                                        className=""
-                                        dayOne={dayjs()}
-                                        weeks={calendar.data.slice(
-                                            calendar.firstWeekIndex + firstWeek,
-                                            calendar.firstWeekIndex +
-                                                firstWeek +
-                                                calendar.weeksDisplayed
-                                        )}
-                                        seances={seances}
-                                        parent={parent}
-                                        setParent={(id) => setParent(id)}
-                                        resetNewSeance={() =>
-                                            setDraggedSeance(null)
-                                        }
-                                        newSeance={draggedSeance}
-                                        dragEnd={dragEnd}
-                                        viewSeanceItem={viewSeanceItem}
-                                        setViewSeanceItem={(value) =>
-                                            setViewSeanceItem(value)
-                                        }
-                                    />
+                        {loadingCalendar ? (
+                            <div>Loading</div>
+                        ) : (
+                            <div>
+                                {isCalendar ? (
+                                    <>
+                                        <Calendar
+                                            className=""
+                                            dayOne={dayjs()}
+                                            weeks={calendar.data.slice(
+                                                calendar.firstWeekIndex +
+                                                    firstWeek,
+                                                calendar.firstWeekIndex +
+                                                    firstWeek +
+                                                    calendar.weeksDisplayed
+                                            )}
+                                            seances={seances}
+                                            parent={parent}
+                                            setParent={(id) => setParent(id)}
+                                            resetNewSeance={() =>
+                                                setDraggedSeance(null)
+                                            }
+                                            newSeance={draggedSeance}
+                                            dragEnd={dragEnd}
+                                            viewSeanceItem={viewSeanceItem}
+                                            setViewSeanceItem={(value) =>
+                                                setViewSeanceItem(value)
+                                            }
+                                        />
 
-                                    <div className="my-8">
-                                        {!onBoardingContext.complete ? (
-                                            <div className="grid grid-cols-2 max-w-md">
-                                                <ButtonPrimary
-                                                    onClick={() => {
-                                                        onBoardingContext.handleInnerStep(
-                                                            'end'
-                                                        )
-                                                    }}
-                                                >
-                                                    Terminer le tutoriel
-                                                </ButtonPrimary>
-                                                {!auth.structure && (
-                                                    <ButtonSecondary
-                                                        className="ml-2"
+                                        <div className="my-8">
+                                            {!onBoardingContext.complete ? (
+                                                <div className="grid grid-cols-2 max-w-md">
+                                                    <ButtonPrimary
+                                                        onClick={() => {
+                                                            onBoardingContext.handleInnerStep(
+                                                                'end'
+                                                            )
+                                                        }}
+                                                    >
+                                                        Terminer le tutoriel
+                                                    </ButtonPrimary>
+                                                    {!auth.structure && (
+                                                        <ButtonSecondary
+                                                            className="ml-2"
+                                                            onClick={() => {
+                                                                console.log(
+                                                                    'generate plan for objectifs'
+                                                                )
+                                                                services
+                                                                    .createPlan(
+                                                                        auth.userId,
+                                                                        auth.token
+                                                                    )
+                                                                    .then(
+                                                                        (
+                                                                            response
+                                                                        ) =>
+                                                                            onBoardingContext.handleInnerStep(
+                                                                                'end'
+                                                                            )
+                                                                    )
+                                                            }}
+                                                        >
+                                                            Générer votre plan
+                                                        </ButtonSecondary>
+                                                    )}
+                                                </div>
+                                            ) : (
+                                                !auth.structure && (
+                                                    <ButtonPrimary
+                                                        className="ml-4"
                                                         onClick={() => {
                                                             console.log(
                                                                 'generate plan for objectifs'
@@ -237,76 +284,52 @@ const Plan = ({ toast }) => {
                                                                 .then(
                                                                     (
                                                                         response
-                                                                    ) =>
+                                                                    ) => {
+                                                                        console.log(
+                                                                            response
+                                                                        )
                                                                         onBoardingContext.handleInnerStep(
                                                                             'end'
                                                                         )
+                                                                    }
                                                                 )
                                                         }}
                                                     >
                                                         Générer votre plan
-                                                    </ButtonSecondary>
-                                                )}
-                                            </div>
-                                        ) : (
-                                            !auth.structure && (
-                                                <ButtonPrimary
-                                                    className="ml-4"
-                                                    onClick={() => {
-                                                        console.log(
-                                                            'generate plan for objectifs'
-                                                        )
-                                                        services
-                                                            .createPlan(
-                                                                auth.userId,
-                                                                auth.token
-                                                            )
-                                                            .then(
-                                                                (response) => {
-                                                                    console.log(
-                                                                        response
-                                                                    )
-                                                                    onBoardingContext.handleInnerStep(
-                                                                        'end'
-                                                                    )
-                                                                }
-                                                            )
-                                                    }}
-                                                >
-                                                    Générer votre plan
-                                                </ButtonPrimary>
-                                            )
-                                        )}
-                                    </div>
-                                </>
-                            ) : (
-                                <ButtonPrimarySmall
-                                    onClick={() => {
-                                        services
-                                            .createCalendrier(
-                                                auth.userId,
-                                                auth.token
-                                            )
-                                            .then((res) => {
-                                                if (res.status === 401) {
-                                                    dispatch(
-                                                        middlewares.logout()
-                                                    )
-                                                }
-                                                onBoardingContext.handleSetComplete(
-                                                    true
+                                                    </ButtonPrimary>
                                                 )
-                                            })
-                                    }}
-                                >
-                                    Générer le calendrier
-                                </ButtonPrimarySmall>
-                            )}
-                        </div>
-                    )}
+                                            )}
+                                        </div>
+                                    </>
+                                ) : (
+                                    <ButtonPrimarySmall
+                                        onClick={() => {
+                                            services
+                                                .createCalendrier(
+                                                    auth.userId,
+                                                    auth.token
+                                                )
+                                                .then((res) => {
+                                                    if (res.status === 401) {
+                                                        dispatch(
+                                                            middlewares.logout()
+                                                        )
+                                                    }
+                                                    onBoardingContext.handleSetComplete(
+                                                        true
+                                                    )
+                                                })
+                                        }}
+                                    >
+                                        Générer le calendrier
+                                    </ButtonPrimarySmall>
+                                )}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
-        </div>
+        </DndContext>
     )
 }
 export default Plan

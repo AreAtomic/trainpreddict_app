@@ -107,17 +107,26 @@ export const setSeances = (seances) => (dispatch) => {
  * @param {array} data
  * @returns
  */
-export const changeCalendarData = (data) => (dispatch) => {
+export const changeCalendarData = (data, firstDayDate) => (dispatch) => {
     if (data) {
-        let index = null
+        let index = 0
         const restructuredCalendar = data.map((week, weekIndex) => {
             const days = [...week.days]
+
+            let firstWeek = false
             week.days.forEach((day) => {
-                if (index === null && day.date.indexOf('01-01') !== -1) {
+                if (day.date.indexOf('01-01') !== -1) {
+                    firstWeek = true
+                }
+                if (firstDayDate === day.date) {
                     index = weekIndex
                 }
             })
-            days.shift()
+
+            if (!firstWeek) {
+                days.shift()
+            }
+
             if (weekIndex < data.length - 1) {
                 days.push(data[weekIndex + 1].days[0])
                 return { ...week, days: days }
@@ -252,8 +261,21 @@ export const setNewComment = (data) => (dispatch) => {
     return Promise.resolve()
 }
 
-export const setDayOneCalendar = (data) => (dispatch) => {
-    dispatch(Actions.changeDateCalendar(data))
+export const setDayOneCalendar = (data, calendar) => (dispatch) => {
+    const date = `${data}T00:00:00.000Z`
+    dispatch(Actions.changeDateCalendar(date))
+
+    let firstWeek = 0
+
+    calendar.data.map((week, index) => {
+        week.days.map((day) => {
+            if (day.date === date) firstWeek = index
+        })
+    })
+
+    console.log(firstWeek)
+    dispatch(Actions.changeFirstWeekIndexCalendar(firstWeek))
+
     return Promise.resolve()
 }
 

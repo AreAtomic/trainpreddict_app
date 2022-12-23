@@ -23,6 +23,17 @@ const Day = (props) => {
     const auth = useSelector((state) => state.auth)
     const user = useSelector((state) => state.user)
     const userId = auth.userId
+
+    const [loading, setLoading] = useState(true)
+    const [planned, setPlanned] = useState([])
+    const [done, setDone] = useState([])
+    const [objectif, setObjectif] = useState([])
+    const [edit, setEdit] = useState(false)
+    const [newComment, setNewComment] = useState(
+        useSelector((state) => state.daySelected.newComment)
+    )
+    const [comments, setComments] = useState(props.day.comment)
+
     useEffect(() => {
         const tempPlanned = []
         props.day.planned.forEach((seance) => {
@@ -76,15 +87,7 @@ const Day = (props) => {
     }, [])
     //#endregion
     //#region Pages state
-    const [loading, setLoading] = useState(true)
-    const [planned, setPlanned] = useState([])
-    const [done, setDone] = useState([])
-    const [objectif, setObjectif] = useState([])
-    const [edit, setEdit] = useState(false)
-    const [newComment, setNewComment] = useState(
-        useSelector((state) => state.daySelected.newComment)
-    )
-    const [comments, setComments] = useState(props.day.comment)
+    
     const saveComment = (value) => {
         services
             .putDayCalendarComment(userId, props.day.date, auth.token, [
@@ -110,7 +113,7 @@ const Day = (props) => {
 
     useEffect(() => {
         if (props.parent === props.id) {
-            if (!props.newSeance.course) {
+            if (!props.newSeance?.course) {
                 setPlanned([...planned, props.newSeance])
                 props.updateDayPlanned(
                     props.day.date,
@@ -135,60 +138,62 @@ const Day = (props) => {
 
     return (
         <Droppable id={props.id}>
-            <div className="absolute top-0 left-0">
-                {/** Modal more informations */}
-                {!props.passed ? (
-                    <PlannedDay
-                        visible={edit}
-                        onClose={() => {
-                            setEdit(false)
-                        }}
-                        date={dayjs(props.day.date).format('DD/MM/YYYY')}
-                        seances={props.seances}
-                        planned={planned}
-                        entrainement={done}
-                        // Adding planned day with drag and drop
-                        id={`modal-${props.id}`}
-                        parent={props.parent}
-                        setParent={props.setParent}
-                        dragEnd={props.dragEnd}
-                        newSeance={props.newSeance}
-                        resetNewSeance={props.resetNewSeance}
-                        day={props.day}
-                        updateDayPlanned={props.updateDayPlanned}
-                        updateDayPlannedWithRace={
-                            props.updateDayPlannedWithRace
-                        }
-                        setPlanned={(value) => setPlanned(value)}
-                        newComment={newComment}
-                        setNewComment={(e) => {
-                            setNewComment(e)
-                        }}
-                        saveComment={() => saveComment()}
-                        comments={comments}
-                        viewSeanceItem={props.viewSeanceItem}
-                        setViewSeanceItem={(value) =>
-                            props.setViewSeanceItem(value)
-                        }
-                    />
-                ) : (
-                    <DonedDay
-                        visible={edit}
-                        onClose={() => {
-                            setEdit(false)
-                        }}
-                        date={dayjs(props.day.date).format('DD/MM/YYYY')}
-                        entrainement={done}
-                        planned={planned}
-                        newComment={newComment}
-                        setNewComment={(e) => {
-                            setNewComment(e)
-                        }}
-                        saveComment={() => saveComment()}
-                        comment={comments}
-                    />
-                )}
-            </div>
+            {planned && done && (
+                <div className="absolute top-0 left-0">
+                    {/** Modal more informations */}
+                    {!props.passed ? (
+                        <PlannedDay
+                            visible={edit}
+                            onClose={() => {
+                                setEdit(false)
+                            }}
+                            date={dayjs(props.day.date).format('DD/MM/YYYY')}
+                            seances={props.seances}
+                            planned={planned}
+                            entrainement={done}
+                            // Adding planned day with drag and drop
+                            id={`modal-${props.id}`}
+                            parent={props.parent}
+                            setParent={props.setParent}
+                            dragEnd={props.dragEnd}
+                            newSeance={props.newSeance}
+                            resetNewSeance={props.resetNewSeance}
+                            day={props.day}
+                            updateDayPlanned={props.updateDayPlanned}
+                            updateDayPlannedWithRace={
+                                props.updateDayPlannedWithRace
+                            }
+                            setPlanned={(value) => setPlanned(value)}
+                            newComment={newComment}
+                            setNewComment={(e) => {
+                                setNewComment(e)
+                            }}
+                            saveComment={() => saveComment()}
+                            comments={comments}
+                            viewSeanceItem={props.viewSeanceItem}
+                            setViewSeanceItem={(value) =>
+                                props.setViewSeanceItem(value)
+                            }
+                        />
+                    ) : (
+                        <DonedDay
+                            visible={edit}
+                            onClose={() => {
+                                setEdit(false)
+                            }}
+                            date={dayjs(props.day.date).format('DD/MM/YYYY')}
+                            entrainement={done}
+                            planned={planned}
+                            newComment={newComment}
+                            setNewComment={(e) => {
+                                setNewComment(e)
+                            }}
+                            saveComment={() => saveComment()}
+                            comment={comments}
+                        />
+                    )}
+                </div>
+            )}
             <div
                 className="bg-primary-blue-500 border border-high-contrast-500 relative p-1 overflow-y-auto no-scrollbar 2xl:w-calendar 2xl:h-calendar xl:w-calendar xl:h-calendar lg:w-calendar-small lg:h-calendar-small ml:h-calendar-small ml:w-calendar-small md:h-calendar-small md:w-calendar-small sm:h-calendar-mobile sm:w-calendar-mobile xs:h-calendar-mobile xs:w-calendar-mobile"
                 onClick={() => {
@@ -199,7 +204,7 @@ const Day = (props) => {
                     props.setParent(props.id)
                 }}
             >
-                {comments.length > 0 && (
+                {comments?.length > 0 && (
                     <div className="absolute right-16 w-3 h-3 bg-high-contrast-500 rounded-full"></div>
                 )}
                 {props.passed && (
@@ -220,12 +225,12 @@ const Day = (props) => {
                                 <div className="2xl:flex xl:flex lg:flex ml:hidden md:hidden sm:hidden xs:hidden">
                                     <ShowEntrainement>
                                         <p className="text-[10px]">
-                                            {seance.titre}
+                                            {seance?.titre}
                                         </p>
                                         {!seance.course && (
                                             <p className="text-medium-contrast-500 text-[10px]">
                                                 {
-                                                    seance.score_stress_entrainement
+                                                    seance?.score_stress_entrainement
                                                 }{' '}
                                                 SSE
                                             </p>
@@ -235,12 +240,12 @@ const Day = (props) => {
                                 <div className="2xl:hidden xl:hidden lg:hidden ml:flex md:flex sm:hidden xs:hidden">
                                     <ShowCourse>
                                         <p className="text-[10px]">
-                                            {seance.titre}
+                                            {seance?.titre}
                                         </p>
-                                        {!seance.course && (
+                                        {!seance?.course && (
                                             <p className="text-medium-contrast-500 text-[10px]">
                                                 {
-                                                    seance.score_stress_entrainement
+                                                    seance?.score_stress_entrainement
                                                 }
                                             </p>
                                         )}
@@ -249,7 +254,7 @@ const Day = (props) => {
                                 <div className="2xl:hidden xl:hidden lg:hidden ml:hidden md:hidden sm:flex xs:flex">
                                     <ShowMobile>
                                         <p className="text-[7px]">
-                                            {seance.titre}
+                                            {seance?.titre}
                                         </p>
                                     </ShowMobile>
                                 </div>
@@ -260,9 +265,11 @@ const Day = (props) => {
                     done.map((entrainement) => {
                         return (
                             <ShowEntrainement>
-                                <p>{entrainement.titre || entrainement.type}</p>
+                                <p>
+                                    {entrainement?.titre || entrainement?.type}
+                                </p>
                                 <p className="text-medium-contrast-500">
-                                    {entrainement.score_stress_entrainement}
+                                    {entrainement?.score_stress_entrainement}
                                     SSE
                                 </p>
                             </ShowEntrainement>
@@ -271,7 +278,7 @@ const Day = (props) => {
                 {!loading &&
                     objectif.map((objectif) => (
                         <ShowObjectif>
-                            <p>{objectif.titre}</p>
+                            <p>{objectif?.titre}</p>
                         </ShowObjectif>
                     ))}
             </div>

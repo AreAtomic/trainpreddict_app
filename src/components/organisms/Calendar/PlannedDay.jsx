@@ -75,7 +75,7 @@ const PlannedDay = (props) => {
             <div className="flex">
                 <HeadingFour>{props.date}</HeadingFour>
             </div>
-            <div className="grid xl:grid-cols-2 lg:grid-cols-2 grid-cols-1 gap-y-2 gap-x-2  justify-between mt-2">
+            <div className="grid xl:grid-cols-2 lg:grid-cols-2 grid-cols-1 gap-y-2 gap-x-2 justify-between mt-2">
                 {/* //TODO: Add condition for structure condition */}
                 {!auth.structure && (
                     <Card
