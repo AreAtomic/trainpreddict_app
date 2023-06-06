@@ -8,7 +8,7 @@ import { store } from './redux'
 import { BrowserRouter } from 'react-router-dom'
 import { PersistGate } from 'reduxjs-toolkit-persist/integration/react'
 import { persistStore } from 'reduxjs-toolkit-persist'
-import { OnBoardingContextProvider } from './contexts/onboardingContext'
+import OnBoardingContextProvider from './contexts/onboardingContext'
 
 let persistor = persistStore(store)
 

@@ -24,7 +24,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import * as services from './services'
 import * as middlewares from './middlewares'
 import { LoggedLayout } from './components/layouts'
-import OnBoardingContext from './contexts/onboardingContext'
+import { OnBoardingContext } from './contexts/onboardingContext'
+
 //#endregion
 toast.configure()
 
@@ -42,11 +43,14 @@ const App = () => {
     }, [auth])
 
     return (
-        <div className="bg-primary-blue-500 text-low-contrast-500 overflow-hidden w-full pt-navbar min-h-screen">
+        <div className="w-full min-h-screen overflow-hidden bg-primary-blue-500 text-low-contrast-500 pt-navbar">
             {user.isLogged ? (
                 <>
                     <Routes>
-                        <Route path="/" element={<LoggedLayout />}>
+                        <Route
+                            path="/"
+                            element={<LoggedLayout toast={toast} />}
+                        >
                             <Route path="/home" element={<Home />} />
                             <Route
                                 path="/dashboard"

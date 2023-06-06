@@ -12,7 +12,7 @@ const OnBoardingContext = React.createContext({
     handleInnerStep: (innerStep) => {},
 })
 
-export const OnBoardingContextProvider = (props) => {
+export default function OnBoardingContextProvider({ children }) {
     const auth = useSelector((state) => state.auth)
     const [step, setStep] = useState(0)
     const [complete, setComplete] = useState(false)
@@ -71,9 +71,9 @@ export const OnBoardingContextProvider = (props) => {
                 handleInnerStep: (innerStep) => setInnerStep(innerStep),
             }}
         >
-            {props.children}
+            {children}
         </OnBoardingContext.Provider>
     )
 }
 
-export default OnBoardingContext
+export { OnBoardingContext }

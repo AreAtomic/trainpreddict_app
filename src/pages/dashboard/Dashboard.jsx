@@ -81,17 +81,17 @@ const Coureur = ({ toast }) => {
                 }
                 dispatch(
                     middlewares.changeCalendarData(
-                        response.data.actualYear?.years[0].weeks
+                        response.data?.actualYear?.years[0].weeks
                     )
                 ).then(setLoadingCalendar(false))
                 dispatch(
                     middlewares.setDatasIndicators(
-                        response.data.actualYear.years[0].weeks
+                        response.data?.actualYear.years[0].weeks
                     )
                 ).then(setLoadingIndicators(false))
                 dispatch(
                     middlewares.setWeeksStatistics(
-                        response.data.actualYear.years[0].weeks
+                        response.data?.actualYear.years[0].weeks
                     )
                 ).then(setLoadingStatistics(false))
             })
@@ -135,7 +135,7 @@ const Coureur = ({ toast }) => {
     return (
         <div className="grid">
             {loading && (
-                <div className="fixed top-10 w-full z-50 h-full ">
+                <div className="fixed z-50 w-full h-full top-10 ">
                     <div className="absolute w-full h-full bg-primary-blue-500 opacity-40"></div>
                     <div className="mt-32">
                         <SpinLoader />
@@ -143,8 +143,8 @@ const Coureur = ({ toast }) => {
                 </div>
             )}
             <div className="z-0">
-                <div className="ml-3 mb-5 z-0">
-                    <div className="grid 2xl:grid-cols-6 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-x-2 gap-y-2 mb-3 justify-around">
+                <div className="z-0 mb-5 ml-3">
+                    <div className="grid justify-around grid-cols-1 mb-3 2xl:grid-cols-6 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-2 gap-x-2 gap-y-2">
                         <HeadingTwo className="w-fit">Semaine</HeadingTwo>
                     </div>
                     {loadingCalendar ? (
@@ -186,7 +186,7 @@ const Coureur = ({ toast }) => {
                     )}
                 </div>
                 {!auth.structure ? (
-                    <div className="ml-3 mb-5 mt-6">
+                    <div className="mt-6 mb-5 ml-3">
                         <div className="flex">
                             <HeadingTwo>Indicateurs</HeadingTwo>
                             <Dropdown
@@ -252,7 +252,7 @@ const Coureur = ({ toast }) => {
                     </div>
                 ) : (
                     parametres.coureur.courbes && (
-                        <div className="ml-3 mb-5 mt-6">
+                        <div className="mt-6 mb-5 ml-3">
                             <div className="flex sm:flex-row">
                                 <HeadingTwo>Indicateurs</HeadingTwo>
                                 <Dropdown
@@ -270,7 +270,7 @@ const Coureur = ({ toast }) => {
                                 />
                             </div>
                             <div
-                                className="mt-2 pr-2"
+                                className="pr-2 mt-2"
                                 style={{
                                     maxWidth: '1135px',
                                     maxHeight: '350px',
@@ -295,7 +295,7 @@ const Coureur = ({ toast }) => {
                         </div>
                     )
                 )}
-                <div className="ml-3 mb-3 w-1/12">
+                <div className="w-1/12 mb-3 ml-3">
                     <HeadingTwo className="mb-3 ">Statistique</HeadingTwo>
                     {loadingStatistics ? (
                         <div></div>

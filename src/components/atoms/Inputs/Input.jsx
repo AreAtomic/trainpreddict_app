@@ -1,4 +1,4 @@
-import { Tooltip } from "@material-tailwind/react";
+import { Tooltip } from 'react-tooltip'
 import help from '../../../assets/help.svg'
 
 const Input = (props) => {
@@ -7,14 +7,22 @@ const Input = (props) => {
             <label className="font-['Nunito'] font-regular text-base text-medium-contrast-500 w-fit flex">
                 {props.label}{' '}
                 {props.tooltip && (
-                    <Tooltip className='flex bg-primary-blue-500 text-low-contrast-500' content={props.tooltip}>
+                    <>
                         <img
                             src={help}
                             alt="Aide pour cycliste débutant"
                             className="ml-4"
                             width="17px"
+                            data-tooltip-id={props.label}
                         />
-                    </Tooltip>
+                        <Tooltip
+                            className="flex bg-primary-blue-500 text-low-contrast-500"
+                            content={props.tooltip}
+                            id={props.label}
+                        >
+                            {props.tooltip}
+                        </Tooltip>
+                    </>
                 )}
             </label>
             <input

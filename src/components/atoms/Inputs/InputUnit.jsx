@@ -1,4 +1,4 @@
-import { Tooltip } from '@material-tailwind/react'
+import { Tooltip } from 'react-tooltip'
 import help from '../../../assets/help.svg'
 
 const InputUnit = (props) => {
@@ -42,12 +42,7 @@ const InputUnit = (props) => {
                 hover:bg-component-one-400`}
             >
                 <input
-                    className="
-                peer
-                w-80
-                bg-transparent
-                focus:outline-none
-                "
+                    className="bg-transparent  peer w-80 focus:outline-none"
                     {...props}
                 />
                 <span>{props.unit}</span>

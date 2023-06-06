@@ -32,7 +32,7 @@ import {
 //#region Import API
 import * as services from '../../services'
 import * as middlewares from '../../middlewares'
-import OnBoardingContext from '../../contexts/onboardingContext'
+import { OnBoardingContext } from '../../contexts/onboardingContext'
 import { ProfilForm } from '../../components/organisms/Form'
 import { DndContext, DragOverlay } from '@dnd-kit/core'
 import {
@@ -139,7 +139,6 @@ const Plan = ({ toast }) => {
         window.location.reload()
     }
 
-
     return (
         <DndContext
             onDragStart={handleDragStart}
@@ -148,7 +147,7 @@ const Plan = ({ toast }) => {
         >
             <div className="grid">
                 {loading && (
-                    <div className="fixed top-10 w-full z-50 h-full ">
+                    <div className="fixed z-50 w-full h-full top-10 ">
                         <div className="absolute w-full h-full bg-primary-blue-500 opacity-40"></div>
                         <div className="mt-32">
                             <SpinLoader />
@@ -156,9 +155,9 @@ const Plan = ({ toast }) => {
                     </div>
                 )}
                 <div className="z-0">
-                    <div className="ml-3 z-0">
-                        <div className="grid 2xl:grid-cols-6 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-x-2 gap-y-2 mb-3 justify-around">
-                            <HeadingTwo className="w-fit mt-0">
+                    <div className="z-0 ml-3">
+                        <div className="grid justify-around grid-cols-1 mb-3 2xl:grid-cols-6 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-2 gap-x-2 gap-y-2">
+                            <HeadingTwo className="mt-0 w-fit">
                                 Calendrier
                             </HeadingTwo>
                             <Dropdown
@@ -232,7 +231,7 @@ const Plan = ({ toast }) => {
 
                                         <div className="my-8">
                                             {!onBoardingContext.complete ? (
-                                                <div className="grid grid-cols-2 max-w-md">
+                                                <div className="grid max-w-md grid-cols-2">
                                                     <ButtonPrimary
                                                         onClick={() => {
                                                             onBoardingContext.handleInnerStep(

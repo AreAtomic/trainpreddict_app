@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import OnBoardingContext from '../../../contexts/onboardingContext'
+import { OnBoardingContext } from '../../../contexts/onboardingContext'
 import dayjs from 'dayjs'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -42,7 +42,9 @@ const ProfilForm = (props) => {
         caracteristics?.tempsEntrainement ? caracteristics.tempsEntrainement : 0
     )
     const [nombreEntrainement, setNombreEntrainement] = useState(
-        caracteristics?.nombreEntrainement ? caracteristics.nombreEntrainement : 0
+        caracteristics?.nombreEntrainement
+            ? caracteristics.nombreEntrainement
+            : 0
     )
     const [musculation, setMusculation] = useState(
         caracteristics?.musculation
@@ -141,7 +143,7 @@ const ProfilForm = (props) => {
     return (
         caracteristics && (
             <div>
-                <div className="grid xl:grid-cols-3 md:grid-cols-2 h-fit justify-center">
+                <div className="grid justify-center xl:grid-cols-3 md:grid-cols-2 h-fit">
                     <InputUnit
                         label="Puissance fonctionnelles au Seuil (FTP)"
                         placeholder="100"

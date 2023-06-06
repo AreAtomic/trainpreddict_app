@@ -152,22 +152,24 @@ export const setDatasIndicators = (data) => (dispatch) => {
     let tirednessPlanned = []
     let formDone = []
     let tirednessDone = []
-    data.forEach((week) => {
-        week.days.forEach((day) => {
-            dates.push(dayjs(day.date).format('DD/MM/YYYY'))
-            formPlanned.push(day.form.planned)
-            tirednessPlanned.push(day.tiredness.planned)
-            formDone.push(day.form.done)
-            tirednessDone.push(day.tiredness.done)
+    if (data) {
+        data.forEach((week) => {
+            week.days.forEach((day) => {
+                dates.push(dayjs(day.date).format('DD/MM/YYYY'))
+                formPlanned.push(day.form.planned)
+                tirednessPlanned.push(day.tiredness.planned)
+                formDone.push(day.form.done)
+                tirednessDone.push(day.tiredness.done)
+            })
         })
-    })
-    dispatch(
-        Actions.setDatasIndicators({
-            dates: dates,
-            form: { planned: formPlanned, done: formDone },
-            tiredness: { planned: tirednessPlanned, done: tirednessDone },
-        })
-    )
+        dispatch(
+            Actions.setDatasIndicators({
+                dates: dates,
+                form: { planned: formPlanned, done: formDone },
+                tiredness: { planned: tirednessPlanned, done: tirednessDone },
+            })
+        )
+    }
     return Promise.resolve()
 }
 
@@ -188,10 +190,12 @@ export const setSelectedIndicators = (selected) => (dispatch) => {
  */
 export const setWeeksStatistics = (data) => (dispatch) => {
     let weeks = []
-    data.forEach((week) => {
-        weeks.push({ ...week.statistiques, dayOne: week.days[0].date })
-    })
-    dispatch(Actions.setWeeksStatistics(weeks))
+    if (data) {
+        data.forEach((week) => {
+            weeks.push({ ...week.statistiques, dayOne: week.days[0].date })
+        })
+        dispatch(Actions.setWeeksStatistics(weeks))
+    }
     return Promise.resolve()
 }
 

@@ -12,7 +12,7 @@ import {
 import { ProfilForm } from '../../components/organisms/Form'
 import arrow from '../../assets/dropdown-arrow.svg'
 import * as services from '../../services'
-import OnBoardingContext from '../../contexts/onboardingContext'
+import { OnBoardingContext } from '../../contexts/onboardingContext'
 
 const Parametres = ({ toast }) => {
     const onBoardingContext = useContext(OnBoardingContext)
@@ -37,12 +37,12 @@ const Parametres = ({ toast }) => {
     return (
         <div>
             {step === 'select' ? (
-                <div className="mx-10 max-w-xs w-screen">
-                    <HeadingFive className="opacity-70 mb-4">
+                <div className="w-screen max-w-xs mx-10">
+                    <HeadingFive className="mb-4 opacity-70">
                         Parametres
                     </HeadingFive>
                     <div
-                        className="flex flex-row justify-between items-baseline"
+                        className="flex flex-row items-baseline justify-between"
                         onClick={() => {
                             setStep('generaux')
                         }}
@@ -51,7 +51,7 @@ const Parametres = ({ toast }) => {
                         <img src={arrow} alt="Arrow" className="rotate-270" />
                     </div>
                     <div
-                        className="mt-2 flex flex-row justify-between items-baseline"
+                        className="flex flex-row items-baseline justify-between mt-2"
                         onClick={() => {
                             setStep('sportif')
                         }}
@@ -63,7 +63,7 @@ const Parametres = ({ toast }) => {
             ) : step === 'generaux' ? (
                 <div className="mx-4">
                     <div
-                        className="mt-2 flex flex-row items-baseline mb-4"
+                        className="flex flex-row items-baseline mt-2 mb-4"
                         onClick={() => {
                             setStep('select')
                         }}
@@ -76,7 +76,7 @@ const Parametres = ({ toast }) => {
                         />
                         <HeadingSix className="ml-4">Retour</HeadingSix>
                     </div>
-                    <div className="w-fit bg-component-two-500 rounded-sm max-w-screen">
+                    <div className="rounded-sm w-fit bg-component-two-500 max-w-screen">
                         <div className="flex flex-col">
                             <Input
                                 label="Nom"
@@ -209,7 +209,7 @@ const Parametres = ({ toast }) => {
             ) : (
                 <div>
                     <div
-                        className="mt-2 mx-4 flex flex-row items-baseline mb-4"
+                        className="flex flex-row items-baseline mx-4 mt-2 mb-4"
                         onClick={() => {
                             setStep('select')
                         }}

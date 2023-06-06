@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useContext } from 'react'
-import OnBoardingContext from '../../../contexts/onboardingContext'
+import { OnBoardingContext } from '../../../contexts/onboardingContext'
 import dayjs from 'dayjs'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -44,9 +44,9 @@ const ObjectifForm = (props) => {
     }, [newObjectif])
 
     return (
-        <div className="bg-component-two-500 pt-1 w-fit mx-2 px-4">
+        <div className="px-4 pt-1 mx-2 bg-component-two-500 w-fit">
             <HeadingFour className="m-4">Ajouter un objectif</HeadingFour>
-            <div className="grid xl:grid-cols-3 lg:grid-cols-2 h-fit justify-center">
+            <div className="grid justify-center xl:grid-cols-3 lg:grid-cols-2 h-fit">
                 <Input
                     label="Titre objectif"
                     placeholder="Un objectif..."
@@ -169,7 +169,7 @@ const ObjectifForm = (props) => {
                     margin="mx-4 my-2"
                 />
             </div>
-            <div className="flex flex-col lg:flex-row max-w-xs">
+            <div className="flex flex-col max-w-xs lg:flex-row">
                 <ButtonPrimary
                     className="m-4"
                     onClick={() => {

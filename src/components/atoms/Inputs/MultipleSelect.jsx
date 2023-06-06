@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { onlyUnique } from '../../../utils'
 import close from '../../../assets/ico-close.svg'
 import dropdown from '../../../assets/dropdown.svg'
-import { Tooltip } from '@material-tailwind/react'
+import { Tooltip } from 'react-tooltip'
 import help from '../../../assets/help.svg'
 
 const Select = (props) => {
@@ -28,17 +28,22 @@ const Select = (props) => {
             <label className="font-['Nunito'] font-regular text-base text-medium-contrast-500 flex">
                 {props.label}
                 {props.tooltip && (
-                    <Tooltip
-                        className="flex bg-primary-blue-500 text-low-contrast-500"
-                        content={props.tooltip}
-                    >
+                    <>
                         <img
                             src={help}
                             alt="Aide pour cycliste débutant"
                             className="ml-4"
                             width="17px"
+                            data-tooltip-id={props.label}
                         />
-                    </Tooltip>
+                        <Tooltip
+                            className="flex bg-primary-blue-500 text-low-contrast-500"
+                            content={props.tooltip}
+                            id={props.label}
+                        >
+                            {props.tooltip}
+                        </Tooltip>
+                    </>
                 )}
             </label>
             <div
@@ -71,7 +76,7 @@ const Select = (props) => {
                 `}
                 onClick={() => setOpen(!open)}
             >
-                <div className="w-80 py-1 overflow-x-hidden flex flex-row hover:overflow-x-auto">
+                <div className="flex flex-row py-1 overflow-x-hidden w-80 hover:overflow-x-auto">
                     {value.map((item, i) => {
                         return (
                             <span
@@ -92,7 +97,7 @@ const Select = (props) => {
                         )
                     })}
                 </div>
-                <span className=" right-0">
+                <span className="right-0 ">
                     <img
                         src={dropdown}
                         width="36"
@@ -112,7 +117,7 @@ const Select = (props) => {
                 {props.options.map((item) => {
                     return (
                         <div
-                            className="py-2 px-3 hover:text-medium-contrast-500 hover:bg-component-two-500 cursor-pointer"
+                            className="px-3 py-2 cursor-pointer hover:text-medium-contrast-500 hover:bg-component-two-500"
                             onClick={() => {
                                 addValue(item)
                             }}
