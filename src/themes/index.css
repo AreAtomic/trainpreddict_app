@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&display=swap');
+
+:root {
+    --zone_1: "#FDEDF1";
+    --zone_2: "#F6B9C9";
+    --zone_3: "#EF84A0";
+    --zone_4: "#EC6A8C";
+    --zone_5: "#E84F78";
+    --zone_6: "#D22555";
+    --zone_7: "#6E0D25";
+}
+
+body {
+    overflow-x: hidden
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    border-radius: 10px;
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    border-radius: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #0b274e;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background: #fbbdce;
+    border-radius: 100vh;
+    border: 3px solid #fbbdce;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #000033;
+}
+
+/** INPUT **/
+.dropdown-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/** APEX CHARTS **/
+.apexcharts-tooltip.apexcharts-theme-dark {
+    background-color: #0B274Ecc !important;
+    color: #000033 !important;
+    border: none;
+}
+
+.apexcharts-tooltip-title {
+    background-color: #0B274Ee6 !important;
+}
+
+.apexcharts-xaxistooltip.apexcharts-theme-dark {
+    background-color: #0B274Ee6 !important;
+    color: #ffe5f6 !important;
+    border: #ffe5f6 1px solid !important;
+}
+
+#power .apexcharts-tooltip.apexcharts-theme-dark,
+#fc .apexcharts-tooltip.apexcharts-theme-dark {
+    background-color: #0B274Ecc !important;
+    color: #fff !important;
+    border: none;
+}

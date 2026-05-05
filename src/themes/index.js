@@ -1,0 +1,7 @@
+export const zone_1 = '#FDEDF1'
+export const zone_2 = '#F6B9C9'
+export const zone_3 = '#EF84A0'
+export const zone_4 = '#EC6A8C'
+export const zone_5 = '#E84F78'
+export const zone_6 = '#D22555'
+export const zone_7 = '#6E0D25'

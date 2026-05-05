@@ -1,39 +1,26 @@
-import { ShowComponents } from './ShowComponents'
-import { Landing } from './Landing'
-import { Connexion } from './Connexion'
-import { Inscription } from './Inscription'
-import { Motdepasse } from './Motdepasse'
-import { Onboarding } from './Onboarding'
-import { Profil } from './Profil'
-import { Objectif } from './Objectif'
-import { Seances, Televersement, Recherche } from './Seances'
+import Dashboard from './Dashboard'
+import { Parametres } from './parametres'
+import { Auth, ConfirmAccount, PasswordLost } from './auth'
+import { Show } from './show'
+import { Home } from './home'
+import { Televersement } from './televersement'
+import { SeancesRouter, CreateCourse } from './Seances'
+import Plan from './Plan'
+import Objectif from './objectifs'
 import { Courbes } from './Courbes'
-import { Plan, ModificationSeance } from './Plan'
-import { Dashboard } from './Dashboard'
-import { Entrainements, Analyse } from './Entrainements'
-import { Statistiques } from './Statistiques'
-import { Lost } from './Lost'
-import { Preparation } from './Preparation'
 
 export {
-    ShowComponents,
-    Landing,
-    Connexion,
-    Inscription,
-    Motdepasse,
-    Onboarding,
-    Profil,
-    Objectif,
-    Seances,
-    Televersement,
-    Recherche,
-    Courbes,
-    Plan,
-    ModificationSeance,
     Dashboard,
-    Entrainements,
-    Analyse,
-    Statistiques,
-    Lost,
-    Preparation,
+    Auth,
+    Show,
+    Parametres,
+    Home,
+    Televersement,
+    SeancesRouter,
+    CreateCourse,
+    Plan,
+    Objectif,
+    Courbes,
+    ConfirmAccount,
+    PasswordLost,
 }
