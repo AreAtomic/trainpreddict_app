@@ -1,6 +1,4 @@
-import './Seances.css'
-import Seances from './Seances'
-import Televersement from './Televersement'
-import Recherche from './Recherche'
+import CreateCourse from './CreateCourse.jsx'
+import SeancesRouter from './Main.jsx'
 
-export { Seances, Televersement, Recherche }
+export { CreateCourse, SeancesRouter }

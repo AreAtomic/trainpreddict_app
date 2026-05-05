@@ -1,4 +1,3 @@
-import './Courbes.css'
-import Courbes from './Courbes'
+import Courbes from './Courbes.jsx'
 
 export { Courbes }

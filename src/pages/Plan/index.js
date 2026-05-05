@@ -1,5 +1,3 @@
-import './Plan.css'
-import Plan from './Plan'
-import ModificationSeance from './ModificationSeance'
+import Plan from './Plan.jsx'
 
-export { Plan, ModificationSeance }
+export default Plan

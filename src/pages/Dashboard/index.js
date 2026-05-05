@@ -1,3 +1,7 @@
-import Dashboard from './Dashboard'
+import Dashboard from './Dashboard.jsx'
 
-export { Dashboard }
+const Page = ({ toast }) => {
+    return <Dashboard toast={toast} />
+}
+
+export default Page
