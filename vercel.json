@@ -1,0 +1,6 @@
+{
+  "buildCommand": "CI=false NODE_OPTIONS=--openssl-legacy-provider yarn run build",
+  "env": {
+    "NODE_OPTIONS": "--openssl-legacy-provider"
+  }
+}
