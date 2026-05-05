@@ -78,21 +78,19 @@ const Plan = ({ toast }) => {
                 if (!response.data?.actualYear) {
                     setIsCalendar(false)
                 }
+                const calendarWeeks =
+                    response.data?.actualYear?.years?.[0]?.weeks
                 dispatch(
                     middlewares.changeCalendarData(
-                        response.data.actualYear?.years[0].weeks,
+                        calendarWeeks,
                         calendar.dayOne
                     )
                 ).then(setLoadingCalendar(false))
                 dispatch(
-                    middlewares.setDatasIndicators(
-                        response.data.actualYear.years[0].weeks
-                    )
+                    middlewares.setDatasIndicators(calendarWeeks)
                 ).then(setLoadingIndicators(false))
                 dispatch(
-                    middlewares.setWeeksStatistics(
-                        response.data.actualYear.years[0].weeks
-                    )
+                    middlewares.setWeeksStatistics(calendarWeeks)
                 ).then(setLoadingStatistics(false))
             })
         services.getAllObjectifs(auth.userId, auth.token).then((response) => {

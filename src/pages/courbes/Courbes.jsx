@@ -39,20 +39,14 @@ const Cuorbes = () => {
                 if (response.status === 401) {
                     dispatch(middlewares.logout())
                 }
+                const calendarWeeks =
+                    response.data?.actualYear?.years?.[0]?.weeks
+                dispatch(middlewares.changeCalendarData(calendarWeeks))
                 dispatch(
-                    middlewares.changeCalendarData(
-                        response.data.actualYear?.years[0].weeks
-                    )
-                )
-                dispatch(
-                    middlewares.setDatasIndicators(
-                        response.data.actualYear.years[0].weeks
-                    )
+                    middlewares.setDatasIndicators(calendarWeeks)
                 ).then(setLoadingIndicators(false))
                 dispatch(
-                    middlewares.setWeeksStatistics(
-                        response.data.actualYear.years[0].weeks
-                    )
+                    middlewares.setWeeksStatistics(calendarWeeks)
                 ).then(setLoadingStatistics(false))
             })
         services.getAllObjectifs(auth.userId, auth.token).then((response) => {

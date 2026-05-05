@@ -68,8 +68,9 @@ export const addRacesToCalendar = (races, date) => (dispatch) => {
         }
         races.forEach((race) => {
             if (
+                race?.date &&
                 dayjs(race.date).format('DD/MM/YYYY') ==
-                dayjs(newDay).format('DD/MM/YYYY')
+                    dayjs(newDay).format('DD/MM/YYYY')
             ) {
                 planned.push(year)
             }
@@ -111,10 +112,13 @@ export const changeCalendarData = (data, firstDayDate) => (dispatch) => {
     if (data) {
         let index = 0
         const restructuredCalendar = data.map((week, weekIndex) => {
-            const days = [...week.days]
+            const rawDays = Array.isArray(week?.days)
+                ? week.days.filter((day) => day && day.date)
+                : []
+            const days = [...rawDays]
 
             let firstWeek = false
-            week.days.forEach((day) => {
+            rawDays.forEach((day) => {
                 if (day.date.indexOf('01-01') !== -1) {
                     firstWeek = true
                 }
@@ -127,8 +131,11 @@ export const changeCalendarData = (data, firstDayDate) => (dispatch) => {
                 days.shift()
             }
 
-            if (weekIndex < data.length - 1) {
-                days.push(data[weekIndex + 1].days[0])
+            const nextFirstDay = data[weekIndex + 1]?.days?.find(
+                (d) => d && d.date
+            )
+            if (weekIndex < data.length - 1 && nextFirstDay) {
+                days.push(nextFirstDay)
                 return { ...week, days: days }
             } else {
                 return { ...week, days: days }
@@ -154,12 +161,16 @@ export const setDatasIndicators = (data) => (dispatch) => {
     let tirednessDone = []
     if (data) {
         data.forEach((week) => {
-            week.days.forEach((day) => {
+            if (!week) return
+            const days = Array.isArray(week.days)
+                ? week.days.filter((day) => day && day.date)
+                : []
+            days.forEach((day) => {
                 dates.push(dayjs(day.date).format('DD/MM/YYYY'))
-                formPlanned.push(day.form.planned)
-                tirednessPlanned.push(day.tiredness.planned)
-                formDone.push(day.form.done)
-                tirednessDone.push(day.tiredness.done)
+                formPlanned.push(day.form?.planned ?? 0)
+                tirednessPlanned.push(day.tiredness?.planned ?? 0)
+                formDone.push(day.form?.done ?? 0)
+                tirednessDone.push(day.tiredness?.done ?? 0)
             })
         })
         dispatch(
@@ -192,7 +203,12 @@ export const setWeeksStatistics = (data) => (dispatch) => {
     let weeks = []
     if (data) {
         data.forEach((week) => {
-            weeks.push({ ...week.statistiques, dayOne: week.days[0].date })
+            if (!week) return
+            const firstDay = week.days?.find((d) => d && d.date)
+            weeks.push({
+                ...(week.statistiques || {}),
+                dayOne: firstDay ? firstDay.date : null,
+            })
         })
         dispatch(Actions.setWeeksStatistics(weeks))
     }
@@ -272,8 +288,8 @@ export const setDayOneCalendar = (data, calendar) => (dispatch) => {
     let firstWeek = 0
 
     calendar.data.map((week, index) => {
-        week.days.map((day) => {
-            if (day.date === date) firstWeek = index
+        ;(week?.days ?? []).forEach((day) => {
+            if (day?.date === date) firstWeek = index
         })
     })
 
